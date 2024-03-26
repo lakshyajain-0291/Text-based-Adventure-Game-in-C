@@ -5,6 +5,7 @@ typedef struct cell
     int x, y;
 } cell_pos;
 
+//Known Error: X is Y, Y is X. Needs extensive UI changes
 void print(int size, int prison[2 * size][2 * size], cell_pos exit, cell_pos pl_pos, cell_pos guard_pos)
 {
     for (int i = 0; i < 2 * size; i++)
