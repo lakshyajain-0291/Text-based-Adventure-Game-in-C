@@ -5,6 +5,7 @@ typedef struct cell
     int x, y;
 } cell_pos;
 
+void print_prison(int size,int i,int j,int k);
 //Known Error: X is Y, Y is X. Needs extensive UI changes
 void print(int size, int prison[2 * size][2 * size], cell_pos exit, cell_pos pl_pos, cell_pos guard_pos)
 {
@@ -14,16 +15,25 @@ void print(int size, int prison[2 * size][2 * size], cell_pos exit, cell_pos pl_
         {
             if (pl_pos.x == i && pl_pos.y == j)
             {
+                printf("\x1b[33m"); //Yellow
                 printf("P ");
+                printf("\x1b[0m");  //Reset
             }
             else if (guard_pos.x == i && guard_pos.y == j)
             {
+                printf("\x1b[31m");
                 printf("G ");
+                printf("\x1b[0m");
             }
             else if (exit.x == i && exit.y == j)
             {
+                printf("\x1b[32m");
                 printf("E ");
+                printf("\x1b[0m");
             }
+            else if((i==0)||(j==0)||(i==2*size-1)||(j==2*size-1)||(i%2!=0)||(j%2!=0))
+             print_prison(size,i,j,prison[i][j]);
+            
             else
             {
                 printf("%d ", prison[i][j]);
@@ -215,4 +225,38 @@ int main()
     scanf("%d", &size);
     playPrisonEscape(size);
     return 0;
+}
+
+void print_prison(int size,int i,int j,int k)
+{
+    
+    if(i==0)
+     {
+        if(j==2*size-1)
+         printf("_");
+        else
+         printf("__");
+     }
+    else if(j==0)
+    {
+        if(i==2*size-1)
+         printf("|_");
+        else
+         printf("| ");
+    }
+    else if(j==2*size-1)
+     printf("|");
+    else if(i==2*size-1)
+     printf("__");
+    else if((i%2!=0||j%2!=0)&& k==1)
+    {
+        printf("\x1b[36m");
+        printf("& ");
+        printf("\x1b[0m");
+    }
+    else if((i%2!=0||j%2!=0)&& k==0)
+     printf("  ");
+            
+        
+    
 }
