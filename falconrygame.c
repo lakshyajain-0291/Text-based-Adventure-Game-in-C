@@ -7,8 +7,9 @@ first flight: Up down (50%)
 next_flight = 50% prev_flight + 30% straight + 20% opp_prev;
 
 */
+
 /*
-Progress: Bird Flies, Scope done
+Progress: Bird Flies, Scope done, hit after 0.6 seconds
 */
 #include <windows.h>
 #include <stdio.h>
@@ -80,7 +81,7 @@ void MouseControl(int *x, int *y)
     }
 }
 
-void printMessage(int x, int y, const char *message)
+void printMessage(int x, int y, char message)
 {
     // Get the handle to the standard output
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -88,7 +89,7 @@ void printMessage(int x, int y, const char *message)
     // Set the cursor position to (x, y) and print the message
     COORD pos = {x, y};
     SetConsoleCursorPosition(hConsole, pos);
-    printf("%s", message);
+    printf("%c", message);
 }
 
 void printFalcon(int x, int y)
@@ -165,7 +166,7 @@ void printScopeFalcon(int x, int y, char c)
 {
     // Get the handle to the standard output
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    
+
     // Set the cursor position to (x, y) and print the message
     COORD pos = {x, y};
     SetConsoleCursorPosition(hConsole, pos);
@@ -174,37 +175,39 @@ void printScopeFalcon(int x, int y, char c)
 
 void openScopeFalcon(int x, int y, int side)
 {
-    for(int i=0; i<=side/2; i++)
+    for (int i = 0; i <= side / 2; i++)
     {
-        printScopeFalcon(x+i, y+(side/4), '_');
-        printScopeFalcon(x-i, y+(side/4), '_');
-        printScopeFalcon(x+i, y-(side/4), '_');
-        printScopeFalcon(x-i, y-(side/4), '_');
-        printScopeFalcon(x+(side/2), y+(i/2), '|');
-        printScopeFalcon(x+(side/2), y-(i/2), '|');
-        printScopeFalcon(x-(side/2), y+(i/2), '|');
-        printScopeFalcon(x-(side/2), y-(i/2), '|');
+        printScopeFalcon(x + i, y + (side / 4), '_');
+        printScopeFalcon(x - i, y + (side / 4), '_');
+        printScopeFalcon(x + i, y - (side / 4), '_');
+        printScopeFalcon(x - i, y - (side / 4), '_');
+        printScopeFalcon(x + (side / 2), y + (i / 2), '|');
+        printScopeFalcon(x + (side / 2), y - (i / 2), '|');
+        printScopeFalcon(x - (side / 2), y + (i / 2), '|');
+        printScopeFalcon(x - (side / 2), y - (i / 2), '|');
     }
+    printScopeFalcon(x - (side / 2), y - (side / 2) + 2, ' ');
+    printScopeFalcon(x + (side / 2), y - (side / 2) + 2, ' ');
 }
 
 void deleteScopeFalcon(int x, int y, int side)
 {
-    for(int i=0; i<=side/2; i++)
+    for (int i = 0; i <= side / 2; i++)
     {
-        printScopeFalcon(x+i, y+(side/4), ' ');
-        printScopeFalcon(x-i, y+(side/4), ' ');
-        printScopeFalcon(x+i, y-(side/4), ' ');
-        printScopeFalcon(x-i, y-(side/4), ' ');
-        printScopeFalcon(x+(side/2), y+(i/2), ' ');
-        printScopeFalcon(x+(side/2), y-(i/2), ' ');
-        printScopeFalcon(x-(side/2), y+(i/2), ' ');
-        printScopeFalcon(x-(side/2), y-(i/2), ' ');
+        printScopeFalcon(x + i, y + (side / 4), ' ');
+        printScopeFalcon(x - i, y + (side / 4), ' ');
+        printScopeFalcon(x + i, y - (side / 4), ' ');
+        printScopeFalcon(x - i, y - (side / 4), ' ');
+        printScopeFalcon(x + (side / 2), y + (i / 2), ' ');
+        printScopeFalcon(x + (side / 2), y - (i / 2), ' ');
+        printScopeFalcon(x - (side / 2), y + (i / 2), ' ');
+        printScopeFalcon(x - (side / 2), y - (i / 2), ' ');
     }
 }
 
 int playFalcon()
 {
-    int click_x = -1, click_y = -1, arrows = 4;
+    int click_x = -1, click_y = -1, arrows = 4, shot = 0;
     int spawn_y;
     while (spawn_y < 10 || spawn_y > 30)
         spawn_y = rand() % 31;
@@ -219,21 +222,41 @@ int playFalcon()
     while (1)
     {
         flyFalcon(&falcon_x, &falcon_y, &flight);
-        if (click_x == falcon_x && click_y == falcon_y)
-            return 1;
+        if (shot == 1)
+        {
+            if (click_x == falcon_x && click_y == falcon_y)
+            {
+                printMessage(click_x, click_y, '0');
+                return 1;
+            }
+            else
+                printMessage(click_x, click_y, 'O');
+        }
         if (falcon_x > 150)
             return 0;
-        if(arrows == 0) return 0;
+        if (arrows == 0)
+            return 0;
         printFalcon(falcon_x, falcon_y);
+        shot = 0;
         click_x = 0, click_y = 0;
-        if(_kbhit()) {
+        if (_kbhit())
+        {
             char key = _getch();
-            if(key==' ')
+            if (key == ' ')
             {
+                shot = 1;
                 arrows--;
                 openScopeFalcon(falcon_x, falcon_y, 8);
                 MouseControl(&click_x, &click_y);
-                deleteScopeFalcon(falcon_x, falcon_y, 8);
+                printMessage(click_x, click_y, 'X');
+                int temp_x = falcon_x, temp_y = falcon_y;
+                deleteFalcon(falcon_x, falcon_y);
+                flyFalcon(&falcon_x, &falcon_y, &flight);
+                printFalcon(falcon_x, falcon_y);
+                delay(0.3);
+                printMessage(click_x, click_y, 'x');
+                deleteFalcon(falcon_x, falcon_y);
+                deleteScopeFalcon(temp_x, temp_y, 8);
             }
         }
         delay(0.3);
@@ -244,6 +267,8 @@ int playFalcon()
 int main()
 {
     int falconRes = playFalcon();
-    if(falconRes == 0) printf("You Lose!\n");
-    else printf("Congratulations! You Win\n");
+    if (falconRes == 0)
+        printf("You Lose!\n");
+    else
+        printf("Congratulations! You Win\n");
 }
