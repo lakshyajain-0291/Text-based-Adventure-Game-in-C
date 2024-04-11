@@ -2,10 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
 
 #define MAX_WORD_LENGTH 50
 
-void encrypt(char *word, char *code, int shift)
+//Errors in UI: Box lines not forming correctly at few places due to unpredictable length of the word
+void encryption(char *word, char *code, int shift)
 {
     int i;
     int length = strlen(word);
@@ -36,8 +38,15 @@ int decryptor(int attempts)
         return 0;
     }
 
-    // Read words from dictionary file and count the number of words
-    char **words = malloc(1000 * sizeof(char *));
+    
+    FILE *temp=fopen("dictionary.txt","r"); //Counting the number of words in the dictionary
+    char w[MAX_WORD_LENGTH];
+    int x=0;
+    while((fscanf(temp,"%s",w))!=EOF)
+        x++;
+    fclose(temp);
+
+    char **words = malloc(x * sizeof(char *));
     if (words == NULL)
     {
         printf("Memory allocation failed.\n");
@@ -45,7 +54,7 @@ int decryptor(int attempts)
         return 0;
     }
 
-    for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < x; i++)
     {
         words[i] = malloc(MAX_WORD_LENGTH * sizeof(char));
         if (words[i] == NULL)
@@ -67,7 +76,7 @@ int decryptor(int attempts)
         words[wordCount][strlen(words[wordCount]) - 1] = '\0'; // Remove newline character
         wordCount++;
     }
-
+    
     srand(time(NULL));
     int randomIndex = rand() % wordCount; // Generate a random index to select a word from the dictionary
     char *word = malloc(MAX_WORD_LENGTH * sizeof(char));
@@ -99,9 +108,13 @@ int decryptor(int attempts)
     }
 
     int shift = rand() % 27 - 13; // Generate a random shift value from -13 to 13
-    encrypt(word, code, shift);
+    encryption(word, code, shift);
+    
+    printf("_____________________________________________________________________________________\n");
+    printf("|                                                                                   |\n");
+    printf("|                                                                                   |\n");
 
-    printf("Encrypted word: %s\n", code);
+    printf("|        Encrypted word: %-59s|\n", code);
 
     int attemptsLeft = attempts;
     char *decryptedWord = malloc(MAX_WORD_LENGTH * sizeof(char));
@@ -121,9 +134,13 @@ int decryptor(int attempts)
 
     while (attemptsLeft > 0)
     {
-        printf("Attempts left: %d\n", attemptsLeft);
-        printf("Enter your decryption attempt: ");
+        printf("|        \x1b[33mAttempts left:\x1b[0m %-26d                                  |\n", attemptsLeft);
+        printf("|        Enter your decryption attempt: ");
         scanf("%s", decryptedWord);
+        int k=55-strlen(decryptedWord);
+        
+         
+
 
         if (strcmp(decryptedWord, words[randomIndex]) == 0)
         {
@@ -136,18 +153,31 @@ int decryptor(int attempts)
                 free(words[i]);
             }
             free(words);
-            printf("Congratulations! You decrypted the word.\n");
+            printf("|        Congratulations! You decrypted the word.                                   |\n");
+            printf("|                                                                                   |\n");
+            printf("|___________________________________________________________________________________|\n");
             return 1;
         }
         else
         {
-            printf("Incorrect attempt. Here's a hint: ");
+            printf("|        \x1b[31mIncorrect attempt.\x1b[0m Here's a hint: ");
 
             // Change a random character in the code to match the original word
             int index = rand() % strlen(word);
             code[index] = word[index];
-
-            printf("%s\n", code);
+            int x=0;
+            while(x!=strlen(word))
+            {
+                if(x==index)
+                { 
+                    printf("\x1b[32m%c\x1b[0m",code[x]);
+                    x++;
+                    continue;
+                }
+                printf("%c",code[x]);
+                 x++;
+            }
+           printf("\n");
             attemptsLeft--;
         }
     }
@@ -163,13 +193,24 @@ int decryptor(int attempts)
             free(words[i]);
         }
         free(words);
-        printf("You ran out of attempts. The correct word was: %s\n", words[randomIndex]);
+        printf("        You ran out of attempts. The correct word was: %s\n", words[randomIndex]);
         return 0;
     }
 }
 
 int main()
 {
+    system("clear");
+    printf("\n        \x1b[33m");
+    char welcome[100]="WELCOME TO THE EAVESDROP GAME";
+    for(int i=0;i<strlen(welcome);i++)
+    {
+        putchar(welcome[i]);
+        fflush(stdout);
+        usleep(100000);
+    }
+    printf("\x1b[0m");
+    printf("\n");
     int attempts = 5; // Number of attempts
     int resEavesdrop = decryptor(attempts);
     return 0;
