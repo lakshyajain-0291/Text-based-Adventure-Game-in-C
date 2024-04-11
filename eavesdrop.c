@@ -7,6 +7,7 @@
 #define MAX_WORD_LENGTH 50
 
 //Errors in UI: Box lines not forming correctly at few places due to unpredictable length of the word
+//Sometimes Null word is opted for some reason
 void encryption(char *word, char *code, int shift)
 {
     int i;
