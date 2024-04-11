@@ -1,0 +1,141 @@
+{
+    "locations": [
+        {
+            "name": "WORLD",
+            "children": [
+                {
+                    "name": "CITY",
+                    "children": [
+                        {
+                            "name": "CITY_IN",
+                            "npcs": [
+                                {
+                                    "name": "Guard"                                    
+                                }
+                            ]
+                        },
+                        {
+                            "name": "COLLOSEUM",
+                            "children": [
+                                {
+                                    "name": "COLLOSEUM_IN",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "FIGHT_PITS",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "TRAINING_ARENA",
+                                    "npcs": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "COMMERCIAL_STREET",
+                            "children": [
+                                {
+                                    "name": "COMMERCIAL_ALLEYWAY",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "METALSMITH_SHOP",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "ALCHEMIST_SHOP",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "HERBALIST_SHOP",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "TAVERN",
+                                    "npcs": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "RESIDENTIAL_STREET",
+                            "children": [
+                                {
+                                    "name": "RESIDENTIAL_ALLEYWAY",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "PLAYER_HOUSE",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "RandomNPC_HOUSE",
+                                    "npcs": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "GOVT_STREET",
+                            "children": [
+                                {
+                                    "name": "GOVT_ALLEYWAYS",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "CITADEL",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "CATHADREL",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "ACADEMY",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "BARRACKS",
+                                    "npcs": []
+                                }
+                            ]
+                        },
+                        {
+                            "name": "OTHER_STREET",
+                            "children": [
+                                {
+                                    "name": "OTHER_ALLEYWAYS",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "DOCKS",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "STRANGE_SHOP",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "ARGENSTONE",
+                                    "npcs": []
+                                },
+                                {
+                                    "name": "BROTHEL",
+                                    "npcs": []
+                                }
+                            ]
+                        }  
+                    ]
+                },
+
+                {
+                    "name": "SEA",
+                    "children":[]
+                },
+
+                {
+                    "name": "FOREST",
+                    "children":[]
+                }
+            ]
+        }
+    ]
+}
