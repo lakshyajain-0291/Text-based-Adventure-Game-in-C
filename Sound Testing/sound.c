@@ -11,7 +11,7 @@ void sigint_handler(int sig) {
 
 int main() {
     // Path to the sound file
-    const char *soundFilePath = "/Users/DANIE/Music/Music/Media.localized/Music/Unknown Artist/Unknown Album/Salaar_Music.m4a"; // Update with your audio file path
+    const char *soundFilePath = "Salaar_Music.m4a"; // Update with your audio file path
     
     // Construct the command to play the sound using afplay
     char command[300]; // Increase the buffer size to accommodate the longer command
