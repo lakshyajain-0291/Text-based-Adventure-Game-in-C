@@ -3,6 +3,8 @@
 #include <time.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <unistd.h>
+
 
 int lives = 8, choice, l = 0; // l to remove slight bugs during displaying
 int num_of_correct_guesses;
@@ -412,9 +414,16 @@ void intro()
 {
   // printf("\033[0;34m\n");//blue
 
-  printf("\033[0;36m\n");
-  printf("\n                       DANIE'S HANGMAN GAME   \n");
-  printf("\033[0m\n");
+  printf("\n        \x1b[33m");
+    char welcome[100]="DANIE'S HANGMAN GAME";
+    for(int i=0;i<strlen(welcome);i++)
+    {
+        putchar(welcome[i]);
+        fflush(stdout);
+        usleep(100000);
+    }
+    printf("\x1b[0m");
+    printf("\n");
   printf("\033[1;31m\033[0m\n"); // red
   printf("\033[0m\n");           // default
 
@@ -439,6 +448,8 @@ void intro()
   system("clear");
   printf("\033[0;36m\n");
   printf("\n                       DANIE'S HANGMAN GAME   \n");
+  printf("\033[0m\n");
+  
   printf("\033[0m\n");
   printf("\n\n       _____________________________________________________________\n");
   printf("      ||                                                          ||\n");
