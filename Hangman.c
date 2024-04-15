@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <unistd.h>
+#include <signal.h>
 
 
 int lives = 8, choice, l = 0; // l to remove slight bugs during displaying
@@ -14,9 +15,18 @@ int select_choice();                                                            
 int return_current_status(char guessed_string[], char *current_status[], char selected_word[], int length); // Updating the current status of the string
 void print_current_status(char *current_status[], int length);                                              // Printing the current status of the string
 void display_hangman(int result);                                                                           // Displaying the updated Hangman podium
+void sigint_handler(int sig);                                                                
 
 int main()
 {
+  const char *soundFilePath = "./Sound Testing/Smooth_funky.mp3"; //Music
+  char command[300];
+  snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
+  signal(SIGINT, sigint_handler);
+  system(command);
+  while(1){
+
+
   srand(time(0)); // Generating the seed to randomise the text to be predicted
   system("clear"); // To clear the terminal on Unix/Linux/Mac //Use: system("cls"); for Windows
   intro();
@@ -220,8 +230,6 @@ int main()
 
       if (lives == 0)
       {
-        system("clear");
-
         printf("\033[0;31m\n");
         printf("You lose because you ran out of lives\n");
         printf("\033[0m\n");
@@ -324,8 +332,9 @@ int main()
 
   printf("\n********************************************\n\n\n\n\n\n\n");
 
+  system("killall afplay"); //To terminate the music track
   return 0;
-}
+}}
 int return_current_status(char guessed_string[], char *current_status[], char selected_word[], int length)
 {
   int status = 0;
@@ -415,7 +424,7 @@ void intro()
   // printf("\033[0;34m\n");//blue
 
   printf("\n        \x1b[33m");
-    char welcome[100]="DANIE'S HANGMAN GAME";
+    char welcome[100]="HANGMAN GAME";
     for(int i=0;i<strlen(welcome);i++)
     {
         putchar(welcome[i]);
@@ -428,7 +437,7 @@ void intro()
   printf("\033[0m\n");           // default
 
   printf("\n\n      __________________________________________________________\n");
-  printf("      |                DANIE'S HANGMAN GAME                    |   \n");
+  printf("      |                     HANGMAN GAME                       |   \n");
   printf("      |                                                        |   \n");
   printf("      |          ____________               ____________       |   \n");
   printf("      |          |      |                   |                  |   \n");
@@ -489,8 +498,13 @@ void intro()
   printf("\033[0m\n");
   system("clear");
   printf("\033[0;36m\n");
-  printf("\n                       DANIE'S HANGMAN GAME   \n");
+  printf("\n                        HANGMAN GAME   \n");
   printf("\033[0m\n");
 
   return;
+}
+
+void sigint_handler(int sig) {
+    system("killall afplay");
+    exit(0);
 }
