@@ -233,7 +233,7 @@ void cheat(int size, int *field)
     }
     delay(2);
 }
-
+/jkhsdkjfhsdf
 // Function to play Minesweeper
 int playMinesweeper(int size)
 {
