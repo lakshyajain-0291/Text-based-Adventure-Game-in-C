@@ -237,6 +237,18 @@ void cheat(int size, int *field)
 // Function to play Minesweeper
 int playMinesweeper(int size)
 {
+    printf("\e[1;1H\e[2J");
+
+    printf("\033[34m");
+    //UI for Game introduction
+        char title[100]="Welcome to Minesweeper";
+        for(int i=0;i<strlen(title);i++)
+        {
+            printf("%c",title[i]);
+            delay(0.2);
+        }
+    printf("\033[0m");
+    
     int *field;
     int *revealed;
     int flag_count = size * size / 6; // Initial flag count equals mine count
@@ -313,18 +325,6 @@ int playMinesweeper(int size)
 
 int main()
 {
-    printf("\e[1;1H\e[2J");
-
-    printf("\033[34m");
-    //UI for Game introduction
-        char title[100]="Welcome to Minesweeper";
-        for(int i=0;i<strlen(title);i++)
-        {
-            printf("%c",title[i]);
-            delay(0.2);
-        }
-    printf("\033[0m");
-
     int resMine = playMinesweeper(6);
     return 0;
 }
