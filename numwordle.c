@@ -38,6 +38,7 @@ void wordlegame(int n, int num, int guess)
 }
 int playWordle(int n, int attempts)
 {
+    system("clear");
     int num;
     while(num<(int)pow(10, n-1) || num>=(int)pow(10, n))
     {

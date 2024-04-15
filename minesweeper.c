@@ -10,14 +10,14 @@ void delay(float number_of_seconds)
     // Converting time into milliseconds
     int milli_seconds = 1000 * number_of_seconds;
 
-    // Storing start time
+    // Storing start time---
     clock_t start_time = clock();
 
     // Looping till required time is not achieved
     while (clock() < start_time + milli_seconds)
         ;
 }
-
+int z=0;  //To prevent printing unecessary Mouse click in the beginning
 // Function to control mouse input
 void MouseControl(int *x, int *y)
 {
@@ -58,6 +58,11 @@ void MouseControl(int *x, int *y)
                 {
                     *x = mouseEvent.dwMousePosition.X;
                     *y = mouseEvent.dwMousePosition.Y;
+                    if(z==0)
+                    {
+                        z=1;
+                        return;
+                    }
                     printf("Mouse clicked at (%d, %d)\n", mouseEvent.dwMousePosition.X, mouseEvent.dwMousePosition.Y);
                     return;
                 }
@@ -87,7 +92,10 @@ void genField(int size, int **field)
     {
         int x = rand() % size;
         int y = rand() % size;
-        (*field)[x * size + y] = -1; // -1 represents a mine
+        if((*field)[x*size +y]!=-1)
+         (*field)[x * size + y] = -1; // -1 represents a mine
+        else 
+         k--;
     }
 
     // Calculate the number of mines in proximity for each cell
@@ -168,11 +176,11 @@ void printReveal(int size, int *revealed, int *field, int flag_mode)
         {
             if (!revealed[i * size + j])
             {
-                printf("# "); // Hidden cell
+                printf("\033[32m# \033[0m"); // Hidden cell
             }
             else if (revealed[i * size + j] == -1)
             {
-                printf("F "); // Flagged cell
+                printf("\033[31mF \033[0m"); // Flagged cell
             }
             else
             {
@@ -183,7 +191,7 @@ void printReveal(int size, int *revealed, int *field, int flag_mode)
         // Print Flag Mode indicator
         if (i == size / 2)
         {
-            printf("\t%d:flagmode", flag_mode);
+            printf("\t%d \033[33m:flagmode\033[0m", flag_mode);
         }
 
         printf("\n");
@@ -204,10 +212,10 @@ int numRevealed(int size, int *revealed)
     int count = 0;
     for (int i = 0; i < size * size; i++)
     {
-        if (revealed[i] == 1)
+        if (revealed[i] == 1)  
             count++;
     }
-    printf("%d\n", count); // Debugging output
+   // printf("%d\n", count); // Debugging output
     delay(1);
     return count;
 }
@@ -238,7 +246,7 @@ int playMinesweeper(int size)
     // Allocate memory for the revealed array
     revealed = (int *)malloc(size * size * sizeof(int));
 
-    // Initialize revealed array to all zeros
+    // Initialize revealed array to all zeros (initially non revealed)
     for (int i = 0; i < size * size; i++)
     {
         revealed[i] = 0;
@@ -249,8 +257,8 @@ int playMinesweeper(int size)
 
     // Cheat to reveal the entire minefield (for debugging purposes)
     // cheat(size, field);
-
     // Main game loop
+    int c=0;
     while (1)
     {
         // Take user input
@@ -267,7 +275,7 @@ int playMinesweeper(int size)
         {
             free(field);
             free(revealed);
-            printf("Congratulations! You have won!\n");
+            printf("\033[36m\nCongratulations! You have won!\n\n\033[0m");
             return 1;
         }
 
@@ -276,7 +284,7 @@ int playMinesweeper(int size)
         {
             free(field);
             free(revealed);
-            printf("Game over! You stepped on a mine.\n");
+            printf("\n\033[31mGame over! You stepped on a mine.\n\033[0m\n\n");
             return 0;
         }
 
@@ -290,15 +298,33 @@ int playMinesweeper(int size)
             reveal(size, click_y, click_x / 2, field, revealed);
         }
 
+        
+
         // Clear the screen and print the updated minefield
         printf("\e[1;1H\e[2J");
+
         printReveal(size, revealed, field, flag_mode);
-        printf("%d\n", flag_count);
+        printf("\nNumber of Flags Left: %d\n", flag_count);
+        printf("\033[34m\n\nMINESWEEPER\n\033[0m");
+        printf("Status: ");
+
     }
 }
 
 int main()
 {
+    printf("\e[1;1H\e[2J");
+
+    printf("\033[34m");
+    //UI for Game introduction
+        char title[100]="Welcome to Minesweeper";
+        for(int i=0;i<strlen(title);i++)
+        {
+            printf("%c",title[i]);
+            delay(0.2);
+        }
+    printf("\033[0m");
+
     int resMine = playMinesweeper(6);
     return 0;
 }
