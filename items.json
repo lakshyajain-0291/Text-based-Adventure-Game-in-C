@@ -1,0 +1,33 @@
+{
+  "items": [
+    {
+      "name": "Gladiator's Sword",
+      "description": "A finely crafted sword, designed for combat in the gladiatorial arena.",
+      "durability": 100,
+      "grade": "COMMON",
+      "buff": {
+        "effect": "ATT_INC",
+        "duration": 0,
+        "valueType": 0,
+        "type": 0,
+        "value": 10
+      },
+      "type": "WEAPON"
+    },
+    {
+      "name": "Golden Armor",
+      "description": "A suit of armor forged from the finest gold, providing protection and prestige.",
+      "durability": 100,
+      "grade": "UNCOMMON",
+      "buff": {
+        "effect": "DEF_INC",
+        "duration": 0,
+        "valueType": 0,
+        "type": 0,
+        "value": 15
+      },
+      "type": "ARMOR"
+    },
+    // Add more items here...
+  ]
+}
