@@ -1,0 +1,31 @@
+{
+  "dialogues": [
+    {
+      "Quest_ID": "Marcus Agrippa_1",
+      "NPC": "Marcus Agrippa",
+      "Text": [
+        "Marcus Agrippa: Greetings, my friend. I have a proposition for you.",
+        "Player: What is it, Marcus?",
+        "Marcus Agrippa: I've heard rumors of a gladiatorial tournament at the Colosseum. I intend to participate and prove my worth.",
+        "Player: Why the sudden interest in gladiatorial combat?",
+        "Marcus Agrippa: My skills have been honed on the battlefield, but I seek new challenges. Plus, the prize for victory could be substantial.",
+        "Player: How can I assist you?",
+        "Marcus Agrippa: I need someone to watch my back, someone I can trust. Will you stand by me in the arena?",
+        "Player: Of course, Marcus. You can count on me."
+      ]
+    },
+    {
+      "Quest_ID": "Metalsmith Gaius_1",
+      "NPC": "Metalsmith Gaius",
+      "Text": [
+        "Metalsmith Gaius: Ah, Marcus Agrippa! I've heard tales of your prowess in combat.",
+        "Marcus Agrippa: And I've heard of your skill with a hammer and anvil, Gaius.",
+        "Metalsmith Gaius: I have a proposition for you. There's a dangerous mission I need assistance with, and your strength would be invaluable.",
+        "Marcus Agrippa: What kind of mission?",
+        "Metalsmith Gaius: It involves venturing into the heart of enemy territory to retrieve a valuable artifact. The risks are great, but so are the rewards.",
+        "Marcus Agrippa: I'm in. Lead the way, Gaius."
+      ]
+    },
+    // Add dialogues for other quests here...
+  ]
+}
