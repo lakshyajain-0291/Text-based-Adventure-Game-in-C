@@ -1,0 +1,34 @@
+{
+    "players": [
+        {
+            "id": "testplayer",
+            "name": "Gaius Marcus Agrippa",
+            "level": 1,
+            "stats": {
+                "HP": 100,
+                "att": 10,
+                "def": 5,
+                "agi": 8,
+                "str": 12,
+                "dex": 9,
+                "inte": 6,
+                "luck": 7
+            },
+            "inventory": {
+                "size": 10,
+                "items": [
+                    {
+                        "item":"WEAPON"
+                    },
+                    {
+                        "item":"ARMOR"
+                    }
+                ]
+            },
+            "wtdLevel": 0,
+            "xp": 0,
+            "gold": 50,
+            "currentLocation": "WORLD/CITY/COLLOSEUM/FIGHT_PITS"
+        }
+    ]
+}
