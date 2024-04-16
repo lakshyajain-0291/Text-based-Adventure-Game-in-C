@@ -1,36 +1,39 @@
 #include "headers.h"
 
+#define MAX_PLAYER_ID_LENGTH 100
+int state;
+
 int main()
 {
-    char *input=(char*)malloc(sizeof(char)*100);
-    char *playerName=(char*)malloc(sizeof(char)*100);
-    int playerInput,gamePlay;
-    Player *player=NULL;
-
-    printf("\nDo youwant to start the game (0/1) : ");
-    scanf("%d",&playerInput);
-    gamePlay=playerInput;
-
-    if(playerInput)
-    {
-        printf("\nEnter your Name : ");
-        scanf("%s",playerName);
-        player=(Player*)malloc(sizeof(Player));
-        player=getPlayerInfo(playerName);//to make
+    char *playerID = (char *)malloc(sizeof(char) * MAX_PLAYER_ID_LENGTH);
+    if (playerID == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        return EXIT_FAILURE;
     }
 
-    while(gamePlay)
-    {
-        int playerState=1;
-        displayPlayerinfo();//to make
+    Player *player = NULL;
 
-        printf("\nEnter your command : ");
-        fgets(input,sizeof(input),stdin);
+    printRules();
 
-        processInput(input,&player,&playerState);//to make
-
-        updateGameState(&player);
-
-        //make a universal condition to end,save and load the the game....
+    printf("\nEnter your Unique ID : ");
+    if (scanf("%s", playerID) != 1) {
+        fprintf(stderr, "Error reading player ID\n");
+        free(playerID);
+        return EXIT_FAILURE;
     }
+
+    player = gameInitialize(playerID);//asks player wheter to start a new game(warns that load game will be deleted) or to load game and if the file does not existt ir gives a prompt telling player to start a new game .It also makes a new json file or load json files based on player choise and returns a player variable
+
+    if (player == NULL) {
+        fprintf(stderr, "Failed to initialize player\n");
+        free(playerID);
+        return EXIT_FAILURE;
+    }
+
+    selectState(&state);//function that can be called from anywhere by player to choose a state
+    processState(&state);//function that processes the state
+
+    // Cleanup
+    free(playerID);
+    return EXIT_SUCCESS;
 }

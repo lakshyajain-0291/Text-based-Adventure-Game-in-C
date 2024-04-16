@@ -19,7 +19,7 @@ typedef struct {
     int gold; // Player's gold
     char **currentLocation; // Player's current location
     char **activeQuests; // Player's active quests
-    QuestManager questManager;//players' active andd completed quests
+    QuestManager questManager;//players' active 
 } Player;
 
 // Function to create a new player
