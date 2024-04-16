@@ -1,0 +1,121 @@
+{
+  "quests": [
+    {
+      "QuestID": "Marcus Agrippa_1",
+      "Name": "The Colosseum's Call",
+      "Location": "COLLOSEUM_IN",
+      "Reward": "Gladiator's Sword",
+      "QuestGiverNPC": "Colloseum Head",
+      "Minigame": "Combat",
+      "Description": "Marcus seeks refuge in the gladiatorial arena, where his combat prowess catches the attention of a skilled metalsmith."
+    },
+    {
+      "QuestID": "Metalsmith Gaius_1",
+      "Name": "The Metalsmith's Request",
+      "Location": "METALSMITH_SHOP",
+      "Reward": "Golden Armor",
+      "QuestGiverNPC": "Metalsmith Gaius",
+      "Minigame": "Combat",
+      "Description": "Marcus aids the metalsmith in a perilous mission, forging an alliance and uncovering clues about his family's fate."
+    },
+    {
+      "QuestID": "Sophia_1",
+      "Name": "The Ruins of Argenstone",
+      "Location": "ARGENSTONE",
+      "Reward": "Ancient Relic",
+      "QuestGiverNPC": "Sophia",
+      "Minigame": "Minesweeper",
+      "Description": "Joined by scholar Sophia, Marcus explores ancient ruins, uncovering secrets amidst treacherous traps and puzzles."
+    },
+    {
+      "QuestID": "Alchemist Aurelia_1",
+      "Name": "The Alchemist's Secret",
+      "Location": "ALCHEMIST_SHOP",
+      "Reward": "Philosopher's Stone",
+      "QuestGiverNPC": "Alchemist Aurelia",
+      "Minigame": "Theft",
+      "Description": "Marcus delves into the world of alchemy, embarking on a risky theft to uncover hidden truths about his family's murder."
+    },
+    {
+      "QuestID": "Herbalist Flora_1",
+      "Name": "The Herbalist's Bounty",
+      "Location": "HERBALIST_SHOP",
+      "Reward": "Potion of Healing",
+      "QuestGiverNPC": "Herbalist Flora",
+      "Minigame": "Memory Game",
+      "Description": "Marcus gathers herbs for Flora, encountering memory challenges amidst wilderness dangers while forging a bond with Sophia."
+    },
+    {
+      "QuestID": "Rebel Leader Octavius_1",
+      "Name": "The Rebel's Cry",
+      "Location": "FOREST",
+      "Reward": "Freedom for the People",
+      "QuestGiverNPC": "Rebel Leader Octavius",
+      "Minigame": "Snake-game",
+      "Description": "Marcus aids rebels with a Snake-like challenge, navigating perilous paths in support of their cause."
+    },
+    {
+      "QuestID": "Nobleman Cassius_1",
+      "Name": "The Noble's Game",
+      "Location": "GOVT_ALLEYWAYS",
+      "Reward": "Political Influence",
+      "QuestGiverNPC": "Nobleman Cassius",
+      "Minigame": "Eavesdropping",
+      "Description": "Marcus eavesdrops on nobles, unraveling intrigue while avoiding detection in high society."
+    },
+    {
+      "QuestID": "Shadow Broker_1",
+      "Name": "The Shadow Broker's Alliance",
+      "Location": "STRANGE_SHOP",
+      "Reward": "Stolen Wealth",
+      "QuestGiverNPC": "Shadow Broker",
+      "Minigame": "Burglary",
+      "Description": "Marcus enters the underworld, engaging in burglary and combat to gain the Shadow Broker's favor."
+    },
+    {
+      "QuestID": "Oracle Sibylla_1",
+      "Name": "The Oracle's Warning",
+      "Location": "CATHEDRAL",
+      "Reward": "Prophecy Scroll",
+      "QuestGiverNPC": "Oracle Sibylla",
+      "Minigame": "Fortune Telling",
+      "Description": "Marcus seeks guidance from the Oracle, facing mystic visions and ancient prophecies."
+    },
+    {
+      "QuestID": "Poseidon_1",
+      "Name": "The Sea's Secret",
+      "Location": "SEA",
+      "Reward": "Sunken Treasure",
+      "QuestGiverNPC": "Poseidon",
+      "Minigame": "Seadiving Treasure Hunt",
+      "Description": "Marcus embarks on a seadiving treasure hunt, braving underwater perils in search of riches."
+    },
+    {
+      "QuestID": "Carmine_1",
+      "Name": "The Heist",
+      "Location": "DOCKS",
+      "Reward": "Stolen Artifacts",
+      "QuestGiverNPC": "Carmine",
+      "Minigame": "Theft, Minesweeper",
+      "Description": "Marcus plans a daring theft, combining strategy and Minesweeper skills to execute the perfect heist."
+    },
+    {
+      "QuestID": "Shadow Broker_2",
+      "Name": "The Shadow Broker's Vaults",
+      "Location": "CITY",
+      "Reward": "Secret Information",
+      "QuestGiverNPC": "Shadow Broker",
+      "Minigame": "Lockpicking",
+      "Description": "Marcus navigates locks and security measures, uncovering secrets in the Shadow Broker's lair."
+    },
+    {
+      "QuestID": "Main Antagonist_1",
+      "Name": "The Final Confrontation",
+      "Location": "WORLD",
+      "Reward": "Vengeance",
+      "QuestGiverNPC": "Gaius Marcus Agrippa",
+      "Minigame": "Many minigames",
+      "Description": "Marcus faces the main antagonist in a climactic showdown, overcoming various challenges in the ultimate battle."
+    }
+  ]
+}

@@ -17,14 +17,17 @@ typedef struct {
     int wtdLevel; // Wantedted level
     int xp; // Player's experience points
     int gold; // Player's gold
+    char **currentLocation; // Player's current location
+    char **activeQuests; // Player's active quests
     QuestManager questManager;//players' active andd completed quests
 } Player;
 
 // Function to create a new player
-Player *createPlayer(char name[], int initLevel, int initHP, int initATT, int initDEF);
+Player *createPlayer(char *ID);
 
 // Function to update player stats based on XP and gold
-void rewardPlayer(Player *player, int xp, int gold);
+void updatePlayer(Player *player, int xp, int gold);
+
 
 
 // Function to add an item to the player's inventory
@@ -38,7 +41,7 @@ void dropItem(Inventory *inventory);
 
 
 // Function to apply a buff to the player's stats
-void applyBUFF(Player *player, BUFF buff);
+// void applyBUFF(Player *player, BUFF buff);
 
 
 
