@@ -1,4 +1,3 @@
-// #include "headers.h"
 #include "header files/cJSON.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,6 +11,7 @@ typedef struct
     char *items; // Array of items in the inventory
 } Inventory;
 
+// Define Stats structure
 typedef struct
 {
     int HP;
@@ -39,6 +39,7 @@ typedef struct
     // QuestManager questManager;//players' active
 } Player;
 
+// Function to parse dialogues.json for dialogues corresponding to Quest
 char *questDialogues(const char *questID)
 {
     char *dialoguesString = NULL;
@@ -105,11 +106,9 @@ void interactWith(Player *player, char *npc)
 {
     printf("Debug 0 : %s\n", npc);
 
-    // Get which quest gets initiated from NPC : getNPCQuest(player, npc)
-    // Get dialogues.json to initiate dialogues.
-    // say questID we got was Metalsmith Gaius_1
+    //NPCQuestID = getNPCQuestID(player, npc)
 
-    char *dialogues = questDialogues("Metalsmith Gaius_1");
+    char *dialogues = questDialogues("Metalsmith Gaius_1"); //NPCQuestID instead of String
     if (dialogues != NULL)
     {
         printf("%s\n", dialogues);
