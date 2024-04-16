@@ -22,8 +22,7 @@ int main()
         return EXIT_FAILURE;
     }
 
-    player = gameInitialize(playerID);//asks player wheter to start a new game(warns that load game will be deleted) or to load game and if the file does not existt ir gives a prompt telling player to start a new game .It also makes a new json file or load json files based on player choise and returns a player variable
-
+    player = gameInitialize(playerID);
     if (player == NULL) {
         fprintf(stderr, "Failed to initialize player\n");
         free(playerID);
