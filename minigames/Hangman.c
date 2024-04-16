@@ -15,11 +15,13 @@ int select_choice();                                                            
 int return_current_status(char guessed_string[], char *current_status[], char selected_word[], int length); // Updating the current status of the string
 void print_current_status(char *current_status[], int length);                                              // Printing the current status of the string
 void display_hangman(int result);                                                                           // Displaying the updated Hangman podium
-void sigint_handler(int sig);                                                                
+void sigint_handler(int sig);     
+void rope_sound();   
+void death_sound();                                                        
 
 int main()
 {
-  const char *soundFilePath = "./Sound Testing/Smooth_funky.mp3"; //Music
+  const char *soundFilePath = "./Sound Files/Mysterious_temple.mp3"; //Music
   char command[300];
   snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
   signal(SIGINT, sigint_handler);
@@ -162,8 +164,8 @@ int main()
 
       if (strcmp("quit\n", guessed_string) == 0)
       {
+        death_sound();
         system("clear");
-
         printf("\033[0;31m\n");
         printf("You Quit!!!\n");
         printf("\033[0m\n");
@@ -199,9 +201,9 @@ int main()
       }
       else if (status == 0) // letter guessed is absent in the string
       {
+        rope_sound();
         system("clear");
         printf("\033[0;31m\n");
-
         printf("WRONG GUESS\nYou lose a life!!");
         printf("\033[0m\n");
         lives--;
@@ -223,6 +225,7 @@ int main()
       }
       else if (status == 3) // Guessed string is wrong
       {
+        rope_sound();
         printf("\033[0;31m\n");
         printf("You lose a life!!\n");
         printf("\033[0m\n");
@@ -230,6 +233,7 @@ int main()
 
       if (lives == 0)
       {
+        death_sound();
         printf("\033[0;31m\n");
         printf("You lose because you ran out of lives\n");
         printf("\033[0m\n");
@@ -242,6 +246,7 @@ int main()
       l = 0;
       if (status == 3) // If a wrong string was typed when we predicted the entire string, we get some extra characters in the input buffer
       {
+        rope_sound();
         printf("\033[0;31m\n");
 
         if (lives == 0)
@@ -507,4 +512,21 @@ void intro()
 void sigint_handler(int sig) {
     system("killall afplay");
     exit(0);
+}
+
+void rope_sound()
+{
+  const char *soundFilePath = "./Sound Files/hangman_rope.mp3"; //Music
+  char command[300];
+  snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
+  signal(SIGINT, sigint_handler);
+  system(command);
+}
+void death_sound()
+{
+  const char *soundFilePath = "./Sound Files/Man_scream.mp3"; //Music
+  char command[300];
+  snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
+  signal(SIGINT, sigint_handler);
+  system(command);
 }
