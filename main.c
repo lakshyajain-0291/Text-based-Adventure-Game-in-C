@@ -29,6 +29,8 @@ int main()
         return EXIT_FAILURE;
     }
 
+    printPrologue();
+
     selectState(&state);//function that can be called from anywhere by player to choose a state
     processState(&state);//function that processes the state
 
