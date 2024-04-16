@@ -1,7 +1,7 @@
 {
   "dialogues": [
     {
-      "Quest_ID": "Metalsmith Gaius_1",
+      "Quest_ID": "0_0",
       "Quest_Name": "The Masterpiece",
       "NPC": "Metalsmith Gaius",
       "Text": [
@@ -14,7 +14,7 @@
       ]
     },
     {
-      "Quest_ID": "Metalsmith Gaius_2",
+      "Quest_ID": "0_1",
       "Quest_Name": "The Rivalry",
       "NPC": "Metalsmith Gaius",
       "Text": [
@@ -27,7 +27,7 @@
       ]
     },
     {
-      "Quest_ID": "Metalsmith Gaius_3",
+      "Quest_ID": "0_2",
       "Quest_Name": "The Lost Relic",
       "NPC": "Metalsmith Gaius",
       "Text": [
