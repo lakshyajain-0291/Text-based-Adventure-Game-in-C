@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "stdio.h": "c",
-        "headers.h": "c"
+        "headers.h": "c",
+        "world.h": "c",
+        "characters.h": "c",
+        "locations.h": "c",
+        "player.h": "c"
     }
 }

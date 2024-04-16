@@ -1,31 +1,47 @@
 {
   "dialogues": [
     {
-      "Quest_ID": "Marcus Agrippa_1",
-      "NPC": "Marcus Agrippa",
+      "Quest_ID": "Metalsmith Gaius_1",
+      "Quest_Name": "The Masterpiece",
+      "NPC": "Metalsmith Gaius",
       "Text": [
-        "Marcus Agrippa: Greetings, my friend. I have a proposition for you.",
-        "Player: What is it, Marcus?",
-        "Marcus Agrippa: I've heard rumors of a gladiatorial tournament at the Colosseum. I intend to participate and prove my worth.",
-        "Player: Why the sudden interest in gladiatorial combat?",
-        "Marcus Agrippa: My skills have been honed on the battlefield, but I seek new challenges. Plus, the prize for victory could be substantial.",
-        "Player: How can I assist you?",
-        "Marcus Agrippa: I need someone to watch my back, someone I can trust. Will you stand by me in the arena?",
-        "Player: Of course, Marcus. You can count on me."
+        "Marcus Agrippa: Greetings Gaius",
+        "Metalsmith Gaius: Ah, Marcus Agrippa! I've heard tales of your prowess in combat.",
+        "Marcus Agrippa: And I've heard of your skill with a hammer and anvil, Gaius.",
+        "Metalsmith Gaius: I have a proposition for you. There's a mission I need assistance with, and your strength would be invaluable.",
+        "Marcus Agrippa: What kind of mission?",
+        "Metalsmith Gaius: It involves venturing into the heart of hostile territory to retrieve a valuable weapon. The risks are great, but so are the rewards. Are you in Marcus?"
       ]
     },
     {
-      "Quest_ID": "Metalsmith Gaius_1",
+      "Quest_ID": "Metalsmith Gaius_2",
+      "Quest_Name": "The Rivalry",
       "NPC": "Metalsmith Gaius",
       "Text": [
-        "Metalsmith Gaius: Ah, Marcus Agrippa! I've heard tales of your prowess in combat.",
-        "Marcus Agrippa: And I've heard of your skill with a hammer and anvil, Gaius.",
-        "Metalsmith Gaius: I have a proposition for you. There's a dangerous mission I need assistance with, and your strength would be invaluable.",
-        "Marcus Agrippa: What kind of mission?",
-        "Metalsmith Gaius: It involves venturing into the heart of enemy territory to retrieve a valuable artifact. The risks are great, but so are the rewards.",
-        "Marcus Agrippa: I'm in. Lead the way, Gaius."
+        "Marcus Agrippa: Greetings Gaius.",
+        "Metalsmith Gaius: Ah, Marcus Agrippa! It's good to see you again. I trust you're faring well?",
+        "Marcus Agrippa: As well as one can, considering the circumstances. I come bearing news of our previous endeavor. The legendary weapon we forged together has become quite the talk of the town.",
+        "Metalsmith Gaius: Excellent news, Marcus! Your assistance was invaluable in its creation. You have my deepest gratitude. Now, onto our next project. I've been pondering over a design for a new weapon—a blade that will be unmatched in both beauty and lethality. However, to bring this vision to life, I'll need your help once more, Marcus. We must gather rare materials and master intricate techniques to forge this masterpiece.",
+        "Marcus Agrippa: Your vision sounds ambitious, Gaius. I'm honored to be a part of it. What materials do you require, and where can we find them?",
+        "Metalsmith Gaius: We'll need a piece of meteoric iron, known for its exceptional strength, as well as a rare gemstone rumored to possess magical properties. The iron can be found deep within the Ironclad Mountains, and the gemstone is said to be guarded by a fearsome creature in the Forest of Shadows. It won't be an easy task, but I have faith in your abilities, Marcus."
       ]
     },
-    // Add dialogues for other quests here...
+    {
+      "Quest_ID": "Metalsmith Gaius_3",
+      "Quest_Name": "The Lost Relic",
+      "NPC": "Metalsmith Gaius",
+      "Text": [
+        "Marcus Agrippa: Greetings, Gaius. I bring news of our victory in the prestigious blacksmithing contest.",
+        "Metalsmith Gaius: Marcus, my friend! Congratulations on your triumph. Your prowess in the competition has brought honor to us both.",
+        "Marcus Agrippa: It was a hard-fought battle, but in the end, our craftsmanship proved superior. Now, what new challenge do you have in store for us?",
+        "Metalsmith Gaius: Our next endeavor will be to recover a stolen artifact of great sentimental value to me. It's a hammer passed down through generations of my family, and I'll stop at nothing to see it returned to its rightful place.",
+        "Marcus Agrippa: I understand the importance of reclaiming what's yours, Gaius. Tell me more about this artifact and the circumstances of its theft.",
+        "Metalsmith Gaius: The hammer was taken from my workshop under the cover of night by a group of thieves who've been plaguing the city for some time. They're known to frequent the seedy taverns of the lower district, and I suspect they're holed up somewhere in the city's underworld.",
+        "Marcus Agrippa: Then it seems we'll need to venture into the heart of darkness to retrieve your hammer. You can count on me, Gaius.",
+        "Metalsmith Gaius: Your loyalty and bravery are unmatched, Marcus. Together, we'll track down those thieves and reclaim what is rightfully mine.",
+        "Marcus Agrippa: Let's not waste any time, then. Lead the way, Gaius. I'm ready to confront whatever dangers lie ahead."
+      ]
+    }
+
   ]
 }
