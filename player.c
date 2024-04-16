@@ -60,7 +60,9 @@ Player *createNewPlayer(char *playerID)
     // }
     
     newPlayer->activeQuests=NULL;
-    int numOfNpcs;//ye kaha se lao????????----->from characters.json
+
+    int numOfNpcs=getNpcNumber();//reading chharcters.json for no of npcs
+
     newPlayer->npcInfo=(int**)malloc(sizeof(int*)*numOfNpcs);
     
     for(int i=0;i<numOfNpcs;i++)
@@ -175,8 +177,6 @@ Player *loadPlayerData(char *playerID)
     fileContent[fileSize]=0;
 
     cJSON *root=cJSON_Parse(fileContent);
-    cJSON *playerArray=cJSON_GetObjectItem(root,"player");
-
     cJSON *playerObject=cJSON_GetObjectItem(root,"player");
 
     Player *player=(Player*)malloc(sizeof(Player));

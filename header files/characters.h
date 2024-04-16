@@ -24,6 +24,6 @@ typedef struct
     int luck;
 }Stats;
 
-
+int getNpcNumber();
 
 #endif
