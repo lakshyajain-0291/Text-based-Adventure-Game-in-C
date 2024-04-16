@@ -1,9 +1,11 @@
 {
     "characters" : [
         {
+            "ID" : 0,
             "name": "Metalsmith Gaius"
         },
         {
+            "ID" : 1,
             "name": "Alchemist Aurelia"
         }
     ]
