@@ -1,5 +1,6 @@
 #ifndef QUEST_H
 #define QUEST_H
+#include "headers.h"
 
 typedef enum
 {
@@ -8,6 +9,15 @@ typedef enum
     DAILY_QUEST,
     COMPULSORY_QUEST,
 }TypeOfQuest;
+
+typedef enum
+{   
+    ACTIVE,
+    COMPLETED,
+    FAILED,
+    TO_SUBMIT,
+
+}QuestStatus;
 
 typedef struct
 {
@@ -21,14 +31,20 @@ typedef struct _quest
     char *name;
     char *description;
     Reward reward;
-    bool status;
-    bool isactive;
+    QuestStatus status;
+    bool (*completionCond)();//a pointer to function thar returns if the quest is completed or not
     TypeOfQuest type;
     struct _quest *next;
 }Quest;
 
-// Function to create a new quest
-Quest *createQuest(char *name,char *desc,int xp,int gold,TypeOfQuest type);
+typedef struct 
+{
+    Quest **activeQuests; //array of active quests 
+    Quest **completedQuests;//array of completed quests
+}QuestManager;
+
+// Function to create a new quest 
+Quest *createQuest(char *name,char *desc,int xp,int gold,TypeOfQuest type,bool(*completionCond)());
 
 // Function to add a quest to a quest list
 void   insertQuest(Quest *parentQuest,Quest *childQuest);
@@ -47,6 +63,7 @@ bool isQuestActive(Quest *quest);
 
 // Function to check if a quest is failed
 bool isQuestFailed(Quest *quest);
+
 
 
 #endif

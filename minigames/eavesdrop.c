@@ -54,14 +54,15 @@ int decryptor(int attempts)
         fclose(dictionary);
         return 0;
     }
-
-    for (int i = 0; i < x; i++)
+    int i;
+    for (i = 0; i < x; i++)
     {
         words[i] = malloc(MAX_WORD_LENGTH * sizeof(char));
         if (words[i] == NULL)
         {
             printf("Memory allocation failed.\n");
-            for (int j = 0; j < i; j++)
+            int j;
+            for (j = 0; j < i; j++)
             {
                 free(words[j]);
             }
@@ -83,8 +84,8 @@ int decryptor(int attempts)
     char *word = malloc(MAX_WORD_LENGTH * sizeof(char));
     if (word == NULL)
     {
-        printf("Memory allocation failed.\n");
-        for (int i = 0; i < wordCount; i++)
+        printf("Memory allocation failed.\n");int i;
+        for (i = 0; i < wordCount; i++)
         {
             free(words[i]);
         }
@@ -98,8 +99,8 @@ int decryptor(int attempts)
     if (code == NULL)
     {
         printf("Memory allocation failed.\n");
-        free(word);
-        for (int i = 0; i < wordCount; i++)
+        free(word);int i;
+        for (i = 0; i < wordCount; i++)
         {
             free(words[i]);
         }
@@ -124,7 +125,8 @@ int decryptor(int attempts)
         printf("Memory allocation failed.\n");
         free(word);
         free(code);
-        for (int i = 0; i < wordCount; i++)
+        int i;
+        for (i = 0; i < wordCount; i++)
         {
             free(words[i]);
         }
@@ -149,7 +151,8 @@ int decryptor(int attempts)
             free(word);
             free(code);
             free(decryptedWord);
-            for (int i = 0; i < wordCount; i++)
+            int i;
+            for (i = 0; i < wordCount; i++)
             {
                 free(words[i]);
             }
@@ -189,7 +192,8 @@ int decryptor(int attempts)
         free(word);
         free(code);
         free(decryptedWord);
-        for (int i = 0; i < wordCount; i++)
+        int i;
+        for (i = 0; i < wordCount; i++)
         {
             free(words[i]);
         }
@@ -204,7 +208,8 @@ int main()
     system("clear");
     printf("\n        \x1b[33m");
     char welcome[100]="WELCOME TO THE EAVESDROP GAME";
-    for(int i=0;i<strlen(welcome);i++)
+    int i;
+    for(i=0;i<strlen(welcome);i++)
     {
         putchar(welcome[i]);
         fflush(stdout);

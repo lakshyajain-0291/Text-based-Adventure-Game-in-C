@@ -1,7 +1,6 @@
-#include<stdio.h>
-
 #ifndef WORLD_H
 #define WORLD_H
+#include "headers.h"
 
 typedef struct
 {
@@ -10,6 +9,11 @@ typedef struct
     Player *player;
 }World;
 
+
+Player *getPlayerInfo(char *playerName)
+{
+
+}
 // Function to initialize the game world
 World* initializeWorld();
 
