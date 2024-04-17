@@ -5,6 +5,7 @@
         "world.h": "c",
         "characters.h": "c",
         "locations.h": "c",
-        "player.h": "c"
+        "player.h": "c",
+        "string.h": "c"
     }
 }

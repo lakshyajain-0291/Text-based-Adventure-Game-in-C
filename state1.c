@@ -43,6 +43,40 @@ typedef struct
     int **NPCInfo;         // Player's interactions with NPCs (and status of Quest-line)
 } Player;
 
+// Function to add activated quest to activeQuests array of strings
+void addActiveQuest(Player *player, char *questID)
+{
+    // Find the number of active quests
+    int numActiveQuests = 0;
+    while (player->activeQuests[numActiveQuests] != NULL)
+    {
+        numActiveQuests++;
+    }
+
+    // Allocate memory for the new quest ID string
+    char *newQuestID = strdup(questID);
+    if (newQuestID == NULL)
+    {
+        // Handle memory allocation error
+        printf("Error: Memory allocation failed\n");
+        return;
+    }
+
+    // Reallocate memory for the activeQuests array to accommodate the new quest ID
+    player->activeQuests = (char **)realloc(player->activeQuests, (numActiveQuests + 2) * sizeof(char *));
+    if (player->activeQuests == NULL)
+    {
+        // Handle memory reallocation error
+        printf("Error: Memory reallocation failed\n");
+        free(newQuestID); // Free the allocated memory for the new quest ID
+        return;
+    }
+
+    // Add the new quest ID to the activeQuests array
+    player->activeQuests[numActiveQuests] = newQuestID;
+    player->activeQuests[numActiveQuests + 1] = NULL; // Null-terminate the array
+}
+
 // Function to activate quest
 void activateQuest(Player *player, char *npc, char *NPCQuestID)
 {
@@ -58,6 +92,9 @@ void activateQuest(Player *player, char *npc, char *NPCQuestID)
 
     // Update the quest status of the relevant NPC for the given quest level
     player->NPCInfo[npcIndex][questLevel] = 1; // Set quest status to 1 (active)
+
+    // Add the activated quest to the activeQuests array
+    addActiveQuest(player, NPCQuestID);
 }
 
 // Function to parse quests.json and get the quest location
