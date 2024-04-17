@@ -1,46 +1,136 @@
 {
-    "player": {
-            "id": "testplayer",
-            "name": "Gaius Marcus Agrippa",
-            "level": 1,
-            "stats": {
-                "HP": 100,
-                "att": 10,
-                "def": 5,
-                "agi": 8,
-                "str": 12,
-                "dex": 9,
-                "inte": 6,
-                "luck": 7
-            },
-            "inventory": {
-                "size": 10,
-                "items": [
-                    {
-                        "item":"WEAPON"
-                    },
-                    {
-                        "item":"ARMOR"
-                    }
-                ]
-            },
-            "wtdLevel": 0,
-            "xp": 0,
-            "gold": 50,
-            "currentLocation": "WORLD/CITY/COLLOSEUM/FIGHT_PITS",
-            "NPCinfo": [
+    "player":
+    {
+        "id": "testplayer",
+        "name": "Gaius Marcus Agrippa",
+        "level": 1,
+        "wtdLevel": 0,
+        "xp": 0,
+        "gold": 50,
+        "currentLocation": "WORLD/CITY/COLLOSEUM/FIGHT_PITS",
+        "stats": 
+        {
+            "HP": 100,
+            "atk": 10,
+            "def": 5,
+            "agi": 8,
+            "str": 12,
+            "dex": 9,
+            "intel": 6,
+            "luck": 7
+        },
+        "inventory": 
+        {
+            "size": 10,
+            "items": 
+            [
                 {
-                    "npc_name" : "Metalsmith Gaius",
-                    "quest_lvl" : 0,
-                    "quest_status" : 0,
-                    "relationship" : 0
+                    "item":"WEAPON"
                 },
                 {
-                    "npc_name" : "Oracle Sibylla",
-                    "quest_lvl" : 0,
-                    "quest_status" : 0,
-                    "relationship" : 0
+                    "item":"ARMOR"
                 }
             ]
-        }
+        },
+        "NPCinfo": 
+        [
+            {
+                "npc_id" : 0,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+            },
+            {
+                "npc_id" : 1,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+         
+            },
+            {
+                "npc_id" : 2,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+            },
+            {
+                "npc_id" : 3,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+            },
+            {
+                "npc_id" : 4,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+            },
+            {
+                "npc_id" : 5,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+            },
+            {
+                "npc_id" : 6,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+            },
+            {
+                "npc_id" : 7,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+            },
+            {
+                "npc_id" : 8,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+            },
+            {
+                "npc_id" : 9,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+            },
+            {
+                "npc_id" : 10,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+            },
+            {
+                "npc_id" : 11,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+            },
+            {
+                "npc_id" : 12,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+            },
+            {
+                "npc_id" : 13,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+            },
+            {
+                "npc_id" : 14,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+            },
+            {
+                "npc_id" : 15,
+                "quest_lvl" : 0,
+                "quest_status" : 0,
+                "relationship" : 0
+            }
+        ]
+    }
 }

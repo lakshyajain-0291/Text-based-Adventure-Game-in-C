@@ -1,4 +1,4 @@
-#include "headers.h"
+#include "header files/headers.h"
 
 #define MAX_PLAYER_ID_LENGTH 100
 int state;
@@ -29,9 +29,14 @@ int main()
         return EXIT_FAILURE;
     }
 
-    selectState(&state);//function that can be called from anywhere by player to choose a state
-    processState(&state);//function that processes the state
+    printPrologue();
 
+    selectState(&state);//function that can be called from anywhere by player to choose a state
+
+    while(state>=0)
+        processState(player,&state);//function that processes the state
+
+    printf("");///EXIT STATEMENT
     // Cleanup
     free(playerID);
     return EXIT_SUCCESS;

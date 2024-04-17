@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <conio.h>
 
+void sound_files(int choice);
+
 // Function to delay output on terminal
 void delay(float number_of_seconds)
 {
@@ -326,4 +328,14 @@ int main()
 {
     int resMine = playMinesweeper(6);
     return 0;
+}
+
+void sound_files(int choice)
+{
+  if(choice==1)
+   const char *soundFilePath = "./Sound Files/bomb_soun"; //Music
+  char command[300];
+  snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
+  signal(SIGINT, sigint_handler);
+  system(command);
 }

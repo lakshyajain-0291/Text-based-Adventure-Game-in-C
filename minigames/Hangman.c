@@ -15,15 +15,15 @@ int select_choice();                                                            
 int return_current_status(char guessed_string[], char *current_status[], char selected_word[], int length); // Updating the current status of the string
 void print_current_status(char *current_status[], int length);                                              // Printing the current status of the string
 void display_hangman(int result);                                                                           // Displaying the updated Hangman podium
-void sigint_handler(int sig);                                                                
+void sigint_handler(int sig);     
+void rope_sound();   
+void death_sound();    
+void bg_score();   
+void success_sounds(int n);                                                 
 
 int main()
 {
-  const char *soundFilePath = "./Sound Testing/Smooth_funky.mp3"; //Music
-  char command[300];
-  snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
-  signal(SIGINT, sigint_handler);
-  system(command);
+  bg_score();
   while(1){
 
 
@@ -37,7 +37,7 @@ int main()
       "What is hate, if not love persevering",
       "I am iron man",
       "Whatever it takes",
-      "Just because something works, doesn't mean it can't be improved" // Marvel Quotes
+      "Just because something works, doesn't mean it can't be improved", // Marvel Quotes
       "One small step for man, one giant leap for mankind",
       "Be the change that you wish to see in the world",
       "Live as if you were to die tomorrow. Learn as if you were to live forever",
@@ -162,8 +162,8 @@ int main()
 
       if (strcmp("quit\n", guessed_string) == 0)
       {
+        death_sound();
         system("clear");
-
         printf("\033[0;31m\n");
         printf("You Quit!!!\n");
         printf("\033[0m\n");
@@ -177,6 +177,7 @@ int main()
 
       if (status == 1) // letter is present
       {
+        success_sounds(1);
         system("clear");
 
         printf("\033[0;32m\n"); // Green color
@@ -199,9 +200,9 @@ int main()
       }
       else if (status == 0) // letter guessed is absent in the string
       {
+        rope_sound();
         system("clear");
         printf("\033[0;31m\n");
-
         printf("WRONG GUESS\nYou lose a life!!");
         printf("\033[0m\n");
         lives--;
@@ -209,6 +210,7 @@ int main()
 
       else if (status == 2) // Correctly guessed the String
       {
+        success_sounds(2);
         system("clear");
         display_hangman(-1);
         printf("\n**************************\n");
@@ -223,6 +225,7 @@ int main()
       }
       else if (status == 3) // Guessed string is wrong
       {
+        rope_sound();
         printf("\033[0;31m\n");
         printf("You lose a life!!\n");
         printf("\033[0m\n");
@@ -230,6 +233,7 @@ int main()
 
       if (lives == 0)
       {
+        death_sound();
         printf("\033[0;31m\n");
         printf("You lose because you ran out of lives\n");
         printf("\033[0m\n");
@@ -242,6 +246,7 @@ int main()
       l = 0;
       if (status == 3) // If a wrong string was typed when we predicted the entire string, we get some extra characters in the input buffer
       {
+        rope_sound();
         printf("\033[0;31m\n");
 
         if (lives == 0)
@@ -507,4 +512,42 @@ void intro()
 void sigint_handler(int sig) {
     system("killall afplay");
     exit(0);
+}
+
+void rope_sound()
+{
+  const char *soundFilePath = "./Sound Files/hangman_rope.mp3"; //Music
+  char command[300];
+  snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
+  signal(SIGINT, sigint_handler);
+  system(command);
+}
+void death_sound()
+{
+  const char *soundFilePath = "./Sound Files/Man_scream.mp3"; //Music
+  char command[300];
+  snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
+  signal(SIGINT, sigint_handler);
+  system(command);
+}
+void bg_score()
+{
+  const char *soundFilePath = "./Sound Files/Mysterious_temple_long.mp3"; //Music
+  char command[300];
+  snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
+  signal(SIGINT, sigint_handler);
+  system(command);
+}
+void success_sounds(int n)
+{
+  const char *soundFilePath;
+  if(n==1)
+   soundFilePath = "./Sound Files/yes_man.mp3"; //Music
+  else if(n==2)
+   soundFilePath = "./Sound Files/success.mp3"; 
+  char command[300];
+  snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
+  signal(SIGINT, sigint_handler);
+  system(command);
+
 }

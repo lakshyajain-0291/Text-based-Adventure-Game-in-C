@@ -15,15 +15,15 @@ typedef enum
 typedef struct 
 {
     int HP;
-    int att;
+    int atk;
     int def;
     int agi;
     int str;
     int dex;
-    int inte;
+    int intel;
     int luck;
 }Stats;
 
-
+int getNpcNumber();
 
 #endif

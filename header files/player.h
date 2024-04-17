@@ -5,48 +5,29 @@
 // Define the Inventory structure
 typedef struct {
     int size; // Size of the inventory
-    Item *items; // Array of items in the inventory
+    char **items; // Array of items in the inventory
 } Inventory;
 
 // Define the Player structure
 typedef struct {
-    char *name; // Player's name
+    char *id; // Player's id
+    char *name;
     int level; // Player's level
-    Stats stats; // Player's stats (e.g., HP, attack, defense)
-    Inventory inventory; // Player's inventory
+    Stats *stats; // Player's stats (e.g., HP, attack, defense)
+    Inventory *inventory; // Player's inventory
     int wtdLevel; // Wantedted level
     int xp; // Player's experience points
     int gold; // Player's gold
-    char **currentLocation; // Player's current location
+    char *currentLocation; // Player's current location as string
     char **activeQuests; // Player's active quests
-    QuestManager questManager;//players' active 
+    int **npcInfo;//players' active 
 } Player;
 
 // Function to create a new player
-Player *createPlayer(char *ID);
+Player *createNewPlayer(char *playerID);
 
-// Function to update player stats based on XP and gold
-void updatePlayer(Player *player, int xp, int gold);
+void savePlayerData(Player *player);
 
-
-
-// Function to add an item to the player's inventory
-void addToInventory(Player *player, Item item);
-
-// Function to update the size of the inventory
-void updateInventorySize(Inventory *inventory, int newSize);
-
-// Function to drop an item from the inventory
-void dropItem(Inventory *inventory);
-
-
-// Function to apply a buff to the player's stats
-// void applyBUFF(Player *player, BUFF buff);
-
-
-
-// Function to display the player's status
-void showStatus(Player *player);
-
+Player *loadPlayerData(char *playerID);
 
 #endif
