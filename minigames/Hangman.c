@@ -17,15 +17,13 @@ void print_current_status(char *current_status[], int length);                  
 void display_hangman(int result);                                                                           // Displaying the updated Hangman podium
 void sigint_handler(int sig);     
 void rope_sound();   
-void death_sound();                                                        
+void death_sound();    
+void bg_score();   
+void success_sounds(int n);                                                 
 
 int main()
 {
-  const char *soundFilePath = "./Sound Files/Mysterious_temple.mp3"; //Music
-  char command[300];
-  snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
-  signal(SIGINT, sigint_handler);
-  system(command);
+  bg_score();
   while(1){
 
 
@@ -39,7 +37,7 @@ int main()
       "What is hate, if not love persevering",
       "I am iron man",
       "Whatever it takes",
-      "Just because something works, doesn't mean it can't be improved" // Marvel Quotes
+      "Just because something works, doesn't mean it can't be improved", // Marvel Quotes
       "One small step for man, one giant leap for mankind",
       "Be the change that you wish to see in the world",
       "Live as if you were to die tomorrow. Learn as if you were to live forever",
@@ -179,6 +177,7 @@ int main()
 
       if (status == 1) // letter is present
       {
+        success_sounds(1);
         system("clear");
 
         printf("\033[0;32m\n"); // Green color
@@ -211,6 +210,7 @@ int main()
 
       else if (status == 2) // Correctly guessed the String
       {
+        success_sounds(2);
         system("clear");
         display_hangman(-1);
         printf("\n**************************\n");
@@ -529,4 +529,25 @@ void death_sound()
   snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
   signal(SIGINT, sigint_handler);
   system(command);
+}
+void bg_score()
+{
+  const char *soundFilePath = "./Sound Files/Mysterious_temple_long.mp3"; //Music
+  char command[300];
+  snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
+  signal(SIGINT, sigint_handler);
+  system(command);
+}
+void success_sounds(int n)
+{
+  const char *soundFilePath;
+  if(n==1)
+   soundFilePath = "./Sound Files/yes_man.mp3"; //Music
+  else if(n==2)
+   soundFilePath = "./Sound Files/success.mp3"; 
+  char command[300];
+  snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
+  signal(SIGINT, sigint_handler);
+  system(command);
+
 }
