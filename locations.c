@@ -78,9 +78,16 @@ void navigationMode(Player *player,int *state)
 
         printf("\nOr Enter i/I for Interaction Mode");
         printf("\nOr Enter q/Q for Quest Mode");
+        printf("\nOr Enter e/E to Exit the Game");
 
-        printf("\nChoose a Location to move to : ");
+        printf("\nMake a Choise to continue : ");
         input=getchar();
+        if(input=='e'||input=='E')
+        {
+            *state =-1;
+            return;
+        }
+
         if(input=='i'||input=='I')
         {
             *state = 1;
@@ -111,9 +118,16 @@ void navigationMode(Player *player,int *state)
 
         printf("\nOr Enter i/I for Interaction Mode");
         printf("\nOr Enter q/Q for Quest Mode");
+        printf("\nOr Enter e/E to Exit the Game");
 
-        printf("\nChoose a Location to move to : ");
+        printf("\nMake a Choise to continue : ");
         input=getchar();
+        if(input=='e'||input=='E')
+        {
+            *state =-1;
+            return;
+        }
+
         if(input=='i'||input=='I')
         {
             *state = 1;

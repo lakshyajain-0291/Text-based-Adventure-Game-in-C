@@ -240,3 +240,26 @@ Player *loadPlayerData(char *playerID)
     
 }
 
+int playMinigame(Player *player,char *gameName)
+{
+
+// Define an array of string-function pairs
+//correct the names of minigame function to these
+    StringFunctionPair functions[] = {
+        // {"Combat", Combat},
+        // {"Falconry", Falconry},
+        //add more games
+    };
+
+    // to call a function based on input string
+    int i;
+    for (i = 0; i < sizeof(functions) / sizeof(functions[0]); i++) {
+        if (strcmp(gameName, functions[i].str) == 0) {
+            functions[i].func(); // Call the function associated with the input string
+            return;
+        }
+    }
+    printf("No function found for input: %s\n", gameName);
+
+}
+

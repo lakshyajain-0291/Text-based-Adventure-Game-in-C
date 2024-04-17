@@ -23,11 +23,20 @@ typedef struct {
     int **npcInfo;//players' active 
 } Player;
 
+// Define a structure to hold string-function mappings
+typedef struct {
+    char *str;
+    void (*func)();
+} StringFunctionPair;
+
+
 // Function to create a new player
 Player *createNewPlayer(char *playerID);
 
 void savePlayerData(Player *player);
 
 Player *loadPlayerData(char *playerID);
+
+int playMinigame(Player *player,char *gameName);
 
 #endif
