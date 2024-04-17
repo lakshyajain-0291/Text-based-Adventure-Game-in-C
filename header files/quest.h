@@ -8,11 +8,14 @@ typedef enum
     QUEST_STATUS,
     RELATONSHIP,
 }QuestManager;
+
 typedef struct
 {
     int xp;
     int gold;
     BUFF buff;
 }Reward;
+
+void questMode(Player *player,int *state);
 
 #endif
