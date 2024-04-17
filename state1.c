@@ -1,3 +1,7 @@
+// Tokenize, as change in currentLocation
+// Quest status: 0=Incomplete/Inactive, 1=Active, 2=To-Submit
+
+// Header files inclusion
 #include "header files/cJSON.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,25 +31,340 @@ typedef struct
 // Define the Player structure
 typedef struct
 {
-    char *name;             // Player's name
-    int level;              // Player's level
-    Stats stats;            // Player's stats (e.g., HP, attack, defense)
-    Inventory inventory;    // Player's inventory
-    int wtdLevel;           // Wantedted level
-    int xp;                 // Player's experience points
-    int gold;               // Player's gold
-    char **currentLocation; // Player's current location
-    char **activeQuests;    // Player's active quests
-    // QuestManager questManager;//players' active
+    char *name;            // Player's name
+    int level;             // Player's level
+    Stats stats;           // Player's stats (e.g., HP, attack, defense)
+    Inventory inventory;   // Player's inventory
+    int wtdLevel;          // Wantedted level
+    int xp;                // Player's experience points
+    int gold;              // Player's gold
+    char *currentLocation; // Player's current location [Change this]
+    char **activeQuests;   // Player's active quests
+    int **NPCInfo;         // Player's interactions with NPCs (and status of Quest-line)
 } Player;
+
+// Function to activate quest
+void activateQuest(Player *player, char *npc, char *NPCQuestID)
+{
+    // Assume NPCInfo is properly initialized and contains valid data
+    // Find the NPC ID based on the given NPC name
+    int npcID = getNPCID(npc);
+
+    // Find the index corresponding to the NPC ID in NPCInfo
+    int npcIndex = npcID; // For simplicity, assuming the NPC ID corresponds to its index in NPCInfo
+
+    // Find the Quest level based on the given NPCQuestID
+    int questLevel = getQuestLevel(NPCQuestID);
+
+    // Update the quest status of the relevant NPC for the given quest level
+    player->NPCInfo[npcIndex][questLevel] = 1; // Set quest status to 1 (active)
+}
+
+// Function to parse quests.json and get the quest location
+char *getQuestLocation(const char *NPCQuestID)
+{
+    char *location = NULL;
+
+    // Read the contents of the quests.json file
+    FILE *file = fopen("quests.json", "r");
+    if (file != NULL)
+    {
+        fseek(file, 0, SEEK_END);
+        long fileSize = ftell(file);
+        fseek(file, 0, SEEK_SET);
+
+        char *fileContent = (char *)malloc(fileSize + 1);
+        if (fileContent != NULL)
+        {
+            fread(fileContent, 1, fileSize, file);
+            fileContent[fileSize] = '\0';
+
+            // Parse the JSON content
+            cJSON *root = cJSON_Parse(fileContent);
+            if (root != NULL)
+            {
+                cJSON *quests = cJSON_GetObjectItem(root, "quests");
+                if (quests != NULL && cJSON_IsArray(quests))
+                {
+                    cJSON *quest;
+                    cJSON_ArrayForEach(quest, quests)
+                    {
+                        cJSON *questIDJSON = cJSON_GetObjectItem(quest, "QuestID");
+                        if (questIDJSON != NULL && cJSON_IsString(questIDJSON) && strcmp(questIDJSON->valuestring, NPCQuestID) == 0)
+                        {
+                            // Quest found, get its location
+                            cJSON *questLocation = cJSON_GetObjectItem(quest, "Location");
+                            if (questLocation != NULL && cJSON_IsString(questLocation))
+                            {
+                                location = strdup(questLocation->valuestring);
+                            }
+                            break; // No need to continue searching
+                        }
+                    }
+                }
+                cJSON_Delete(root);
+            }
+            free(fileContent);
+        }
+        fclose(file);
+    }
+
+    return location;
+}
+
+// Function to parse quests.json and get the quest description
+char *getQuestDescription(const char *NPCQuestID)
+{
+    char *description = NULL;
+
+    // Read the contents of the quests.json file
+    FILE *file = fopen("quests.json", "r");
+    if (file != NULL)
+    {
+        fseek(file, 0, SEEK_END);
+        long fileSize = ftell(file);
+        fseek(file, 0, SEEK_SET);
+
+        char *fileContent = (char *)malloc(fileSize + 1);
+        if (fileContent != NULL)
+        {
+            fread(fileContent, 1, fileSize, file);
+            fileContent[fileSize] = '\0';
+
+            // Parse the JSON content
+            cJSON *root = cJSON_Parse(fileContent);
+            if (root != NULL)
+            {
+                cJSON *quests = cJSON_GetObjectItem(root, "quests");
+                if (quests != NULL && cJSON_IsArray(quests))
+                {
+                    cJSON *quest;
+                    cJSON_ArrayForEach(quest, quests)
+                    {
+                        cJSON *questIDJSON = cJSON_GetObjectItem(quest, "QuestID");
+                        if (questIDJSON != NULL && cJSON_IsString(questIDJSON) && strcmp(questIDJSON->valuestring, NPCQuestID) == 0)
+                        {
+                            // Quest found, get its description
+                            cJSON *questDesc = cJSON_GetObjectItem(quest, "Description");
+                            if (questDesc != NULL && cJSON_IsString(questDesc))
+                            {
+                                description = strdup(questDesc->valuestring);
+                            }
+                            break; // No need to continue searching
+                        }
+                    }
+                }
+                cJSON_Delete(root);
+            }
+            free(fileContent);
+        }
+        fclose(file);
+    }
+
+    return description;
+}
+
+// Function to parse quests.json and get the quest reward
+void getQuestReward(Player *player, const char *questID)
+{
+    // Read the contents of the quests.json file
+    FILE *file = fopen("quests.json", "r");
+    if (file != NULL)
+    {
+        fseek(file, 0, SEEK_END);
+        long fileSize = ftell(file);
+        fseek(file, 0, SEEK_SET);
+
+        char *fileContent = (char *)malloc(fileSize + 1);
+        if (fileContent != NULL)
+        {
+            fread(fileContent, 1, fileSize, file);
+            fileContent[fileSize] = '\0';
+
+            // Parse the JSON content
+            cJSON *root = cJSON_Parse(fileContent);
+            if (root != NULL)
+            {
+                cJSON *quests = cJSON_GetObjectItem(root, "quests");
+                if (quests != NULL && cJSON_IsArray(quests))
+                {
+                    cJSON *quest;
+                    cJSON_ArrayForEach(quest, quests)
+                    {
+                        cJSON *questIDJSON = cJSON_GetObjectItem(quest, "QuestID");
+                        if (questIDJSON != NULL && cJSON_IsString(questIDJSON) && strcmp(questIDJSON->valuestring, questID) == 0)
+                        {
+                            // Quest found, get its reward
+                            cJSON *reward = cJSON_GetObjectItem(quest, "Reward");
+                            if (reward != NULL && cJSON_IsObject(reward))
+                            {
+                                // Update player's attributes based on the reward
+                                cJSON *xp = cJSON_GetObjectItem(reward, "xp");
+                                cJSON *gold = cJSON_GetObjectItem(reward, "gold");
+                                cJSON *item = cJSON_GetObjectItem(reward, "item");
+                                cJSON *relationship = cJSON_GetObjectItem(reward, "relationship");
+
+                                if (xp != NULL && cJSON_IsNumber(xp))
+                                {
+                                    player->xp += xp->valueint;
+                                }
+                                if (gold != NULL && cJSON_IsNumber(gold))
+                                {
+                                    player->gold += gold->valueint;
+                                }
+                                if (item != NULL && cJSON_IsString(item))
+                                {
+                                    // Append the item to the inventory
+                                    if (player->inventory.items == NULL)
+                                    {
+                                        player->inventory.items = (char **)malloc(sizeof(char *));
+                                        player->inventory.size = 1;
+                                    }
+                                    else
+                                    {
+                                        player->inventory.items = (char **)realloc(player->inventory.items, (player->inventory.size + 1) * sizeof(char *));
+                                        player->inventory.size++;
+                                    }
+                                    player->inventory.items[player->inventory.size - 1] = strdup(item->valuestring);
+                                }
+                                if (relationship != NULL && cJSON_IsNumber(relationship))
+                                {
+                                    // Update the relationship with the NPC
+                                    int npcID = atoi(strtok(questID, "_"));
+                                    player->NPCInfo[npcID][2] += relationship->valueint;
+                                }
+
+                                // Increase quest level and reset quest status
+                                int npcID = atoi(strtok(questID, "_"));
+                                player->NPCInfo[npcID][0]++;   // Increase quest level
+                                player->NPCInfo[npcID][1] = 0; // Reset quest status to 0 (incomplete/inactive)
+                            }
+                            break; // No need to continue searching
+                        }
+                    }
+                }
+                cJSON_Delete(root);
+            }
+            free(fileContent);
+        }
+        fclose(file);
+    }
+}
+
+// Function to check if there is any quest to submit to the NPC
+bool anyQuesttoSubmit(Player *player, const char *npcName)
+{
+    int npcID = getNPCID(npcName);
+    if (npcID == -1)
+    {
+        // NPC not found
+        return false;
+    }
+
+    // Get the quest ID for the NPC
+    char *questID = getQuestID(player, npcName);
+    if (questID == NULL)
+    {
+        // Quest ID not found
+        return false;
+    }
+
+    // Check if the quest status is "to-submit" (status = 2)
+    if (player->NPCInfo[npcID][1] == 2)
+    {
+        // Quest to submit found
+        free(questID); // Free the allocated memory
+        return true;
+    }
+
+    // No quest to submit
+    free(questID); // Free the allocated memory
+    return false;
+}
+
+// Function to parse characters.json and get the NPC ID
+int getNPCID(const char *npcName)
+{
+    // Read the contents of the characters.json file
+    FILE *file = fopen("characters.json", "r");
+    if (file != NULL)
+    {
+        fseek(file, 0, SEEK_END);
+        long fileSize = ftell(file);
+        fseek(file, 0, SEEK_SET);
+
+        char *fileContent = (char *)malloc(fileSize + 1);
+        if (fileContent != NULL)
+        {
+            fread(fileContent, 1, fileSize, file);
+            fileContent[fileSize] = '\0';
+
+            // Parse the JSON content
+            cJSON *root = cJSON_Parse(fileContent);
+            if (root != NULL)
+            {
+                cJSON *characters = cJSON_GetObjectItem(root, "characters");
+                if (characters != NULL && cJSON_IsArray(characters))
+                {
+                    cJSON *character;
+                    cJSON_ArrayForEach(character, characters)
+                    {
+                        cJSON *name = cJSON_GetObjectItem(character, "name");
+                        if (name != NULL && cJSON_IsString(name) && strcmp(name->valuestring, npcName) == 0)
+                        {
+                            cJSON *id = cJSON_GetObjectItem(character, "ID");
+                            if (id != NULL && cJSON_IsNumber(id))
+                            {
+                                // NPC found, return its ID
+                                cJSON_Delete(root);
+                                fclose(file);
+                                free(fileContent);
+                                return id->valueint;
+                            }
+                        }
+                    }
+                }
+                cJSON_Delete(root);
+            }
+            free(fileContent);
+        }
+        fclose(file);
+    }
+
+    // NPC not found or error reading file
+    return -1;
+}
+
+// Function to get the quest ID for a given NPC and player
+char *getQuestID(Player *player, const char *npcName)
+{
+    int npcID = getNPCID(npcName);
+    if (npcID == -1)
+    {
+        // NPC not found
+        return NULL;
+    }
+
+    // Get the quest level from the NPCInfo array
+    int questLevel = player->NPCInfo[npcID][0];
+
+    // Construct and return the quest ID string
+    char *questID = (char *)malloc(20 * sizeof(char)); // Adjust size as needed
+    if (questID != NULL)
+    {
+        sprintf(questID, "%d_%d", npcID, questLevel);
+    }
+    return questID;
+}
 
 // Function to parse dialogues.json for dialogues corresponding to Quest
 char *questDialogues(const char *questID)
 {
+    printf("Debug 1\n");
     char *dialoguesString = NULL;
 
     // Read the contents of the dialogues.json file
-    FILE *file = fopen("dialogues.json", "r");
+    FILE *file = fopen("dialogue.json", "r");
     if (file != NULL)
     {
         fseek(file, 0, SEEK_END);
@@ -102,29 +421,54 @@ char *questDialogues(const char *questID)
     return dialoguesString;
 }
 
-void interactWith(Player *player, char *npc)
+// Function to interact with given NPC
+void interactWith(Player *player, char *npc) // Requires Quest Submission
 {
     printf("Debug 0 : %s\n", npc);
 
-    //NPCQuestID = getNPCQuestID(player, npc)
+    // If any quest to submit:
+    if (anyQuesttoSubmit(player, npc))
+        getQuestReward(player, npc);
 
-    char *dialogues = questDialogues("Metalsmith Gaius_1"); //NPCQuestID instead of String
+    char *NPCQuestID = getQuestID(player, npc);
+
+    char *dialogues = questDialogues(NPCQuestID); // NPCQuestID instead of String
     if (dialogues != NULL)
     {
         printf("%s\n", dialogues);
         free(dialogues); // Free the allocated memory
     }
-    // Get choice to accept or reject
 
-    /*
-    if accepted: change **activeQuests
-    else return to chooseNPC
-    */
+    // Quest description and reward
+    char *questDescription = getQuestDescription(NPCQuestID);
+    if (questDescription != NULL)
+    {
+        printf("%s\n", questDescription);
+        free(questDescription);
+    }
+
+    // Quest Location
+    char *questLocation = getQuestLocation(NPCQuestID);
+    if (questLocation != NULL)
+    {
+        printf("You must go to %s to complete the Quest\n", questLocation);
+        free(questLocation);
+    }
+
+    // Get choice to accept or reject
+    printf("Enter 1 to accept this quest now:\nEnter 0 to reject:\n");
+    int questChoice;
+    scanf("%d", &questChoice);
+
+    // If accepted, add to active quests
+    if (questChoice == 1)
+        activateQuest(player, npc, NPCQuestID);
 }
 
+// Function to choose NPCs from available NPCs
 void chooseNPC(char **NPCsAvailable, Player *player)
-{   
-    while(1)
+{
+    while (1)
     {
         printf("Available NPCs:\n");
         for (int i = 0; NPCsAvailable[i] != NULL; i++)
@@ -153,15 +497,6 @@ void chooseNPC(char **NPCsAvailable, Player *player)
     }
 }
 
-char *stringdum(const char *str)
-{
-    size_t len = strlen(str) + 1;
-    char *new_str = (char *)malloc(len);
-    if (new_str == NULL)
-        return NULL;
-    strcpy(new_str, str);
-    return new_str;
-}
 // Function to return array of NPCs available at the specified locationNode
 char **returnNPCsAvailable(const char *locationNode)
 {
@@ -226,32 +561,30 @@ char **returnNPCsAvailable(const char *locationNode)
 
     return NPCsAvailable;
 }
-// Function to find the last string in an array of strings
-char *findLastString(char **strings, int count)
+
+// Function to get last word of string
+char *getLastWordAfterLastSlash(const char *input)
 {
-    if (count <= 0)
+    // Find the position of the last slash
+    const char *lastSlash = strrchr(input, '/');
+
+    if (lastSlash == NULL)
     {
-        // If the array is empty or count is invalid, return NULL
-        return NULL;
+        // No slash found, return a copy of the input string
+        return strdup(input);
     }
     else
     {
-        // Return the last string in the array
-        return strings[count - 1];
+        // Extract the substring after the last slash
+        return strdup(lastSlash + 1);
     }
 }
 
 // Function to find the last location node in the currentLocation array of Player
 void interactWithLocalNPCs(Player *player)
 {
-    int count = 0;
-    // Determine the number of strings in currentLocation array
-    while (player->currentLocation[count] != NULL)
-    {
-        count++;
-    }
     // Find and return the last string in currentLocation array
-    char *locationNode = findLastString(player->currentLocation, count);
+    char *locationNode = getLastWordAfterLastSlash(player->currentLocation);
 
     // Now go to locations.json and find "locationNode", and return array of NPCs available
     char **NPCsAvailable = returnNPCsAvailable(locationNode);
@@ -264,10 +597,7 @@ void interactWithLocalNPCs(Player *player)
 int main()
 {
     Player p1;
-    p1.currentLocation = (char **)malloc(3 * sizeof(char *));
-    p1.currentLocation[0] = "CITY";
-    p1.currentLocation[1] = "COLLOSEUM";
-    p1.currentLocation[2] = NULL; // Null-terminate the array
+    p1.currentLocation = "WORLD/CITY/COLLOSEUM";
 
     interactWithLocalNPCs(&p1);
 }
