@@ -32,8 +32,11 @@ int main()
     printPrologue();
 
     selectState(&state);//function that can be called from anywhere by player to choose a state
-    processState(&state);//function that processes the state
 
+    while(state>=0)
+        processState(player,&state);//function that processes the state
+
+    printf("");///EXIT STATEMENT
     // Cleanup
     free(playerID);
     return EXIT_SUCCESS;

@@ -25,7 +25,6 @@
         "Metalsmith Gaius: It involves venturing into the heart of enemy territory to retrieve a valuable artifact. The risks are great, but so are the rewards.",
         "Marcus Agrippa: I'm in. Lead the way, Gaius."
       ]
-    },
-    // Add dialogues for other quests here...
+    }
   ]
 }

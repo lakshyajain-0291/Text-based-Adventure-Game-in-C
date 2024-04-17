@@ -65,10 +65,15 @@ void selectMode(int *state)
 
 }
 
-void processState(int *state)
+void processState(Player *player,int *state)
 {
-    //  if(*state==0)
-    //  {
-    //     navigationMode();
-    //  }
+    if(*state==0)
+        navigationMode(player,state);
+    else
+    if(*state==1)
+        interactionMode(player,state);
+    else
+    if(*state==2)
+        questMode(player,state);
+
 }

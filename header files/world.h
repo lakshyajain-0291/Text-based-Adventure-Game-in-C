@@ -8,5 +8,5 @@ Player* gameInitialize(char *PlayerID);
 
 void selectState(int *state);
 
-void processState(int *state);
+void processState(Player *player,int *state);
 #endif
