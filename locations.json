@@ -12,7 +12,14 @@
         },
         {
             "name": "COLLOSEUM",
-            "NPCs": [],
+            "NPCs": [
+                {
+                    "npc" : "LAKSHYA"
+                },
+                {
+                    "npc" : "DANIE"
+                }
+            ],
             "quests": []
         },
         {
@@ -22,136 +29,6 @@
         },
         {
             "name": "FIGHT_PITS",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "TRAINING_ARENA",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "COMMERCIAL_STREET",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "COMMERCIAL_ALLEYWAY",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "METALSMITH_SHOP",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "ALCHEMIST_SHOP",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "HERBALIST_SHOP",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "TAVERN",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "RESIDENTIAL_STREET",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "RESIDENTIAL_ALLEYWAY",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "PLAYER_HOUSE",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "RandomNPC_HOUSE",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "GOVT_STREET",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "GOVT_ALLEYWAYS",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "CITADEL",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "CATHADREL",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "ACADEMY",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "BARRACKS",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "OTHER_STREET",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "OTHER_ALLEYWAYS",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "DOCKS",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "STRANGE_SHOP",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "ARGENSTONE",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "BROTHEL",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "SEA",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "FOREST",
-            "NPCs": [],
-            "quests": []
-        },
-        {
-            "name": "WORLD",
             "NPCs": [],
             "quests": []
         }
