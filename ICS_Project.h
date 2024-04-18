@@ -35,11 +35,15 @@ typedef struct
     int **NPCInfo;         // Player's interactions with NPCs (and status of Quest-line)
 } Player;
 
-// Define a structure to hold string-function mappings
+// Define a typedef for function pointer
+typedef int (*GameFunction)();
+
+// Define a struct to hold string-function pairs
 typedef struct {
-    char *str;
-    void (*func)();
+    const char *str;
+    GameFunction func;
 } StringFunctionPair;
+
 
 typedef enum
 {

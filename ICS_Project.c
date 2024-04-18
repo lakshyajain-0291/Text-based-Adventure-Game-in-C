@@ -334,16 +334,16 @@ int playMinigame(Player *player,char *gameName)
     StringFunctionPair functions[] = {
         // {"Combat", Combat},
         {"Falconry", Falconry},
-        NULL
+        {NULL,NULL}
         //add more games
     };
 
     // to call a function based on input string
     int i;
-    for (i = 0; functions[i]!=NULL; i++) {
+    for (i = 0; functions[i].str!=NULL; i++) {
         if (strcmp(gameName, functions[i].str) == 0) {
-            functions[i].func(); // Call the function associated with the input string
-            return;
+            return functions[i].func(); // Call the function associated with the input string
+            
         }
     }
     printf("No function found for input: %s\n", gameName);
