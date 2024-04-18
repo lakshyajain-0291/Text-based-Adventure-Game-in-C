@@ -1,4 +1,4 @@
-#include "header files/headers.h"
+#include "ICS_Project.h"
 
 #define MAX_PLAYER_ID_LENGTH 100
 int state;
@@ -37,7 +37,9 @@ int main()
         processState(player,&state);//function that processes the state
 
     printf("");///EXIT STATEMENT
+
+    savePlayerData(player);
     // Cleanup
-    free(playerID);
+    freePlayer(playerID);
     return EXIT_SUCCESS;
 }
