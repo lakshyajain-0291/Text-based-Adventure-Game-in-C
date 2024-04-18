@@ -59,18 +59,18 @@ void result(int size, int prison[2 * size][2 * size], cell_pos exit, cell_pos pl
     if (pl_pos.x == guard_pos.x && pl_pos.y == guard_pos.y)
     {
         sound(3);
-        sleep(3);
         print(size, prison, exit, pl_pos, guard_pos);
         printf("\033[31mGuard caught you!\n\033[31m\n\n\n\n\n");
+        sleep(3);
         return;
     }
 
     if (pl_pos.x == exit.x && pl_pos.y == exit.y)
     {
         sound(2);
-        sleep(2);
         print(size, prison, exit, pl_pos, guard_pos);
         printf("\033[32mCongratulations! You escaped!\n\n\n\n\n\033[0m");
+        sleep(2);
         return;
     }
 }
@@ -193,10 +193,10 @@ void makePrison(int size, int prison[2 * size][2 * size])
         prison[8][11] = 1;
         prison[10][3] = 1;
         prison[10][7] = 1;
-        prison[11][2] = 1;
+        //prison[11][2] = 1;
         prison[11][4] = 1;
         prison[11][6] = 1;
-        prison[11][12] = 1;
+        //prison[11][12] = 1;
         prison[13][0] = 1;
         prison[13][6] = 1;
         prison[13][8] = 1;
@@ -206,15 +206,48 @@ void makePrison(int size, int prison[2 * size][2 * size])
     }
 }
 
-int playPrisonEscape(int size)
+int playPrisonEscape(int size,int map)
 {
     system("clear");
 
     int prison[size * 2][size * 2];
     makePrison(size, prison);
-    cell_pos exit = {14,8};
-    cell_pos pl_pos = {10, 10};
-    cell_pos guard_pos = {6, 4};
+    cell_pos exit;
+    cell_pos pl_pos;
+    cell_pos guard_pos;
+    if(map==0)
+    {
+        exit.x=8;
+        exit.y=14;
+       
+        pl_pos.x=14;
+        pl_pos.y=2;
+        
+        guard_pos.x=4;
+        guard_pos.y=8;
+    }
+    else if(map==1)
+    {
+        exit.x=14;
+        exit.y=8;
+       
+        pl_pos.x=10;
+        pl_pos.y=10;
+        
+        guard_pos.x=6;
+        guard_pos.y=4;
+    }
+    else if(map==2)
+    {
+        exit.x=2;
+        exit.y=10;
+       
+        pl_pos.x=14;
+        pl_pos.y=2;
+        
+        guard_pos.x=14;
+        guard_pos.y=14;
+    }
     printf("\n        \x1b[33m");
     char welcome[100]="WELCOME TO THE PRISON ESCAPE GAME";
     for(int i=0;i<strlen(welcome);i++)
@@ -250,11 +283,12 @@ int playPrisonEscape(int size)
 
 int main()
 {
-    //int size;
-   /* printf("Enter the size of the prison: ");
-    scanf("%d", &size);*/
     sound(0);
-    playPrisonEscape(8);
+    srand(time(0));
+    for(int i=0;i<1000;i++)  //To properly randomise
+     rand();
+    int map=rand() %3;
+    playPrisonEscape(8,map);
     system("killall afplay");
     return 0;
 }
