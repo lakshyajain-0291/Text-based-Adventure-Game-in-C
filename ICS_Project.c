@@ -1246,13 +1246,12 @@ char *questDialogues(char *questID)
 void interactWithLocalNPCs(Player *player)
 {
     char *str=player->currentLocation;
-    char *locationNode; 
+    char *locationNode=str; 
     for(int i=0;str[i];i++)
     {
         if(str[i]=='/')
-            locationNode=str;
+            locationNode=str+1;
     }
-
 
     // Now go to locations.json and find "locationNode", and return array of NPCs available
     char **NPCsAvailable = returnNPCsAvailable(locationNode);
