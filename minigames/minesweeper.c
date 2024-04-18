@@ -330,7 +330,7 @@ int main()
     return 0;
 }
 
-void sound_files(int choice)
+/* void sound_files(int choice)
 {
   if(choice==1)
    const char *soundFilePath = "./Sound Files/bomb_soun"; //Music
@@ -338,4 +338,4 @@ void sound_files(int choice)
   snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
   signal(SIGINT, sigint_handler);
   system(command);
-}
+} */

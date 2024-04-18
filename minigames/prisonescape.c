@@ -1,4 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <unistd.h>
+#include <signal.h>
+#include <ctype.h>
 
 typedef struct cell
 {
@@ -6,9 +12,13 @@ typedef struct cell
 } cell_pos;
 
 void print_prison(int size,int i,int j,int k);
+void sound(int n);
 //Known Error: X is Y, Y is X. Needs extensive UI changes
 void print(int size, int prison[2 * size][2 * size], cell_pos exit, cell_pos pl_pos, cell_pos guard_pos)
 {
+    printf("\n        \x1b[33m");
+    printf("PRISON ESCAPE GAME");
+    printf("\x1b[0m\n\n\n\n");
     for (int i = 0; i < 2 * size; i++)
     {
         for (int j = 0; j < 2 * size; j++)
@@ -36,7 +46,7 @@ void print(int size, int prison[2 * size][2 * size], cell_pos exit, cell_pos pl_
             
             else
             {
-                printf("%d ", prison[i][j]);
+                printf("%d ", prison[i][j]);  //Zero are the positions where the player can move
             }
         }
         printf("\n");
@@ -48,13 +58,19 @@ void result(int size, int prison[2 * size][2 * size], cell_pos exit, cell_pos pl
 {
     if (pl_pos.x == guard_pos.x && pl_pos.y == guard_pos.y)
     {
-        printf("Guard caught you!\n");
+        sound(3);
+        sleep(3);
+        print(size, prison, exit, pl_pos, guard_pos);
+        printf("\033[31mGuard caught you!\n\033[31m\n\n\n\n\n");
         return;
     }
 
     if (pl_pos.x == exit.x && pl_pos.y == exit.y)
     {
-        printf("Congratulations! You escaped!\n");
+        sound(2);
+        sleep(2);
+        print(size, prison, exit, pl_pos, guard_pos);
+        printf("\033[32mCongratulations! You escaped!\n\n\n\n\n\033[0m");
         return;
     }
 }
@@ -62,28 +78,28 @@ void move(int size, int prison[2 * size][2 * size], cell_pos *pl_pos, char pl_mo
 {
     switch (pl_move)
     {
-    case 'W':
+    case 'D':
         if (pl_pos->y + 2 < 2 * size && prison[pl_pos->x][(pl_pos->y) + 1] == 0)
         {
             pl_pos->y += 2;
         }
         break;
 
-    case 'A':
+    case 'W':
         if (pl_pos->x - 2 >= 0 && prison[(pl_pos->x) - 1][(pl_pos->y)] == 0)
         {
             pl_pos->x += -2;
         }
         break;
 
-    case 'S':
+    case 'A':
         if (pl_pos->y - 2 >= 0 && prison[(pl_pos->x)][(pl_pos->y) - 1] == 0)
         {
             pl_pos->y += -2;
         }
         break;
 
-    case 'D':
+    case 'S':
         if (pl_pos->x + 2 < 2 * size && prison[(pl_pos->x) + 1][(pl_pos->y)] == 0)
         {
             pl_pos->x += 2;
@@ -100,8 +116,9 @@ void playermove(int size, int prison[2 * size][2 * size], cell_pos *pl_pos, cell
     char pl_move;
     printf("Enter your move (W/A/S/D): ");
     scanf(" %c", &pl_move);
+    pl_move=toupper(pl_move);
+    system("clear");
     move(size, prison, pl_pos, pl_move, exit);
-    print(size, prison, exit, *pl_pos, guard_pos);
     result(size, prison, exit, *pl_pos, guard_pos);
 }
 
@@ -113,40 +130,37 @@ void guardmove(int size, int prison[2 * size][2 * size], cell_pos *pl_pos, cell_
     {
         if (pl_pos->x > guard_pos->x && prison[(guard_pos->x) + 1][guard_pos->y] == 0)
         {
-            guard_move = 'D';
+            guard_move = 'S';
             move(size, prison, guard_pos, guard_move, exit);
-            print(size, prison, exit, *pl_pos, *guard_pos);
             result(size, prison, exit, *pl_pos, *guard_pos);
             count++;
         }
 
         else if (pl_pos->x < guard_pos->x && prison[(guard_pos->x) - 1][guard_pos->y] == 0)
         {
-            guard_move = 'A';
+            guard_move = 'W';
             move(size, prison, guard_pos, guard_move, exit);
-            print(size, prison, exit, *pl_pos, *guard_pos);
             result(size, prison, exit, *pl_pos, *guard_pos);
             count++;
         }
 
         else if ((pl_pos->x == guard_pos->x && pl_pos->y > guard_pos->y) && prison[(guard_pos->x)][(guard_pos->y) + 1] == 0)
         {
-            guard_move = 'W';
+            guard_move = 'D';
             move(size, prison, guard_pos, guard_move, exit);
-            print(size, prison, exit, *pl_pos, *guard_pos);
             result(size, prison, exit, *pl_pos, *guard_pos);
             count++;
         }
 
         else if ((pl_pos->x == guard_pos->x && pl_pos->y < guard_pos->y) && prison[(guard_pos->x)][(guard_pos->y) - 1] == 0)
         {
-            guard_move = 'S';
+            guard_move = 'A';
             move(size, prison, guard_pos, guard_move, exit);
-            print(size, prison, exit, *pl_pos, *guard_pos);
             result(size, prison, exit, *pl_pos, *guard_pos);
             count++;
         }
     }
+    print(size, prison, exit, *pl_pos, *guard_pos);
 }
 
 void makePrison(int size, int prison[2 * size][2 * size])
@@ -194,11 +208,24 @@ void makePrison(int size, int prison[2 * size][2 * size])
 
 int playPrisonEscape(int size)
 {
+    system("clear");
+
     int prison[size * 2][size * 2];
     makePrison(size, prison);
     cell_pos exit = {14,8};
     cell_pos pl_pos = {10, 10};
     cell_pos guard_pos = {6, 4};
+    printf("\n        \x1b[33m");
+    char welcome[100]="WELCOME TO THE PRISON ESCAPE GAME";
+    for(int i=0;i<strlen(welcome);i++)
+    {
+        putchar(welcome[i]);
+        fflush(stdout);
+        usleep(100000);
+    }
+    printf("\x1b[0m");
+    printf("\n\n\n");
+    system("clear");
     print(size, prison, exit, pl_pos, guard_pos);
 
     while (1)
@@ -209,9 +236,12 @@ int playPrisonEscape(int size)
             return 1;
             break; // player escaped
         }
+        sound(1);
         guardmove(size, prison, &pl_pos, &guard_pos, exit);
         if (pl_pos.x == guard_pos.x && pl_pos.y == guard_pos.y)
         {
+            system("clear");
+            print(size, prison, exit, pl_pos, guard_pos);
             return 0;
             break; // guard caught player
         }
@@ -220,10 +250,12 @@ int playPrisonEscape(int size)
 
 int main()
 {
-    int size;
-    printf("Enter the size of the prison: ");
-    scanf("%d", &size);
-    playPrisonEscape(size);
+    //int size;
+   /* printf("Enter the size of the prison: ");
+    scanf("%d", &size);*/
+    sound(0);
+    playPrisonEscape(8);
+    system("killall afplay");
     return 0;
 }
 
@@ -251,7 +283,7 @@ void print_prison(int size,int i,int j,int k)
     else if((i%2!=0||j%2!=0)&& k==1)
     {
         printf("\x1b[36m");
-        printf("& ");
+        printf("& ");  //Obstacles 
         printf("\x1b[0m");
     }
     else if((i%2!=0||j%2!=0)&& k==0)
@@ -259,4 +291,19 @@ void print_prison(int size,int i,int j,int k)
             
         
     
+}
+void sound(int n)
+{
+  const char *soundFilePath;
+  if(n==0)
+   soundFilePath = "./Sound Files/chasing.mp3"; //Music
+  if(n==1)
+   soundFilePath = "./Sound Files/running.mp3"; 
+  if(n==2)
+   soundFilePath = "./Sound Files/yes_man.mp3"; 
+  if(n==3)
+   soundFilePath = "./Sound Files/wasted.mp3";
+  char command[300];
+  snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
+  system(command);
 }
