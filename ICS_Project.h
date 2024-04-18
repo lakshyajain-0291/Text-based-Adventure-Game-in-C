@@ -20,18 +20,19 @@ typedef struct {
 } Inventory;
 
 // Define the Player structure
-typedef struct {
-    char *id; // Player's id
-    char *name;
-    int level; // Player's level
-    Stats *stats; // Player's stats (e.g., HP, attack, defense)
-    Inventory *inventory; // Player's inventory
-    int wtdLevel; // Wantedted level
-    int xp; // Player's experience points
-    int gold; // Player's gold
-    char *currentLocation; // Player's current location as string
-    char **activeQuests; // Player's active quests
-    int **npcInfo;//players' active 
+typedef struct
+{   
+    char *id;
+    char *name;            // Player's name
+    int level;             // Player's level
+    Stats stats;           // Player's stats (e.g., HP, attack, defense)
+    Inventory *inventory;   // Player's inventory
+    int wtdLevel;          // Wantedted level
+    int xp;                // Player's experience points
+    int gold;              // Player's gold
+    char *currentLocation; // Player's current location [Change this]
+    char **activeQuests;   // Player's active quests
+    int **NPCInfo;         // Player's interactions with NPCs (and status of Quest-line)
 } Player;
 
 // Define a structure to hold string-function mappings
@@ -49,6 +50,7 @@ typedef enum
     ///Add more as needed
 }TypeOfNpc;
 
+// Define Stats structure
 typedef struct 
 {
     int HP;
@@ -171,6 +173,10 @@ int playMinigame(Player *player,char *gameName);
 //From characters.h
 
 int getNpcNumber();
+int getNPCID(char *npcName);
+void interactWith(Player *player, char *npc); // Requires Quest Submission
+void chooseNPC(char **NPCsAvailable, Player *player);
+
 
 
 
@@ -196,6 +202,8 @@ int getNpcNumber();
 //From locations.h
 
 void navigationMode(Player *player,int *state);
+char *getQuestLocation(char *QuestID);
+char **returnNPCsAvailable(char *locationNode);
 
 
 
@@ -203,6 +211,19 @@ void navigationMode(Player *player,int *state);
 //From quest.h
 
 void questMode(Player *player,int *state);
+void addActiveQuest(Player *player, char *questID);
+void activateQuest(Player *player, char *npc, char *NPCQuestID);
+char *getQuestDescription(const char *NPCQuestID);
+void getQuestReward(Player *player, const char *questID);
+bool anyQuesttoSubmit(Player *player, const char *npcName);
+char *getQuestID(Player *player, char *npcName);
+char *questDialogues(char *questID);
+void interactWithLocalNPCs(Player *player);
+void interactionMode(Player* player,int *state);
+
+
+
+
 
 
 
@@ -210,4 +231,9 @@ void questMode(Player *player,int *state);
 //From story.h
 
 
+
+
+//From minigame
+
+int Falconry(Player *player);
 #endif
