@@ -56,7 +56,7 @@ Player* gameInitializer(char *PlayerID)
     return player;
 }
 
-void selectMode(int *state)
+void selectState(int *state)
 {
     printf("\n0----Choose Navigation  Mode");
     printf("\n1----Choose Interaction Mode");
@@ -776,7 +776,14 @@ char **returnNPCsAvailable(char *locationNode)
 
 void questMode(Player *player,int *state)
 {
-    FILE *file=fopen("../quests.json","r");
+    if(player->inventory->items)
+    {
+        for(int i=0;player->inventory->items[i];i++)
+        {
+            printf("\n%d...to slecect Item - %s",i+1,player->inventory->items[i]);
+        }
+    }
+    FILE *file=fopen("quests.json","r");
     if (!file) {
         fprintf(stderr, "Failed to open quests.json\n");
         return;
@@ -876,8 +883,13 @@ void questMode(Player *player,int *state)
     }
 
     cJSON *child=cJSON_GetArrayItem(questsArray,choises[i]);
-    playMiniGame(player,cJSON_GetObjectItem(child,"Minigame")->valuestring);//in player.c
-
+    int result=playMiniGame(player,cJSON_GetObjectItem(child,"Minigame")->valuestring);//in player.c
+    if(result)
+    {
+        char *questId=cJSON_GetObjectItem(child,"QuestID");
+        int npcId=questId[0]-'0';
+        player->NPCInfo[npcId][QUEST_STATUS]=2;
+    }
 }
 
 // Function to add activated quest to activeQuests array of strings

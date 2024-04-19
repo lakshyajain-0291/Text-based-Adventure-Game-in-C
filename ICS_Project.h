@@ -17,7 +17,21 @@
 typedef struct {
     int size; // Size of the inventory
     char **items; // Array of items in the inventory
+    int *activeItems;
 } Inventory;
+
+// Define Stats structure
+typedef struct 
+{
+    int HP;
+    int atk;
+    int def;
+    int agi;
+    int str;
+    int dex;
+    int intel;
+    int luck;
+}Stats;
 
 // Define the Player structure
 typedef struct
@@ -25,7 +39,7 @@ typedef struct
     char *id;
     char *name;            // Player's name
     int level;             // Player's level
-    Stats stats;           // Player's stats (e.g., HP, attack, defense)
+    Stats *stats;           // Player's stats (e.g., HP, attack, defense)
     Inventory *inventory;   // Player's inventory
     int wtdLevel;          // Wantedted level
     int xp;                // Player's experience points
@@ -53,19 +67,6 @@ typedef enum
     CITIZEN,
     ///Add more as needed
 }TypeOfNpc;
-
-// Define Stats structure
-typedef struct 
-{
-    int HP;
-    int atk;
-    int def;
-    int agi;
-    int str;
-    int dex;
-    int intel;
-    int luck;
-}Stats;
 
 typedef enum
 {
