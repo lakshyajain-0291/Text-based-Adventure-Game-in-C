@@ -7,6 +7,7 @@
 #include<stdbool.h>
 #include"cJSON.h"
 #include"cJSON.c"
+#include<time.h>
 
 
 
@@ -149,7 +150,10 @@ typedef struct
 
 //From world.h
 
-void printRules();
+
+void delay(int milliseconds);
+
+void type(const char *sentence);
 
 Player* gameInitializer(char *PlayerID);
 
