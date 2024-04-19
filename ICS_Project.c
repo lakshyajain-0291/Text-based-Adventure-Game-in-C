@@ -2,10 +2,18 @@
 
 
 //FROM world.c
-void printRules()
-{
-    //make a function with time 
-    // delay that has rules of the game to print
+
+void delay(int milliseconds) {
+    clock_t start_time = clock();
+    while (clock() < start_time + milliseconds * CLOCKS_PER_SEC / 1000);    
+}
+
+void type(const char *sentence) {
+    for (int i = 0; i < strlen(sentence); i++) {
+        printf("%c", sentence[i]);
+        fflush(stdout); // Flush the output buffer to ensure immediate printing
+        delay(50);     // Adjust delay as needed (50 milliseconds in this example)
+    }
 }
 
 Player* gameInitializer(char *PlayerID)
