@@ -7,6 +7,38 @@
         {
             "ID" : 1,
             "name": "Alchemist Aurelia"
-        }
+        },
+        {
+            "ID" : 2,
+            "name" : "Herbalist Flora"
+        },
+        {
+            "ID" : 3,
+            "name" : "Cassius the Spider"
+        },
+        {
+            "ID" : 4,
+            "name" : "Octavius the Rebel"
+        },
+        {
+            "ID" : 5,
+            "name" : "Oracle Sybilla"
+        },
+        {
+            "ID" : 6,
+            "name" : "General Lucius"
+        },
+        {
+            "ID" : 7,
+            "name" : "Sophia the Scholar"
+        },
+        {
+            "ID" : 8,
+            "name" : "Siren Melaina"
+        },
+        {
+            "ID" : 9,
+            "name" : "Mortimer the Whisperer"
+        }        
     ]
 }
