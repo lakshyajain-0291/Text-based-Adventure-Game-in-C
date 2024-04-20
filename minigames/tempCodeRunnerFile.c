@@ -1,1 +1,1 @@
-usleep(100000);
+putchar(welcome[i]);
