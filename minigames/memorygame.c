@@ -18,7 +18,7 @@ Progress:
 void delay(float number_of_seconds)
 {
     // Converting time into milli_seconds
-    int milli_seconds = 1000 * (int)number_of_seconds;
+    int milli_seconds = 1000 * number_of_seconds;
 
     // Storing start time
     clock_t start_time = clock();
@@ -73,6 +73,7 @@ void MouseControl(int *x, int *y)
                 }
             }
         }
+
     }
 }
 
@@ -125,12 +126,6 @@ void genMat(int size, int num, int mat[size][size])
             }
         }
     }
-    for (int i = 0; i < size; i++)
-    {
-        for (int j = 0; j < size; j++)
-            printf("%d ", mat[i][j]);
-        printf("\n");
-    }
     delay(0.5);
 }
 
@@ -152,10 +147,11 @@ void printMemory1(int size, int num, int mat[size][size], int prog_arr[num])
             if (k != num)
                 printf("%d ", mat[i][j]);
             else
-                printf("# ");
+                printf("\x1b[33m# \x1b[0m");
         }
         printf("\n");
     }
+    printf("\x1b[34m\n\n\nMEMORY GAME!!!! \n\x1b[0m\n");
 }
 
 void printMemory2(int size, int num, int mat[size][size], int prog_arr[num], int click1_x, int click1_y, int click2_x, int click2_y)
@@ -184,7 +180,7 @@ void printMemory2(int size, int num, int mat[size][size], int prog_arr[num], int
                 printf("%d ", mat[i][j]);
             }
             else
-                printf("# ");
+               printf("\x1b[33m# \x1b[0m");
         }
         printf("\n");
     }
@@ -216,6 +212,16 @@ void gameMemory(int size, int num, int mat[size][size], int *attempts, int prog_
 // Function to call game
 int playMemory(int size, int num, int attempts)
 {
+    printf("\e[1;1H\e[2J");
+    printf("\n        \x1b[33m");
+    char welcome[100]="WELCOME TO THE MEMORY GAME";
+    for(int i=0;i<strlen(welcome);i++)
+    {
+        printf("%c",welcome[i]);
+        delay(0.2);
+    }
+    printf("\x1b[0m");
+    printf("\n\n\n");
     int mat[size][size], progress = 0;
     int prog_arr[num];
     for (int i = 0; i < num; i++)
@@ -229,18 +235,24 @@ int playMemory(int size, int num, int attempts)
         printf("Progress = %d\nAttempts Remaining = %d\n ", progress, attempts);
         delay(1);
         if (attempts <= 0)
-            return 0;
+        {    return 0;
+             printf("You Lose!\n");
+        }
         if (progress == num)
-            return 1;
+        {    return 1;
+             printf("You Win!!\n");
+        }
     }
+}
+int start_memory()
+{
+    int size = 4, attempts = 15;
+    int resMemory = playMemory(size, size * size / 2, attempts);
+    
 }
 
 int main()
 {
-    int size = 4, attempts = 15;
-    int resMemory = playMemory(size, size * size / 2, attempts);
-    if (resMemory == 0)
-        printf("You Lose!\n");
-    else if (resMemory == 1)
-        printf("You Win!!\n");
+   int x=start_memory();
+   return x;
 }
