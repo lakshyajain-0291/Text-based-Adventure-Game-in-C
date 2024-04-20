@@ -6,6 +6,8 @@ int state;
 
 int main()
 {
+    printf("\e[1;1H\e[2J");
+
     char *playerID = (char *)malloc(sizeof(char) * MAX_PLAYER_ID_LENGTH);
     if (playerID == NULL)
     {
@@ -17,7 +19,7 @@ int main()
 
     // printRules();
 
-    printf("\nEnter your Unique ID : ");
+    printf("\nEnter Login ID : ");
     if (scanf("%s", playerID) != 1)
     {
         fprintf(stderr, "Error reading player ID\n");
@@ -48,7 +50,7 @@ int main()
     while (state >= 0)
         processState(player, &state); // function that processes the state
 
-    printf("END OF GAME!"); /// EXIT STATEMENT
+    printf("Thank you for playing The Vindication"); /// EXIT STATEMENT
 
 //     savePlayerData(player);
 //     // Cleanup

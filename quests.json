@@ -11,7 +11,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Combat Game"
+            "Minigame": "Combat"
         },
         {
             "QuestID": "0_1", 
@@ -37,7 +37,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Burglary Game"
+            "Minigame": "PrisonEscape"
         },
         {
             "QuestID": "1_0", 
@@ -50,7 +50,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Code Break Game"
+            "Minigame": "Lockpicking"
         },
         {
             "QuestID": "1_1",
@@ -63,7 +63,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Burglary Game"
+            "Minigame": "PrisonEscape"
         },
         {
             "QuestID": "1_2",
@@ -76,7 +76,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Memory Game"
+            "Minigame": "Memory"
         },
         { 
             "QuestID": "2_0", 
@@ -89,7 +89,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Hang the Man Game"
+            "Minigame": "Hangtheman"
         },
         {
             "QuestID": "2_1",
@@ -102,7 +102,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Memory Game"
+            "Minigame": "Memory"
         },
         {
             "QuestID": "2_2",
@@ -115,7 +115,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Burglary Game"
+            "Minigame": "PrisonEscape"
         },
         {
             "QuestID": "3_0", 
@@ -128,7 +128,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Burglary Game"
+            "Minigame": "PrisonEscape"
         },
         {
             "QuestID": "3_1",
@@ -141,7 +141,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Memory Game"
+            "Minigame": "Wordle"
         },
         {
             "QuestID": "3_2",
@@ -154,7 +154,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Hang the Man Game"
+            "Minigame": "Hangtheman"
         },
         {
             "QuestID": "4_0", 
@@ -167,7 +167,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Memory Game"
+            "Minigame": "Wordle"
         },
         {
             "QuestID": "4_1",
@@ -180,7 +180,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Burglary Game"
+            "Minigame": "PrisonEscape"
         },
         {
             "QuestID": "4_2",
@@ -193,7 +193,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Combat Game"
+            "Minigame": "Combat"
         },
         {
             "QuestID": "5_0", 
@@ -206,7 +206,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Code Break Game"
+            "Minigame": "Lockpicking"
         },
         {
             "QuestID": "5_1",
@@ -219,7 +219,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Memory Game"
+            "Minigame": "Memory"
         },
         {
             "QuestID": "5_2",
@@ -232,7 +232,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Hang the Man Game"
+            "Minigame": "Hangtheman"
         },
         {
             "QuestID": "6_0", 
@@ -245,7 +245,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Combat Game"
+            "Minigame": "Combat"
         },
         {
             "QuestID": "6_1",
@@ -258,7 +258,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Minesweeper"
+            "Minigame": "Snakegame"
         },
         {
             "QuestID": "6_2",
@@ -271,7 +271,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Code Break Game"
+            "Minigame": "Lockpicking"
         },
         {
             "QuestID": "7_0", 
@@ -284,7 +284,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Burglary Game"
+            "Minigame": "Minesweeper"
         },
         {
             "QuestID": "7_1",
@@ -297,7 +297,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Memory Game"
+            "Minigame": "Wordle"
         },
         {
             "QuestID": "7_2",
@@ -310,7 +310,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Hang the Man Game"
+            "Minigame": "Hangtheman"
         },
         {
             "QuestID": "8_0", 
@@ -336,7 +336,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Memory Game"
+            "Minigame": "Memory"
         },
         {
             "QuestID": "8_2",
@@ -349,7 +349,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Hang the Man Game"
+            "Minigame": "Hangtheman"
         },
         {
             "QuestID": "9_0", 
@@ -362,7 +362,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Burglary Game"
+            "Minigame": "Snakegame"
         },
         {
             "QuestID": "9_1",
@@ -375,7 +375,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Memory Game"
+            "Minigame": "Memory"
         },
         {
             "QuestID": "9_2",
@@ -388,7 +388,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Hang the Man Game"
+            "Minigame": "Hangtheman"
         }
     ]
 }

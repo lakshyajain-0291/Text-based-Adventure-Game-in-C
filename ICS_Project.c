@@ -405,9 +405,9 @@ Player* gameInitializer(char *PlayerID)//This works checked
     int input;
     Player *player;
 
-    printf("\n1----Start a New Game");
-    printf("\n2----Load an Old Game");
-    printf("\nPlease enter a Choise : ");
+    printf("\nEnter (1) to Start a New Game");
+    printf("\nEnter (2) Load an Old Game");
+    printf("\nEnter a Choice : ");
     scanf("%d",&input);
 
     if (input == 1)
@@ -429,7 +429,7 @@ Player* gameInitializer(char *PlayerID)//This works checked
         }
         else
         {
-            printf("Old game loaded successfully.\n");
+            printf("Old game loaded successfully\n");
         }
     }
     else
@@ -444,9 +444,9 @@ Player* gameInitializer(char *PlayerID)//This works checked
 
 void selectState(int *state)//This works checked
 {
-    printf("\n0----Choose Navigation  Mode");
-    printf("\n1----Choose Interaction Mode");
-    printf("\n2----Choose Quest       Mode");
+    printf("\nEnter (0) to Choose  Navigation Mode");
+    printf("\nEnter (1) to Choose Interaction Mode");
+    printf("\nEnter (2) to Choose       Quest Mode");
     printf("\nChoose a Mode to continue your Journey : ");
 
     scanf("%d",state);
@@ -531,14 +531,14 @@ void navigationMode(Player *player,int *state)//This works checked BUT ADD SOME 
         for(int i=0;i<cJSON_GetArraySize(children);i++)
         {
             cJSON *child=cJSON_GetArrayItem(children,i);
-            printf("\n%d...to go to %s",i+1,cJSON_GetObjectItem(child,"name")->valuestring);
+            printf("\n Enter (%d) to go to %s",i+1,cJSON_GetObjectItem(child,"name")->valuestring);
         }
 
-        printf("\nOr Enter i/I for Interaction Mode");
-        printf("\nOr Enter q/Q for Quest Mode");
-        printf("\nOr Enter e/E to Exit the Game");
+        printf("\nOr Enter (i/I) for Interaction Mode");
+        printf("\nEnter (q/Q) for Quest Mode");
+        printf("\nEnter (e/E) to Exit the Game");
 
-        printf("\nMake a Choise to continue : ");
+        printf("\nEnter your choice : ");
         getchar();
         input=getc(stdin);
         // flushInputBuffer();
@@ -567,7 +567,7 @@ void navigationMode(Player *player,int *state)//This works checked BUT ADD SOME 
                 return;
             }
 
-            printf("\nWell such a place doesn't exist. Enter a Valid Location!");
+            printf("\nSuch a place doesn't exist. Enter a Valid Location!");
             printf("\nChoose a Location to move to : ");
             getchar();
             input=getc(stdin);
@@ -596,24 +596,24 @@ void navigationMode(Player *player,int *state)//This works checked BUT ADD SOME 
     else
     {
         // printf("\nin else");
-        printf("\n0...to go out of %s",token_prev);
+        printf("\nEnter (0) to go out of %s",token_prev);
         for(int i=0;i<cJSON_GetArraySize(children);i++)
         {
             cJSON *child=cJSON_GetArrayItem(children,i);
-            printf("\n%d...to go to %s",(i+1),cJSON_GetObjectItem(child,"name")->valuestring);
+            printf("\nEnter (%d) to go to %s",(i+1),cJSON_GetObjectItem(child,"name")->valuestring);
         }
 
         printf("\n");
-        printf("\nOr Enter i/I for Interaction Mode");
-        printf("\nOr Enter q/Q for Quest Mode");
-        printf("\nOr Enter e/E to Exit the Game");
+        printf("\nOr Enter (i/I) for Interaction Mode");
+        printf("\nEnter (q/Q) for Quest Mode");
+        printf("\nEnter (e/E) to Exit the Game");
 
         printf("\n");
-        printf("\nMake a Choice to continue : ");
+        printf("\nEnter your choice : ");
         getchar();
         input=getc(stdin);
         // flushInputBuffer();
-        printf("\nc=%c",input);
+        // printf("\nc=%c",input);
 
         while(input<'0' || input>(cJSON_GetArraySize(children)+'0'))
         {
@@ -636,7 +636,7 @@ void navigationMode(Player *player,int *state)//This works checked BUT ADD SOME 
                 return;
             }
 
-            printf("\nWell such a place doesn't exist. Enter a Valid Location!");
+            printf("\nSuch a place doesn't exist. Enter a Valid Location!");
             printf("\nChoose a Location to move to : ");
             getchar();
             input=getc(stdin);
@@ -695,7 +695,7 @@ void addActiveQuest(Player *player, char *questID)//This works checked (A)
     int numActiveQuests = 0;
     while (player->activeQuests[numActiveQuests] != NULL)
     {
-        printf("+\n");
+        // printf("+\n");
         numActiveQuests++;
     }
     // printf("Number of active quests %d\n", numActiveQuests);
@@ -722,11 +722,11 @@ void addActiveQuest(Player *player, char *questID)//This works checked (A)
     // Add the new quest ID to the activeQuests array
     player->activeQuests[numActiveQuests] = newQuestID;
     player->activeQuests[numActiveQuests + 1] = NULL; // Null-terminate the array
-    printf("Active Quests: ");
-    for (int i = 0; i < numActiveQuests + 1; i++)
-    {
-        printf("%s ", player->activeQuests[i]);
-    }
+    // printf("Active Quests: ");
+    // for (int i = 0; i < numActiveQuests + 1; i++)
+    // {
+    //     printf("%s ", player->activeQuests[i]);
+    // }
     printf("\n");
 }
 
@@ -966,7 +966,7 @@ void giveQuestReward(Player *player, char *questID)//This works checked (A)
 bool anyActiveQuest(Player *player, char *npc)//This works checked (A)
 {
     char *questID = getQuestID(player, npc);
-    printf("in anyActiveQuest, questID = %s\n", questID);
+    // printf("in anyActiveQuest, questID = %s\n", questID);
     // Check if the NPC has any active quests
     for (int i = 0; player->activeQuests[i] != NULL; i++)
     {
@@ -1176,7 +1176,7 @@ char *questDialogues(char *questID)//This works checked (A)
 // Function to interact with given NPC
 void interactWith(Player *player, char *npc) // Requires Quest Submission
 {
-    printf("Debug 0 : %s\n", npc);
+    // printf("Debug 0 : %s\n", npc);
 
     char *NPCQuestID = getQuestID(player,npc);
 
@@ -1190,14 +1190,14 @@ void interactWith(Player *player, char *npc) // Requires Quest Submission
 
     if (anyActiveQuest(player, npc) == true)
     {
-        printf("You have an active quest related to this NPC. Please complete the quest first\n");
+        printf("\nYou have an active quest related to this NPC. Please complete the quest first\n");
     }
     else
     {
         char *dialogues = questDialogues(NPCQuestID); // NPCQuestID instead of String
         if (dialogues != NULL)
         {
-            printf("%s\n", dialogues);//UI MODIFICATIONS REQ IF TIME
+            printf("\n%s\n", dialogues);//UI MODIFICATIONS REQ IF TIME
             free(dialogues); // Free the allocated memory
         }
 
@@ -1205,28 +1205,38 @@ void interactWith(Player *player, char *npc) // Requires Quest Submission
         char *questDescription = getQuestDescription(NPCQuestID);
         if (questDescription != NULL)
         {
-            printf("%s\n", questDescription);
+            printf("\n%s\n", questDescription);
             free(questDescription);
+
+            // PRINT THE QUEST REWARDS
+
+
+            // Quest Location
+            char *questLocation = getQuestLocation(NPCQuestID);
+            if (questLocation != NULL)
+            {
+                printf("\nYou must go to %s to complete this Quest\n", questLocation);
+                free(questLocation);
+            }
+
+            // Get input to accept or reject
+            printf("\nEnter (1) to accept this quest right now\nEnter (0) to reject this quest for now");
+            printf("\nEnter your choice :");
+            int questinput;
+            scanf("%d", &questinput);
+
+            // If accepted, add to active quests
+            if (questinput == 1)
+            {
+                activateQuest(player, npc, NPCQuestID);
+                printf("\nAccepted Quest!\n");
+            }
         }
-        // PRINT THE QUEST REWARDS
-
-
-        // Quest Location
-        char *questLocation = getQuestLocation(NPCQuestID);
-        if (questLocation != NULL)
+        else 
         {
-            printf("You must go to %s to complete the Quest\n", questLocation);
-            free(questLocation);
+            printf("\nYou have been ignored by %s\n", npc);
         }
-
-        // Get input to accept or reject
-        printf("Enter 1 to accept this quest now:\nEnter 0 to reject:\n");
-        int questinput;
-        scanf("%d", &questinput);
-
-        // If accepted, add to active quests
-        if (questinput == 1)
-            activateQuest(player, npc, NPCQuestID);
+        
     }
 }
 
@@ -1236,23 +1246,23 @@ void chooseNPC(char **NPCsAvailable, Player *player,int *state)
     int i;
     char input;
 
-    printf("Available NPCs:\n");
+    // printf("Available NPCs:\n");
     for(i=0;NPCsAvailable[i];i++)
     {
-        printf("\n%d...to go to %s",i+1,NPCsAvailable[i]);
+        printf("\nEnter (%d) to interact with %s",i+1,NPCsAvailable[i]);
     }
 
-    printf("\nOr Enter n/N for Navigation Mode");
-    printf("\nOr Enter q/Q for Quest Mode");
-    printf("\nOr Enter e/E to Exit the Game");
+    printf("\nOr Enter (n/N) for Navigation Mode");
+    printf("\nEnter (q/Q) for Quest Mode");
+    printf("\nEnter (e/E) to Exit the Game\n");
 
-    printf("\nMake a Choise to continue : ");
+    printf("\nEnter Your choice : ");
     getchar();
     input=getc(stdin);
     // flushInputBuffer();
 
     for(i=1;NPCsAvailable[i-1];i++);
-    printf("c=%c,i=%d,",input,i);
+    // printf("c=%c,i=%d,",input,i);
     while(input<'1' || input>i+'1')
     {  
         // printf("\nin loop");
@@ -1274,8 +1284,8 @@ void chooseNPC(char **NPCsAvailable, Player *player,int *state)
             return;
         }
 
-        printf("\nWell such a place doesn't exist. Enter a Valid Location!");
-        printf("\nChoose a Location to move to : ");
+        printf("\nSuch an NPC doesn't exist. Enter a Valid NPC!");
+        printf("\nChoose a NPC to interact with : ");
         getchar();
         input=getc(stdin);
         // flushInputBuffer();
@@ -1431,7 +1441,7 @@ void equipItem(Player *player,int index)
 
     player->inventory->activeItems[index]=1;
 
-    printf("\nEquiped successfully");
+    printf("\nEquiped Item successfully!");
 }
 
 void unequipItem(Player *player,int index)
@@ -1494,13 +1504,13 @@ void unequipItem(Player *player,int index)
     }
 
     player->inventory->activeItems[index]=0;
-    printf("\nUnequiped successfully");
+    printf("\nUnequiped Item successfully!");
 }
 
 // Function to find the last location node in the currentLocation array of Player
 void interactionMode(Player *player,int *state)//This works checked (A)
 {
-    printf("In Interaction\n");
+    // printf("In Interaction\n");
     // Find and return the last string in currentLocation array
     char *locationNode = player->currentLocation;
     int i;
@@ -1508,7 +1518,7 @@ void interactionMode(Player *player,int *state)//This works checked (A)
         if(player->currentLocation[i]=='/')
             locationNode=player->currentLocation+i+1;
     
-    printf("Got Location node =%s\n",locationNode);
+    // printf("Got Location node =%s\n",locationNode);
     // Now go to locations.json and find "locationNode", and return array of NPCs available
     char **NPCsAvailable = returnNPCsAvailable(locationNode);
 
@@ -1524,14 +1534,14 @@ void questMode(Player *player,int *state)
 
     printf("\n");//Heading
     for(i=0;player->inventory->items[i];i++)
-        printf("\n%d...to select Item - %s",i+1,player->inventory->items[i]);
+    printf("\nEnter (%d) to select Item => %s",i+1,player->inventory->items[i]);
     
-    printf("\nOr Enter s/S to Skip");
-    printf("\nOr Enter i/I for Interaction Mode");
-    printf("\nOr Enter n/N for Navigation Mode");
-    printf("\nOr Enter e/E to Exit the Game");
+    printf("\nOr Enter (s/S) to Skip");
+    printf("\nEnter (i/I) for Interaction Mode");
+    printf("\nEnter (n/N) for Navigation Mode");
+    printf("\nEnter (e/E) to Exit the Game");
 
-    printf("\nMake a Choise to continue : ");
+    printf("\nEnter your choice : ");
     getchar();
     input=getc(stdin);
     // flushInputBuffer();
@@ -1559,7 +1569,7 @@ void questMode(Player *player,int *state)
         if(player->inventory->activeItems[input-'1'])
         {
             char toUnequip;
-            printf("\nAlready Equiped!!");
+            printf("\nItem Already Equiped.");
             printf("\nDo you want to Unequip it (Y/N) :");
             getchar();
             toUnequip=getc(stdin);
@@ -1571,7 +1581,7 @@ void questMode(Player *player,int *state)
         else
         {
             char toEquip;
-            printf("\nNOT Equiped!!");
+            printf("\nItem not currently Equiped.");
             printf("\nDo you want to Equip it (Y/N) :");
             getchar();
             toEquip=getc(stdin);
@@ -1648,14 +1658,17 @@ void questMode(Player *player,int *state)
     {
         // printf("\n%d",choises[j]);
         cJSON *quest=cJSON_GetArrayItem(questsArray,choises[j]);
-        printf("\n%d...to start quest- %s",j+1,cJSON_GetObjectItem(quest,"name")->valuestring);
+        printf("\nEnter (%d) to start quest=> %s",j+1,cJSON_GetObjectItem(quest,"name")->valuestring);
     }
 
-    printf("\nOr Enter i/I for Interaction Mode");
-    printf("\nOr Enter n/N for Navigation Mode");
-    printf("\nOr Enter e/E to Exit the Game");
+    if(choises[0]==-1)
+        printf("\nNo Active quest at this location\nExplore More!");
 
-    printf("\nMake a Choise to continue : ");
+    printf("\nOr Enter (i/I) for Interaction Mode");
+    printf("\nEnter (n/N) for Navigation Mode");
+    printf("\nEnter (e/E) to Exit the Game");
+
+    printf("\nEnter your choice : ");
     getchar();
     input=getc(stdin);
     // flushInputBuffer();
@@ -1698,8 +1711,8 @@ void questMode(Player *player,int *state)
             return;
         }
 
-        printf("\nWell such a quest doesn't exist. Enter a Valid Choise!");
-        printf("\nMake a Choise to continue : ");
+        printf("\nSuch a quest doesn't exist. Enter a Valid Choice!");
+        printf("\nEnter your choice : ");
         getchar();
         input=getc(stdin);
         // flushInputBuffer();

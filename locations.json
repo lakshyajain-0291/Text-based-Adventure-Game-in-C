@@ -2,12 +2,32 @@
     "locations": [
         {
             "name": "CITY",
-            "NPCs": [],
+            "NPCs": [
+                {
+                    "npc":"The Common Man"
+                },
+                {
+                    "npc":"The Common Woman"
+                },
+                {
+                    "npc":"The Patrol Guard"
+                }
+            ],
             "quests": []
         },
         {
             "name": "CITY_IN",
-            "NPCs": [],
+            "NPCs": [
+                {
+                    "npc":"The Common Man"
+                },
+                {
+                    "npc":"The Child"
+                },
+                {
+                    "npc":"The Patrol Guard"
+                }
+            ],
             "quests": [
                 {
                     "QuestID":"4_2"
@@ -16,32 +36,77 @@
         },
         {
             "name": "COLLOSEUM",
-            "NPCs": [],
+            "NPCs": [
+                {
+                    "npc":"The Nobleman"
+                },
+                {
+                    "npc":"Arena Master"
+                }
+            ],
             "quests": []
         },
         {
             "name": "COLLOSEUM_IN",
-            "NPCs": [],
+            "NPCs": [
+                {
+                    "npc":"The Noblewoman"
+                },
+                {
+                    "npc":"The Beggar"
+                },
+                {
+                    "npc":"Opponent Gladiator"
+                }                
+            ],
             "quests": []
         },
         {
             "name": "FIGHT_PITS",
-            "NPCs": [],
+            "NPCs": [
+                {
+                    "npc":"Opponent Gladiator"
+                }
+            ],
             "quests": []
         },
         {
             "name":"TRAINING_ARENA",
-            "NPCs":[],
+            "NPCs":[
+                {
+                    "npc":"Opponent Gladiator"
+                }
+            ],
             "quests":[]
         },
         {
             "name":"COMMERCIAL_STREET",
-            "NPCs":[],
+            "NPCs":[
+                {
+                    "npc":"The Beggar"
+                },
+                {
+                    "npc":"The Common Man"
+                },
+                {
+                    "npc":"The Patrol Guard"
+                }
+            ],
             "quests":[]
         },
         {
             "name":"COMMERCIAL_ALLEYWAY",
-            "NPCs":[],
+            "NPCs":[
+                {
+                    "npc":"The Beggar"
+                },
+                {
+                    "npc":"The Common Woman"
+                },
+                {
+                    "npc":"The Noblewoman"
+                }
+            ],
             "quests":[]
         },
         {
@@ -99,7 +164,17 @@
         },
         {
             "name":"RESIDENTIAL_STREET",
-            "NPCs":[],
+            "NPCs":[
+                {
+                    "npc":"The Common Woman"
+                },
+                {
+                    "npc":"The Common Man"
+                },
+                {
+                    "npc":"The Child"
+                }
+            ],
             "quests":[
                 {
                     "QuestID":"6_0"
@@ -111,7 +186,14 @@
         },
         {
             "name":"RESIDENTIAL_ALLEYWAY",
-            "NPCs":[],
+            "NPCs":[
+                {
+                    "npc":"The Beggar"
+                },
+                {
+                    "npc":"The Patrol Guard"
+                }
+            ],
             "quests":[]
         },
         {
@@ -121,12 +203,32 @@
         },
         {
             "name":"RANDOM_NPC_HOUSE",
-            "NPCs":[],
+            "NPCs":[
+                {
+                    "npc":"The Common Woman"
+                },
+                {
+                    "npc":"The Common Man"
+                },
+                {
+                    "npc":"The Child"
+                }
+            ],
             "quests":[]
         },
         {
             "name":"GOVERNMENT_STREET",
-            "NPCs":[],
+            "NPCs":[
+                {
+                    "npc":"The Beggar"
+                },
+                {
+                    "npc":"The Common Man"
+                },
+                {
+                    "npc":"The Patrol Guard"
+                }
+            ],
             "quests":[
                 {
                     "QuestID":"3_1"
@@ -141,7 +243,17 @@
         },
         {
             "name":"GOVERNMENT_ALLEYWAYS",
-            "NPCs":[],
+            "NPCs":[
+                {
+                    "npc":"The Noblewoman"
+                },
+                {
+                    "npc":"The Common Man"
+                },
+                {
+                    "npc":"The Patrol Guard"
+                }
+            ],
             "quests":[
                 {
                     "QuestID":"3_0"
@@ -182,6 +294,9 @@
             "NPCs":[
                 {
                     "npc":"Sophia the Scholar"
+                },
+                {
+                    "npc":"The Nobleman"
                 }
             ],
             "quests":[
@@ -198,7 +313,11 @@
         },
         {
             "name":"BARRACKS",
-            "NPCs":[],
+            "NPCs":[
+                {
+                    "npc":"The Patrol Guard"
+                }
+            ],
             "quests":[
                 {
                     "QuestID":"6_1"
@@ -207,7 +326,11 @@
         },
         {
             "name":"OTHER_STREET",
-            "NPCs":[],
+            "NPCs":[
+                {
+                    "npc":"The Common Woman"
+                }
+            ],
             "quests":[
                 {
                     "QuestID":"4_0"
@@ -216,7 +339,11 @@
         },
         {
             "name":"OTHER_ALLEYWAYS",
-            "NPCs":[],
+            "NPCs":[
+                {
+                    "npc":"The Beggar"
+                }
+            ],
             "quests":[
                 {
                     "QuestID":"0_2"
@@ -228,7 +355,11 @@
         },
         {
             "name":"DOCKS",
-            "NPCs":[],
+            "NPCs":[
+                {
+                    "npc":"The Fisherman"
+                }
+            ],
             "quests":[
                 {
                     "QuestID":"0_1"
@@ -240,6 +371,12 @@
             "NPCs":[
                 {
                     "npc":"Cassius the Spider"
+                },
+                {
+                    "npc":"The Common Man"
+                },
+                {
+                    "npc":"The Nobleman"
                 }
             ],
             "quests":[]
@@ -274,6 +411,9 @@
             "NPCs":[
                 {
                     "npc":"Siren Melaina"
+                },
+                {
+                    "npc":"The Fisherman"
                 }
             ],
             "quests":[
@@ -290,6 +430,9 @@
             "NPCs":[
                 {
                     "npc":"Octavius the Rebel"
+                },
+                {
+                    "npc":"The Common Man"
                 }
             ],
             "quests":[
