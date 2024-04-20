@@ -452,7 +452,7 @@ void intro()
   printf("      |          |                          |      |           |   \n");
   printf("      |          |___________               |_____/_\\_____     |   \n");
   printf("      |                                                        |   \n");
-  printf("      |         Welcome to Danie's Hangman Game!!              |   \n");
+  printf("      |            Welcome to The Hangman Game!!               |   \n");
   printf("      |     Guess the string and save the stickman's life!     |   \n");
   printf("      |________________________________________________________|   \n");
   printf("\033[0;32m\n"); // Green
@@ -461,7 +461,7 @@ void intro()
   printf("\033[0m\n");
   system("clear");
   printf("\033[0;36m\n");
-  printf("\n                       DANIE'S HANGMAN GAME   \n");
+  printf("\n                       THE HANGMAN GAME   \n");
   printf("\033[0m\n");
   
   printf("\033[0m\n");
