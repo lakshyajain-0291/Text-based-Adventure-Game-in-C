@@ -1,0 +1,80 @@
+{
+	"player":	{
+		"id":	"laki",
+		"name":	"Gaius Marcus Agrippa",
+		"level":	1,
+		"wtdLevel":	0,
+		"xp":	0,
+		"gold":	50,
+		"currentLocation":	"WORLD/CITY",
+		"stats":	{
+			"hp":	100,
+			"atk":	10,
+			"def":	5,
+			"agi":	8,
+			"str":	12,
+			"dex":	9,
+			"intel":	6,
+			"luck":	7
+		},
+		"inventory":	{
+			"size":	10,
+			"items":	[{
+					"item":	"Gladiator's Sword",
+					"isEquiped":	0
+				}]
+		},
+		"NPCInfo":	[{
+				"npc_id":	0,
+				"quest_lvl":	0,
+				"quest_status":	0,
+				"relationship":	0
+			}, {
+				"npc_id":	1,
+				"quest_lvl":	0,
+				"quest_status":	0,
+				"relationship":	0
+			}, {
+				"npc_id":	2,
+				"quest_lvl":	0,
+				"quest_status":	0,
+				"relationship":	0
+			}, {
+				"npc_id":	3,
+				"quest_lvl":	0,
+				"quest_status":	0,
+				"relationship":	0
+			}, {
+				"npc_id":	4,
+				"quest_lvl":	0,
+				"quest_status":	0,
+				"relationship":	0
+			}, {
+				"npc_id":	5,
+				"quest_lvl":	0,
+				"quest_status":	0,
+				"relationship":	0
+			}, {
+				"npc_id":	6,
+				"quest_lvl":	0,
+				"quest_status":	0,
+				"relationship":	0
+			}, {
+				"npc_id":	7,
+				"quest_lvl":	0,
+				"quest_status":	0,
+				"relationship":	0
+			}, {
+				"npc_id":	8,
+				"quest_lvl":	0,
+				"quest_status":	0,
+				"relationship":	0
+			}, {
+				"npc_id":	9,
+				"quest_lvl":	0,
+				"quest_status":	0,
+				"relationship":	0
+			}],
+		"activeQuests":	[]
+	}
+}

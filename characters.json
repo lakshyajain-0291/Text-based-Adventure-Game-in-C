@@ -10,35 +10,35 @@
         },
         {
             "ID" : 2,
-            "name" : "Herbalist Flora"
+            "name": "Herbalist Flora"
         },
         {
             "ID" : 3,
-            "name" : "Cassius the Spider"
+            "name": "Cassius the Spider"
         },
         {
             "ID" : 4,
-            "name" : "Octavius the Rebel"
+            "name": "Octavius the Rebel"
         },
         {
             "ID" : 5,
-            "name" : "Oracle Sybilla"
+            "name": "Oracle Sibylla"
         },
         {
             "ID" : 6,
-            "name" : "General Lucius"
+            "name": "General Lucius"
         },
         {
             "ID" : 7,
-            "name" : "Sophia the Scholar"
+            "name": "Sophia the Scholar"
         },
         {
             "ID" : 8,
-            "name" : "Siren Melaina"
+            "name": "Siren Melaina"
         },
         {
             "ID" : 9,
-            "name" : "Mortimer the Whisperer"
-        }        
+            "name": "Mortimer the Whisperer"
+        }
     ]
 }

@@ -6,12 +6,15 @@
       "durability": 100,
       "grade": "COMMON",
       "buff": {
-        "effect": "ATT_INC",
-        "duration": 0,
-        "valueType": 0,
-        "type": 0,
-        "value": 10
-      },
+        "hp":	10,
+        "atk": 2,
+        "def":	0,
+        "agi":	0,
+        "str":	3,
+        "dex":	0,
+        "intel":	0,
+        "luck":	0
+        },
       "type": "WEAPON"
     },
     {
@@ -20,14 +23,16 @@
       "durability": 100,
       "grade": "UNCOMMON",
       "buff": {
-        "effect": "DEF_INC",
-        "duration": 0,
-        "valueType": 0,
-        "type": 0,
-        "value": 15
+        "hp":	10,
+        "atk": 0,
+        "def":	4,
+        "agi":	0,
+        "str":	0,
+        "dex":	0,
+        "intel":	0,
+        "luck":	0
       },
       "type": "ARMOR"
-    },
-    // Add more items here...
+    }
   ]
 }

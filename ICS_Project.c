@@ -1,22 +1,369 @@
 #include"ICS_Project.h"
+// #include"cJSON.c"
 
-
-//FROM world.c
-
-void delay(int milliseconds) {
-    clock_t start_time = clock();
-    while (clock() < start_time + milliseconds * CLOCKS_PER_SEC / 1000);    
-}
-
-void type(const char *sentence) {
-    for (int i = 0; i < strlen(sentence); i++) {
-        printf("%c", sentence[i]);
-        fflush(stdout); // Flush the output buffer to ensure immediate printing
-        delay(50);     // Adjust delay as needed (50 milliseconds in this example)
+int getNpcNumber()//This works checked
+{
+    FILE *file=fopen("characters.json","r");
+    if(file==NULL)
+    {
+        fprintf(stderr,"Failed to open file for reading\n");
+        return -1;
     }
+
+    fseek(file,0,SEEK_END);
+    long fileSize=ftell(file);
+    fseek(file,0,SEEK_SET);
+
+    char *fileContent=(char*)malloc(fileSize+1);
+    if (fileContent == NULL) {
+        fprintf(stderr, "Memory allocation failed for file content\n");
+        fclose(file);
+        return -1;
+    }
+
+    size_t bytesRead = fread(fileContent, 1, fileSize, file);
+    // if (bytesRead != fileSize) {
+    //     printf("Error reading file.\n");
+    //     fclose(file);
+    //     free(fileContent);
+    //     return NULL;
+    // }
+    
+    fileContent[fileSize]=0;
+    fclose(file);
+
+    cJSON *root=cJSON_Parse(fileContent);
+    if (root == NULL) {
+        printf("Error parsing JSON data.\n");
+        free(fileContent);
+        return -1;
+    }
+
+    cJSON *charactersArray=cJSON_GetObjectItem(root,"characters");
+
+    return cJSON_GetArraySize(charactersArray);
 }
 
-Player* gameInitializer(char *PlayerID)
+
+// int playMiniGame(Player *player,char *gameName)
+// {
+
+// // Define an array of string-function pairs
+// // correct the names of minigame function to these
+//     StringFunctionPair functions[] = {
+//         // {"Combat", Combat},
+//         {"Falconry", Falconry},
+//         {NULL,NULL}
+//         //add more games
+//     };
+
+//     // to call a function based on input string
+//     int i;
+//     for (i = 0; functions[i].str!=NULL; i++) {
+//         if (strcmp(gameName, functions[i].str) == 0) {
+//             return functions[i].func(); // Call the function associated with the input string
+            
+//         }
+//     }
+//     printf("No function found for input: %s\n", gameName);
+
+// }
+
+
+Player *createNewPlayer(char *playerID)//This works checked
+{
+    Player *newPlayer = (Player*)malloc(sizeof(Player));
+    if (newPlayer == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    newPlayer->id=(char*)malloc(MAX_PLAYER_ID_LENGTH); 
+    if (newPlayer->id == NULL) 
+    {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    newPlayer->name=(char*)malloc(25); 
+    if (newPlayer->name == NULL) 
+    {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    newPlayer->stats = (Stats*)malloc(sizeof(Stats));
+    if (newPlayer->stats == NULL) 
+    {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    newPlayer->inventory = (Inventory*)malloc(sizeof(Inventory));
+    if (newPlayer->inventory == NULL) 
+    {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+    newPlayer->inventory->items=(char**)malloc(sizeof(char*)*11); //initially only one string which will be NULL
+    if (newPlayer->inventory->items == NULL)
+    {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+    newPlayer->inventory->activeItems=(int*)calloc(sizeof(int),11); // Equal to items and has 0/1/-1 value(equiped or not or null)
+    if (newPlayer->inventory->items == NULL)
+    {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    newPlayer->currentLocation = (char*)malloc(sizeof(char)*100);
+    if (newPlayer->currentLocation == NULL) 
+    {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    newPlayer->activeQuests=(char**)malloc(sizeof(char*)); //initially only one string which will be NULL
+    if (newPlayer->inventory->items == NULL)
+    {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    int numOfNpcs=getNpcNumber();//reading chharcters.json for no of npcs
+
+    newPlayer->NPCInfo=(int**)malloc(sizeof(int*)*numOfNpcs);
+    if (newPlayer->NPCInfo == NULL)
+    {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+    for(int i=0;i<numOfNpcs;i++)
+    {
+        newPlayer->NPCInfo[i]=(int*)calloc(sizeof(int),3);
+    }
+
+    // Initialize player properties
+    strcpy(newPlayer->id, playerID);
+    strcpy(newPlayer->name, "Gaius Marcus Agrippa");
+    newPlayer->level = 1;
+
+    newPlayer->stats->HP = 100;
+    newPlayer->stats->atk = 10;
+    newPlayer->stats->def = 5;
+    newPlayer->stats->agi = 8;
+    newPlayer->stats->str = 12;
+    newPlayer->stats->dex = 9;
+    newPlayer->stats->intel = 6;
+    newPlayer->stats->luck = 7;
+
+    newPlayer->inventory->size = 10;
+    strcpy(newPlayer->inventory->items[0],"Gladiator's Sword");
+    newPlayer->inventory->items[1]=NULL;
+    newPlayer->inventory->activeItems[0]=0;//not equiped
+    newPlayer->inventory->activeItems[1]=-1;//NULL
+    // Initialize inventory items as needed
+    // For simplicity, let's leave them empty for now
+
+    newPlayer->wtdLevel = 0;
+    newPlayer->xp = 0;
+    newPlayer->gold = 50;
+
+    strcpy(newPlayer->currentLocation,"WORLD/CITY");
+    // char *token=strtok("WORLD/CITY","/");
+    // for(int i=0;token!=NULL;i++)
+    // {
+    //     newPlayer->currentLocation[i]=token;
+    //     token=strtok(NULL,"/");
+    // }
+    
+    newPlayer->activeQuests[0]=NULL;
+    
+    return newPlayer;
+}
+
+void savePlayerData(Player *player)//This works checked
+{
+    cJSON *root=cJSON_CreateObject();
+    cJSON *playerObject= cJSON_CreateObject();
+    
+    cJSON_AddItemToObject(root,"player",playerObject);
+
+    cJSON_AddStringToObject(playerObject,"id",player->id);
+    cJSON_AddStringToObject(playerObject,"name",player->name);
+    cJSON_AddNumberToObject(playerObject,"level",player->level);
+    cJSON_AddNumberToObject(playerObject,"wtdLevel",player->wtdLevel);
+    cJSON_AddNumberToObject(playerObject,"xp",player->xp);
+    cJSON_AddNumberToObject(playerObject,"gold",player->gold);
+    cJSON_AddStringToObject(playerObject,"currentLocation",player->currentLocation);
+
+    cJSON *statsObject= cJSON_CreateObject();
+    cJSON_AddItemToObject(playerObject,"stats",statsObject);
+
+    cJSON_AddNumberToObject(statsObject,"hp",player->stats->HP);
+    cJSON_AddNumberToObject(statsObject,"atk",player->stats->atk);
+    cJSON_AddNumberToObject(statsObject,"def",player->stats->def);
+    cJSON_AddNumberToObject(statsObject,"agi",player->stats->agi);
+    cJSON_AddNumberToObject(statsObject,"str",player->stats->str);
+    cJSON_AddNumberToObject(statsObject,"dex",player->stats->dex);
+    cJSON_AddNumberToObject(statsObject,"intel",player->stats->intel);
+    cJSON_AddNumberToObject(statsObject,"luck",player->stats->luck);
+
+    cJSON *inventoryObject= cJSON_CreateObject();
+    cJSON_AddItemToObject(playerObject,"inventory",inventoryObject);
+
+    cJSON_AddNumberToObject(inventoryObject,"size",player->inventory->size);
+    cJSON *itemsArray=cJSON_AddArrayToObject(inventoryObject,"items");
+
+    for(int i=0;player->inventory->items[i];i++)
+    {
+        cJSON *item=cJSON_CreateObject();
+        cJSON_AddItemToArray(itemsArray,item);
+        cJSON_AddStringToObject(item,"item",player->inventory->items[i]);
+        cJSON_AddNumberToObject(item,"isEquiped",player->inventory->activeItems[i]);
+    }
+
+    cJSON *npcsArray=cJSON_AddArrayToObject(playerObject,"NPCInfo");
+    int n=getNpcNumber();
+    for(int i=0;i<n;i++)
+    {
+        cJSON *npc=cJSON_CreateObject();
+        cJSON_AddItemToArray(npcsArray,npc);
+        cJSON_AddNumberToObject(npc,"npc_id",i);
+        cJSON_AddNumberToObject(npc,"quest_lvl",player->NPCInfo[i][QUEST_LVL]);
+        cJSON_AddNumberToObject(npc,"quest_status",player->NPCInfo[i][QUEST_STATUS]);
+        cJSON_AddNumberToObject(npc,"relationship",player->NPCInfo[i][RELATONSHIP]);
+    }
+
+    cJSON *activeQuestArray=cJSON_AddArrayToObject(playerObject,"activeQuests");
+    for(int i=0;player->activeQuests[i];i++)
+    {
+        cJSON *quest=cJSON_CreateObject();
+        cJSON_AddItemToArray(activeQuestArray,quest);
+        cJSON_AddStringToObject(quest,"QuestID",player->activeQuests[i]);
+    }
+
+    char *fileName;
+    fileName=(char*)malloc(sizeof(char)*50);
+    strcpy(fileName,player->id);
+    strcat(fileName,".json");
+
+    FILE *file = fopen(fileName, "w");
+    if (file == NULL) {
+        fprintf(stderr, "Failed to open file for writing\n");
+        return;
+    }
+
+    char *jsonData = cJSON_Print(root);
+    fprintf(file, "%s", jsonData);
+    fclose(file);
+    free(jsonData);
+    cJSON_Delete(root);
+}
+
+Player *loadPlayerData(char *playerID)//This works checked
+{
+    int i;
+    char *fileName;
+    strcpy(fileName,playerID);
+    strcat(fileName,".json");
+
+    FILE *file=fopen(fileName,"r");
+    if(file==NULL)
+    {
+        fprintf(stderr,"Failed to open file for reading\n");
+        return NULL;
+    }
+
+    fseek(file,0,SEEK_END);
+    long fileSize = ftell(file);
+    fseek(file,0,SEEK_SET);
+
+    char *fileContent = (char*)malloc(fileSize + 1);
+    if (fileContent == NULL) {
+        fprintf(stderr, "Memory allocation failed for file content\n");
+        fclose(file);
+        return NULL;
+    }
+
+    fread(fileContent,1,fileSize,file);
+    fclose(file);
+    fileContent[fileSize]=0;
+
+    cJSON *root=cJSON_Parse(fileContent);
+    cJSON *playerObject=cJSON_GetObjectItem(root,"player");
+
+    Player *player=createNewPlayer(playerID);
+
+    // Load player properties from JSON object
+    strcpy(player->id,cJSON_GetObjectItem(playerObject,"id")->valuestring);
+    strcpy(player->name,cJSON_GetObjectItem(playerObject,"name")->valuestring);
+    player->level=cJSON_GetObjectItem(playerObject,"level")->valueint;
+    player->wtdLevel=cJSON_GetObjectItem(playerObject,"wtdLevel")->valueint;
+    player->xp=cJSON_GetObjectItem(playerObject,"xp")->valueint;
+    player->gold=cJSON_GetObjectItem(playerObject,"gold")->valueint;
+    strcpy(player->currentLocation,cJSON_GetObjectItem(playerObject,"currentLocation")->valuestring);
+
+    // Load player stats from JSON object
+    cJSON *statsObject=cJSON_GetObjectItem(playerObject,"stats");
+    player->stats->HP = cJSON_GetObjectItem(statsObject, "HP")->valueint;
+    player->stats->atk = cJSON_GetObjectItem(statsObject, "atk")->valueint;
+    player->stats->def = cJSON_GetObjectItem(statsObject, "def")->valueint;
+    player->stats->agi = cJSON_GetObjectItem(statsObject, "agi")->valueint;
+    player->stats->str = cJSON_GetObjectItem(statsObject, "str")->valueint;
+    player->stats->dex = cJSON_GetObjectItem(statsObject, "dex")->valueint;
+    player->stats->intel = cJSON_GetObjectItem(statsObject, "intel")->valueint;
+    player->stats->luck = cJSON_GetObjectItem(statsObject, "luck")->valueint;
+
+
+    cJSON *inventoryObject=cJSON_GetObjectItem(playerObject,"inventory");
+    player->inventory->size = cJSON_GetObjectItem(inventoryObject, "size")->valueint;
+    cJSON *itemsArray=cJSON_GetObjectItem(inventoryObject,"items");
+
+    cJSON *item=NULL;
+    i=0;
+    cJSON_ArrayForEach(item,itemsArray)
+    {   
+        player->inventory->items[i]=(char*)malloc(50);
+        strcpy(player->inventory->items[i], cJSON_GetObjectItem(item,"item")->valuestring);
+        player->inventory->activeItems[i]=cJSON_GetObjectItem(item,"isEquiped")->valueint;
+        i++;
+    }
+    player->inventory->items[i]=NULL;
+
+    cJSON *npcsArray=cJSON_GetObjectItem(playerObject,"NPCInfo");
+
+    cJSON *npc=NULL;
+    i=0;
+    cJSON_ArrayForEach(npc,npcsArray)
+    {
+        player->NPCInfo[i][QUEST_LVL]= cJSON_GetObjectItem(npc,"quest_lvl")->valueint;
+        player->NPCInfo[i][QUEST_STATUS]= cJSON_GetObjectItem(npc,"quest_status")->valueint;
+        player->NPCInfo[i][RELATONSHIP]= cJSON_GetObjectItem(npc,"relationship")->valueint;
+        i++;
+    }
+
+    cJSON *activeQuestArray=cJSON_GetObjectItem(playerObject,"activeQuests");
+    cJSON *quest=NULL;
+    i=0;
+    int n=cJSON_GetArraySize(activeQuestArray);
+    player->activeQuests=(char**)malloc(sizeof(char*)*(n+1));
+    cJSON_ArrayForEach(quest,activeQuestArray)
+    {
+        player->activeQuests[i]=(char*)malloc(10);
+        strcpy(player->activeQuests[i],cJSON_GetObjectItem(quest,"QuestID")->valuestring);
+        i++;
+    }
+
+    cJSON_Delete(root);
+    free(fileContent);
+    return player;
+    
+}
+
+Player* gameInitializer(char *PlayerID)//This works checked
 {
     // asks player wheather to start a new game
     // (warns that load game will be deleted) 
@@ -29,8 +376,8 @@ Player* gameInitializer(char *PlayerID)
 
     printf("\n1----Start a New Game");
     printf("\n2----Load an Old Game");
-    printf("Pleade enter a Choise : ");
-    scanf("%d",input);
+    printf("\nPlease enter a Choise : ");
+    scanf("%d",&input);
 
     if (input == 1)
     {
@@ -64,7 +411,7 @@ Player* gameInitializer(char *PlayerID)
     return player;
 }
 
-void selectState(int *state)
+void selectState(int *state)//This works checked
 {
     printf("\n0----Choose Navigation  Mode");
     printf("\n1----Choose Interaction Mode");
@@ -75,503 +422,34 @@ void selectState(int *state)
 
 }
 
-void processState(Player *player,int *state)
-{
-    if(*state==0)
-        navigationMode(player,state);
-    else
-    if(*state==1)
-        interactionMode(player,state);
-    else
-    if(*state==2)
-        questMode(player,state);
-
-}
-
-
-
-
-
-//From player.c
-
-Player *createNewPlayer(char *playerID)
-{
-    Player *newPlayer = (Player*)malloc(sizeof(Player));
-    if (newPlayer == NULL) {
-        fprintf(stderr, "Memory allocation failed\n");
-        exit(EXIT_FAILURE);
-    }
-
-    newPlayer->stats = (Stats*)malloc(sizeof(Stats));
-    if (newPlayer->stats == NULL) 
+void navigationMode(Player *player,int *state)//This works checked BUT ADD SOME INTERACTIVE ELEMENTS ___VERY BLAND
+{   
+    // printf("\nEntered navigation");
+    FILE *file=fopen("navigations.json","r");
+    if(file==NULL)
     {
-        fprintf(stderr, "Memory allocation failed\n");
-        exit(EXIT_FAILURE);
+        fprintf(stderr,"Failed to open file for reading\n");
+        return ;
     }
 
-    newPlayer->inventory = (Inventory*)malloc(sizeof(Inventory));
-    if (newPlayer->inventory == NULL) 
-    {
-        fprintf(stderr, "Memory allocation failed\n");
-        exit(EXIT_FAILURE);
+    fseek(file,0,SEEK_END);
+    long fileSize=ftell(file);
+    fseek(file,0,SEEK_SET);
+
+    char *fileContent=(char*)malloc(fileSize+1);
+    if (fileContent == NULL) {
+        fprintf(stderr, "Memory allocation failed for file content\n");
+        fclose(file);
+        return ;
     }
 
-    newPlayer->currentLocation = (char**)malloc(sizeof(char*)*2);
-    if (newPlayer->currentLocation == NULL) 
-    {
-        fprintf(stderr, "Memory allocation failed\n");
-        exit(EXIT_FAILURE);
-    }
-
-    // Initialize player properties
-    strcpy(newPlayer->id, playerID);
-    strcpy(newPlayer->name, "Gaius Marcus Agrippa");
-    newPlayer->level = 1;
-
-    newPlayer->stats->HP = 100;
-    newPlayer->stats->atk = 10;
-    newPlayer->stats->def = 5;
-    newPlayer->stats->agi = 8;
-    newPlayer->stats->str = 12;
-    newPlayer->stats->dex = 9;
-    newPlayer->stats->intel = 6;
-    newPlayer->stats->luck = 7;
-
-    newPlayer->inventory->size = 10;
-    // Initialize inventory items as needed
-    // For simplicity, let's leave them empty for now
-
-    newPlayer->wtdLevel = 0;
-    newPlayer->xp = 0;
-    newPlayer->gold = 50;
-
-    strcpy(newPlayer->currentLocation,"WORLD/CITY");
-    // char *token=strtok("WORLD/CITY","/");
-    // for(int i=0;token!=NULL;i++)
-    // {
-    //     newPlayer->currentLocation[i]=token;
-    //     token=strtok(NULL,"/");
+    size_t bytesRead = fread(fileContent, 1, fileSize, file);
+    // if (bytesRead != fileSize) {
+    //     printf("Error reading file.\n");
+    //     fclose(file);
+    //     free(fileContent);
+    //     return ;
     // }
-    
-    newPlayer->activeQuests=NULL;
-
-    int numOfNpcs=getNpcNumber();//reading chharcters.json for no of npcs
-
-    newPlayer->NPCInfo=(int**)malloc(sizeof(int*)*numOfNpcs);
-    
-    for(int i=0;i<numOfNpcs;i++)
-    {
-        newPlayer->NPCInfo[i]=(int*)malloc(sizeof(int)*3);
-        newPlayer->NPCInfo[i][QUEST_LVL]=0;
-        newPlayer->NPCInfo[i][QUEST_STATUS]=0;
-        newPlayer->NPCInfo[i][RELATONSHIP]=0;
-    }
-
-    return newPlayer;
-}
-
-void savePlayerData(Player *player)
-{
-    cJSON *root=cJSON_CreateObject();
-    cJSON *playerObject= cJSON_CreateObject();
-    cJSON *statsObject= cJSON_CreateObject();
-    cJSON *inventoryObject= cJSON_CreateObject();
-
-    cJSON_AddItemToObject(root,"player",playerObject);
-
-    cJSON_AddStringToObject(playerObject,"id",player->id);
-    cJSON_AddStringToObject(playerObject,"name",player->name);
-    cJSON_AddNumberToObject(playerObject,"level",player->level);
-    cJSON_AddNumberToObject(playerObject,"wtdLevel",player->wtdLevel);
-    cJSON_AddNumberToObject(playerObject,"xp",player->xp);
-    cJSON_AddNumberToObject(playerObject,"gold",player->gold);
-    cJSON_AddStringToObject(playerObject,"currentLocation",player->currentLocation);
-
-    cJSON_AddItemToObject(playerObject,"stats",statsObject);
-
-    cJSON_AddNumberToObject(statsObject,"hp",player->stats->HP);
-    cJSON_AddNumberToObject(statsObject,"atk",player->stats->atk);
-    cJSON_AddNumberToObject(statsObject,"def",player->stats->def);
-    cJSON_AddNumberToObject(statsObject,"agi",player->stats->agi);
-    cJSON_AddNumberToObject(statsObject,"str",player->stats->str);
-    cJSON_AddNumberToObject(statsObject,"dex",player->stats->dex);
-    cJSON_AddNumberToObject(statsObject,"intel",player->stats->intel);
-    cJSON_AddNumberToObject(statsObject,"luck",player->stats->luck);
-
-    cJSON_AddItemToObject(playerObject,"inventory",inventoryObject);
-
-    cJSON_AddNumberToObject(inventoryObject,"size",player->inventory->size);
-    cJSON *itemsArray=cJSON_AddArrayToObject(inventoryObject,"items");
-
-    for(int i=0;i<player->inventory->size;i++)
-    {
-        cJSON *item=cJSON_CreateObject();
-        cJSON_AddItemToArray(itemsArray,item);
-        cJSON_AddStringToObject(item,"item",player->inventory->items[i]);
-    }
-
-    cJSON *npcsArray=cJSON_AddArrayToObject(playerObject,"NPCInfo");
-
-    int n=sizeof(player->NPCInfo)/sizeof(int*);
-    for(int i=0;i<n;i++)
-    {
-        cJSON *npc=cJSON_CreateObject();
-        cJSON_AddItemToArray(itemsArray,npc);
-        cJSON_AddNumberToObject(npc,"npc_id",i);
-        cJSON_AddNumberToObject(npc,"quest_lvl",player->NPCInfo[i][QUEST_LVL]);
-        cJSON_AddNumberToObject(npc,"quest_status",player->NPCInfo[i][QUEST_STATUS]);
-        cJSON_AddNumberToObject(npc,"relationship",player->NPCInfo[i][RELATONSHIP]);
-    }
-
-
-    char *fileName;
-    fileName=(char*)malloc(sizeof(char)*50);
-    strcpy(fileName,player->id);
-    strcat(fileName,".json");
-
-    FILE *file = fopen(fileName, "w");
-    if (file == NULL) {
-        fprintf(stderr, "Failed to open file for writing\n");
-        return;
-    }
-
-    char *jsonData = cJSON_Print(root);
-    fprintf(file, "%s", jsonData);
-    fclose(file);
-    free(jsonData);
-    cJSON_Delete(root);
-}
-
-Player *loadPlayerData(char *playerID)
-{
-    char *fileName;
-    strcpy(fileName,playerID);
-    strcat(fileName,".json");
-
-    FILE *file=fopen(fileName,"r");
-    if(file==NULL)
-    {
-        fprintf(stderr,"Failed to open file for reading\n");
-        return NULL;
-    }
-
-    fseek(file,0,SEEK_END);
-    long fileSize = ftell(file);
-    fseek(file,0,SEEK_SET);
-
-    char *fileContent = (char*)malloc(fileSize + 1);
-    if (fileContent == NULL) {
-        fprintf(stderr, "Memory allocation failed for file content\n");
-        fclose(file);
-        return NULL;
-    }
-
-    fread(fileContent,1,fileSize,file);
-    fclose(file);
-    fileContent[fileSize]=0;
-
-    cJSON *root=cJSON_Parse(fileContent);
-    cJSON *playerObject=cJSON_GetObjectItem(root,"player");
-
-    Player *player=(Player*)malloc(sizeof(Player));
-    if (player == NULL) {
-        fprintf(stderr, "Memory allocation failed for player\n");
-        cJSON_Delete(root);
-        free(fileContent);
-        return NULL;
-    }
-
-
-    // Load player properties from JSON object
-    strcpy(player->id,cJSON_GetObjectItem(playerObject,"id")->valuestring);
-    strcpy(player->name,cJSON_GetObjectItem(playerObject,"name")->valuestring);
-    player->level=cJSON_GetObjectItem(playerObject,"level")->valueint;
-    player->wtdLevel=cJSON_GetObjectItem(playerObject,"wtdLevel")->valueint;
-    player->xp=cJSON_GetObjectItem(playerObject,"xp")->valueint;
-    player->gold=cJSON_GetObjectItem(playerObject,"gold")->valueint;
-    strcpy(player->currentLocation,cJSON_GetObjectItem(playerObject,"currentLocation")->valuestring);
-
-    // Load player stats from JSON object
-    cJSON *statsObject=cJSON_GetObjectItem(playerObject,"stats");
-    player->stats->HP = cJSON_GetObjectItem(statsObject, "HP")->valueint;
-    player->stats->atk = cJSON_GetObjectItem(statsObject, "atk")->valueint;
-    player->stats->def = cJSON_GetObjectItem(statsObject, "def")->valueint;
-    player->stats->agi = cJSON_GetObjectItem(statsObject, "agi")->valueint;
-    player->stats->str = cJSON_GetObjectItem(statsObject, "str")->valueint;
-    player->stats->dex = cJSON_GetObjectItem(statsObject, "dex")->valueint;
-    player->stats->intel = cJSON_GetObjectItem(statsObject, "intel")->valueint;
-    player->stats->luck = cJSON_GetObjectItem(statsObject, "luck")->valueint;
-
-
-    cJSON *inventoryObject=cJSON_GetObjectItem(playerObject,"inventory");
-    player->inventory->size = cJSON_GetObjectItem(inventoryObject, "size")->valueint;
-    cJSON *itemsArray=cJSON_GetObjectItem(inventoryObject,"items");
-
-    cJSON *item=NULL;
-    int i=0;
-    cJSON_ArrayForEach(item,itemsArray)
-    {
-        strcpy(player->inventory->items[i], cJSON_GetObjectItem(item,"item")->valuestring);
-        i++;
-    }
-
-
-    cJSON *npcsArray=cJSON_GetObjectItem(playerObject,"NPCInfo");
-
-    cJSON *npc=NULL;
-    int i=0;
-    cJSON_ArrayForEach(npc,npcsArray)
-    {
-        player->NPCInfo[i][QUEST_LVL]= cJSON_GetObjectItem(npc,"quest_lvl")->valueint;
-        player->NPCInfo[i][QUEST_STATUS]= cJSON_GetObjectItem(npc,"quest_status")->valueint;
-        player->NPCInfo[i][RELATONSHIP]= cJSON_GetObjectItem(npc,"relationship")->valueint;
-        i++;
-    }
-
-    cJSON_Delete(root);
-    free(fileContent);
-    return player;
-    
-}
-
-int playMinigame(Player *player,char *gameName)
-{
-
-// Define an array of string-function pairs
-//correct the names of minigame function to these
-    StringFunctionPair functions[] = {
-        // {"Combat", Combat},
-        {"Falconry", Falconry},
-        {NULL,NULL}
-        //add more games
-    };
-
-    // to call a function based on input string
-    int i;
-    for (i = 0; functions[i].str!=NULL; i++) {
-        if (strcmp(gameName, functions[i].str) == 0) {
-            return functions[i].func(); // Call the function associated with the input string
-            
-        }
-    }
-    printf("No function found for input: %s\n", gameName);
-
-}
-
-
-
-
-//From charcters.c
-
-int getNpcNumber()
-{
-    FILE *file=fopen("../characters.json","r");
-    if(file==NULL)
-    {
-        fprintf(stderr,"Failed to open file for reading\n");
-        return NULL;
-    }
-
-    fseek(file,0,SEEK_END);
-    long fileSize=ftell(file);
-    fseek(file,0,SEEK_SET);
-
-    char *fileContent=(char*)malloc(fileSize+1);
-    if (fileContent == NULL) {
-        fprintf(stderr, "Memory allocation failed for file content\n");
-        fclose(file);
-        return NULL;
-    }
-
-    size_t bytesRead = fread(fileContent, 1, fileSize, file);
-    if (bytesRead != fileSize) {
-        printf("Error reading file.\n");
-        fclose(file);
-        free(fileContent);
-        return NULL;
-    }
-    
-    fileContent[fileSize]=0;
-    fclose(file);
-
-    cJSON *root=cJSON_Parse(fileContent);
-    if (root == NULL) {
-        printf("Error parsing JSON data.\n");
-        free(fileContent);
-        return NULL;
-    }
-
-    cJSON *charactersArray=cJSON_GetObjectItem(root,"characters");
-
-    return cJSON_GetArraySize(charactersArray);
-}
-
-// Function to parse characters.json and get the NPC ID
-int getNPCID(char *npcName)
-{
-    // Read the contents of the characters.json file
-    FILE *file = fopen("characters.json", "r");
-    if (file != NULL)
-    {
-        fseek(file, 0, SEEK_END);
-        long fileSize = ftell(file);
-        fseek(file, 0, SEEK_SET);
-
-        char *fileContent = (char *)malloc(fileSize + 1);
-        if (fileContent != NULL)
-        {
-            fread(fileContent, 1, fileSize, file);
-            fileContent[fileSize] = '\0';
-
-            // Parse the JSON content
-            cJSON *root = cJSON_Parse(fileContent);
-            if (root != NULL)
-            {
-                cJSON *characters = cJSON_GetObjectItem(root, "characters");
-                if (characters != NULL && cJSON_IsArray(characters))
-                {
-                    cJSON *character;
-                    cJSON_ArrayForEach(character, characters)
-                    {
-                        cJSON *name = cJSON_GetObjectItem(character, "name");
-                        if (name != NULL && cJSON_IsString(name) && strcmp(name->valuestring, npcName) == 0)
-                        {
-                            cJSON *id = cJSON_GetObjectItem(character, "ID");
-                            if (id != NULL && cJSON_IsNumber(id))
-                            {
-                                // NPC found, return its ID
-                                cJSON_Delete(root);
-                                fclose(file);
-                                free(fileContent);
-                                return id->valueint;
-                            }
-                        }
-                    }
-                }
-                cJSON_Delete(root);
-            }
-            free(fileContent);
-        }
-        fclose(file);
-    }
-
-    // NPC not found or error reading file
-    return -1;
-}
-
-// Function to interact with given NPC
-void interactWith(Player *player, char *npc) // Requires Quest Submission
-{
-    printf("Debug 0 : %s\n", npc);
-
-    // If any quest to submit:
-    if (anyQuesttoSubmit(player, npc))
-        getQuestReward(player, npc);
-
-    char *NPCQuestID = getQuestID(player, npc);
-
-    char *dialogues = questDialogues(NPCQuestID); // NPCQuestID instead of String
-    if (dialogues != NULL)
-    {
-        printf("%s\n", dialogues);
-        free(dialogues); // Free the allocated memory
-    }
-
-    // Quest description and reward
-    char *questDescription = getQuestDescription(NPCQuestID);
-    if (questDescription != NULL)
-    {
-        printf("%s\n", questDescription);
-        free(questDescription);
-    }
-
-    // Quest Location
-    char *questLocation = getQuestLocation(NPCQuestID);
-    if (questLocation != NULL)
-    {
-        printf("You must go to %s to complete the Quest\n", questLocation);
-        free(questLocation);
-    }
-
-    // Get choice to accept or reject
-    printf("Enter 1 to accept this quest now:\nEnter 0 to reject:\n");
-    int questChoice;
-    scanf("%d", &questChoice);
-
-    // If accepted, add to active quests
-    if (questChoice == 1)
-        activateQuest(player, npc, NPCQuestID);
-}
-
-// Function to choose NPCs from available NPCs
-void chooseNPC(char **NPCsAvailable, Player *player)
-{
-    while (1)
-    {
-        printf("Available NPCs:\n");
-        for (int i = 0; NPCsAvailable[i] != NULL; i++)
-        {
-            printf("%d. %s\n", i + 1, NPCsAvailable[i]);
-        }
-
-        printf("Choose an NPC to interact with (enter the corresponding number) (or enter 0 to return to Navigation state): ");
-        int choice;
-        scanf("%d", &choice);
-
-        // Check if the choice is valid
-        if (choice >= 1 && choice <= sizeof(NPCsAvailable) / sizeof(NPCsAvailable[0]) + 1)
-        {
-            char *chosenNPC = NPCsAvailable[choice - 1];
-            interactWith(player, chosenNPC);
-        }
-        else if (choice == 0)
-        {
-            return;
-        }
-        else
-        {
-            printf("Invalid choice. Please choose a valid NPC.\n");
-        }
-    }
-}
-
-
-
-
-//From item.h
-
-
-
-
-//From locations.h
-
-void navigationMode(Player *player,int *state)
-{
-    FILE *file=fopen("../navigations.json","r");
-    if(file==NULL)
-    {
-        fprintf(stderr,"Failed to open file for reading\n");
-        return ;
-    }
-
-    fseek(file,0,SEEK_END);
-    long fileSize=ftell(file);
-    fseek(file,0,SEEK_SET);
-
-    char *fileContent=(char*)malloc(fileSize+1);
-    if (fileContent == NULL) {
-        fprintf(stderr, "Memory allocation failed for file content\n");
-        fclose(file);
-        return ;
-    }
-
-    size_t bytesRead = fread(fileContent, 1, fileSize, file);
-    if (bytesRead != fileSize) {
-        printf("Error reading file.\n");
-        fclose(file);
-        free(fileContent);
-        return ;
-    }
     
     fileContent[fileSize]=0;
     fclose(file);
@@ -588,7 +466,8 @@ void navigationMode(Player *player,int *state)
     cJSON *children=cJSON_GetObjectItem(currentLocationInJson,"children");
 
     char *token_prev=NULL;
-    char *token=strtok(player->currentLocation,"/");
+    char *duplicate=strdup(player->currentLocation);//IMP BECAUSE STRTOK PUTS NULL WHERE IT FINDS LIMITERS
+    char *token=strtok(duplicate,"/");
 
     while(token!=NULL)
     {
@@ -597,7 +476,7 @@ void navigationMode(Player *player,int *state)
         while(child!=NULL)
         {
             cJSON *childName=cJSON_GetObjectItem(child,"name");
-            if(!strcmp(token,childName->valuestring))
+            if(strcmp(token,childName->valuestring)==0)
             {
                 children=cJSON_GetObjectItem(child,"children");
                 currentLocationInJson=child;
@@ -607,14 +486,17 @@ void navigationMode(Player *player,int *state)
             child=child->next;
         }
 
-        token_prev=token;
+        token_prev=strdup(token);
         token=strtok(NULL,"/");
     }
 
     char input;
+    // printf("HU");
+    // flushInputBuffer();
 
-    if(strcmp(player->currentLocation,"WORLD")==0)
+    if(strcmp(token_prev,"WORLD")==0)
     {
+        // printf("\nin if");
         for(int i=0;i<cJSON_GetArraySize(children);i++)
         {
             cJSON *child=cJSON_GetArrayItem(children,i);
@@ -626,7 +508,42 @@ void navigationMode(Player *player,int *state)
         printf("\nOr Enter e/E to Exit the Game");
 
         printf("\nMake a Choise to continue : ");
-        input=getchar();
+        getchar();
+        input=getc(stdin);
+        // flushInputBuffer();
+        // printf("c=%c,",input);
+
+
+        while(input<='0' || input>(cJSON_GetArraySize(children)+'0'))
+        {  
+            // printf("\nin loop");
+
+            if(input=='e'||input=='E')
+            {
+                *state =-1;
+                return;
+            }
+
+            if(input=='i'||input=='I')
+            {
+                *state = 1;
+                return;
+            }
+
+            if(input=='q' || input=='Q')
+            {
+                *state=2;
+                return;
+            }
+
+            printf("\nWell such a place doesn't exist. Enter a Valid Location!");
+            printf("\nChoose a Location to move to : ");
+            getchar();
+            input=getc(stdin);
+            // flushInputBuffer();
+
+        }
+
         if(input=='e'||input=='E')
         {
             *state =-1;
@@ -644,29 +561,58 @@ void navigationMode(Player *player,int *state)
             *state=2;
             return;
         }
-
-        while(input<='0' || input>(cJSON_GetArraySize(children)+'0'))
-        {
-            printf("\nWell such a place doesn't exist. Enter a Valid Location!");
-            printf("\nChoose a Location to move to : ");
-            input=getchar();
-        }
-    }
+   }
     else
     {
+        // printf("\nin else");
         printf("\n0...to go out of %s",token_prev);
         for(int i=0;i<cJSON_GetArraySize(children);i++)
         {
             cJSON *child=cJSON_GetArrayItem(children,i);
-            printf("\n%d...to go to %s",i+1,cJSON_GetObjectItem(child,"name")->valuestring);
+            printf("\n%d...to go to %s",(i+1),cJSON_GetObjectItem(child,"name")->valuestring);
         }
 
+        printf("\n");
         printf("\nOr Enter i/I for Interaction Mode");
         printf("\nOr Enter q/Q for Quest Mode");
         printf("\nOr Enter e/E to Exit the Game");
 
-        printf("\nMake a Choise to continue : ");
-        input=getchar();
+        printf("\n");
+        printf("\nMake a Choice to continue : ");
+        getchar();
+        input=getc(stdin);
+        // flushInputBuffer();
+        printf("\nc=%c",input);
+
+        while(input<'0' || input>(cJSON_GetArraySize(children)+'0'))
+        {
+            // printf("\nin loop");
+            if(input=='e'||input=='E')
+            {
+                *state =-1;
+                return;
+            }
+
+            if(input=='i'||input=='I')
+            {
+                *state = 1;
+                return;
+            }
+
+            if(input=='q' || input=='Q')
+            {
+                *state=2;
+                return;
+            }
+
+            printf("\nWell such a place doesn't exist. Enter a Valid Location!");
+            printf("\nChoose a Location to move to : ");
+            getchar();
+            input=getc(stdin);
+            // flushInputBuffer();
+    
+        }
+
         if(input=='e'||input=='E')
         {
             *state =-1;
@@ -683,232 +629,45 @@ void navigationMode(Player *player,int *state)
         {
             *state=2;
             return;
-        }
-
-        while(input<'0' || input>(cJSON_GetArraySize(children)+'0'))
-        {
-            printf("\nWell such a place doesn't exist. Enter a Valid Location!");
-            printf("\nChoose a Location to move to : ");
-            input=getchar();
         }
     }
 
     if(input-'0')
     {
-        cJSON *child=cJSON_GetArrayItem(children,input-1);
+        // printf("\nin if2");
+        cJSON *child=cJSON_GetArrayItem(children,input-'1');
+        // printf("\n%s",cJSON_GetObjectItem(child,"name")->valuestring);
         strcat(player->currentLocation,"/");
         strcat(player->currentLocation,cJSON_GetObjectItem(child,"name")->valuestring);
     }
     else
     {
+        // printf("\nin else2");
         char *str=player->currentLocation;
-        int j;
+        int j=0;
 
         for(int i=0;str[i];i++)
         {
             if(str[i]=='/')j=i;
         }
 
-        str[j]=0;
+        if(j)
+            str[j]=0;
     }
-}
-
-// Function to return array of NPCs available at the specified locationNode
-char **returnNPCsAvailable(char *locationNode)
-{
-    char **NPCsAvailable = NULL;
-
-    // Read the contents of the locations.json file
-    FILE *file = fopen("locations.json", "r");
-    if (file != NULL)
-    {
-        fseek(file, 0, SEEK_END);
-        long fileSize = ftell(file);
-        fseek(file, 0, SEEK_SET);
-
-        char *fileContent = (char *)malloc(fileSize + 1);
-        if (fileContent != NULL)
-        {
-            fread(fileContent, 1, fileSize, file);
-            fileContent[fileSize] = '\0';
-
-            // Parse the JSON content
-            cJSON *root = cJSON_Parse(fileContent);
-            if (root != NULL)
-            {
-                cJSON *locations = cJSON_GetObjectItem(root, "locations");
-                if (locations != NULL && cJSON_IsArray(locations))
-                {
-                    cJSON *location;
-                    cJSON_ArrayForEach(location, locations)
-                    {
-                        cJSON *name = cJSON_GetObjectItem(location, "name");
-                        if (name != NULL && cJSON_IsString(name) && strcmp(name->valuestring, locationNode) == 0)
-                        {
-                            cJSON *npcs = cJSON_GetObjectItem(location, "NPCs");
-                            if (npcs != NULL && cJSON_IsArray(npcs))
-                            {
-                                int numNPCs = cJSON_GetArraySize(npcs);
-                                NPCsAvailable = (char **)malloc((numNPCs + 1) * sizeof(char *));
-                                if (NPCsAvailable != NULL)
-                                {
-                                    for (int i = 0; i < numNPCs; i++)
-                                    {
-                                        cJSON *npcObj = cJSON_GetArrayItem(npcs, i);
-                                        cJSON *npc = cJSON_GetObjectItem(npcObj, "npc");
-                                        if (npc != NULL && cJSON_IsString(npc))
-                                        {
-                                            NPCsAvailable[i] = strdup(npc->valuestring);
-                                        }
-                                    }
-                                    NPCsAvailable[numNPCs] = NULL; // Null-terminate the array
-                                }
-                            }
-                            break; // No need to continue searching
-                        }
-                    }
-                }
-                cJSON_Delete(root);
-            }
-            free(fileContent);
-        }
-        fclose(file);
-    }
-
-    return NPCsAvailable;
-}
-
-
-
-//From quest.h
-
-void questMode(Player *player,int *state)
-{
-    if(player->inventory->items)
-    {
-        for(int i=0;player->inventory->items[i];i++)
-        {
-            printf("\n%d...to slecect Item - %s",i+1,player->inventory->items[i]);
-        }
-    }
-    FILE *file=fopen("quests.json","r");
-    if (!file) {
-        fprintf(stderr, "Failed to open quests.json\n");
-        return;
-    }
-
-    fseek(file,0,SEEK_END);
-    long fileSize=ftell(file);
-    fseek(file,0,SEEK_SET);
-
-    char *fileContent = (char *)malloc(fileSize + 1);
-    if (!fileContent) {
-        fprintf(stderr, "Memory allocation failed for file content\n");
-        fclose(file);
-        return;
-    }
-
-    fread(fileContent,1,fileSize,file);
-    fclose(file);
-    fileContent[fileSize]=0;
-
-    cJSON *root=cJSON_Parse(fileContent);
-    if (!root) {
-        const char *error = cJSON_GetErrorPtr();
-        if (error != NULL) {
-            fprintf(stderr, "Error before: %s\n", error);
-        }
-        cJSON_Delete(root);
-        free(fileContent);
-        return;
-    }
-
-    cJSON *questsArray=cJSON_GetObjectItem(root,"quests");
-    cJSON *ptr=questsArray->child;
-
-    char *cur_loc=player->currentLocation;
-    int j=0,i=0;
-    int choises[10];
-    char input;
-
-    for(int i=0;cur_loc[i];i++)
-        if(cur_loc[i]=="/")j=i;
-
-    cur_loc=player->currentLocation+j;
-
-    int n=sizeof(player->activeQuests)/sizeof(char*);
-    j=0;
-
-    for(int i=0;i<n;i++)
-    {
-
-        char *questId=player->activeQuests[i];
-        while(ptr)
-        {
-            if(strcmp(questId,cJSON_GetObjectItem(ptr,"QuestID")->valuestring)==0 && strcmp(cur_loc,cJSON_GetObjectItem(ptr,"Location")->valuestring)==0)
-                choises[j++]=i;
-
-            ptr=ptr->next;
-        }
-    }
-    choises[j]=-1;
-    
-    for(i=0;i<10 && choises[i]>=0;i++)
-    {
-        cJSON *child=cJSON_GetArrayItem(questsArray,choises[i]);
-        printf("\n%d...to start quest- %s",i+1,cJSON_GetObjectItem(child,"name")->valuestring);
-    }
-
-    printf("\nOr Enter i/I for Interaction Mode");
-    printf("\nOr Enter n/N for Navigation Mode");
-    printf("\nOr Enter e/E to Exit the Game");
-
-    printf("\nMake a Choise to continue : ");
-    input=getchar();
-    if(input=='e'||input=='E')
-    {
-        *state =-1;
-        return;
-    }
-
-    if(input=='i'||input=='I')
-    {
-        *state = 1;
-        return;
-    }
-
-    if(input=='n' || input=='N')
-    {
-        *state=0;
-        return;
-    }
-
-    while(input<='0' || input>i+'0')
-    {
-        printf("\nWell such a quest doesn't exist. Enter a Valid Choise!");
-        printf("\nMake a Choise to continue : ");
-        input=getchar();
-    }
-
-    cJSON *child=cJSON_GetArrayItem(questsArray,choises[i]);
-    int result=playMiniGame(player,cJSON_GetObjectItem(child,"Minigame")->valuestring);//in player.c
-    if(result)
-    {
-        char *questId=cJSON_GetObjectItem(child,"QuestID");
-        int npcId=questId[0]-'0';
-        player->NPCInfo[npcId][QUEST_STATUS]=2;
-    }
+    // printf("\n%s",player->currentLocation); 
 }
 
 // Function to add activated quest to activeQuests array of strings
-void addActiveQuest(Player *player, char *questID)
+void addActiveQuest(Player *player, char *questID)//This works checked (A)
 {
     // Find the number of active quests
     int numActiveQuests = 0;
     while (player->activeQuests[numActiveQuests] != NULL)
     {
+        printf("+\n");
         numActiveQuests++;
     }
+    // printf("Number of active quests %d\n", numActiveQuests);
 
     // Allocate memory for the new quest ID string
     char *newQuestID = strdup(questID);
@@ -932,10 +691,38 @@ void addActiveQuest(Player *player, char *questID)
     // Add the new quest ID to the activeQuests array
     player->activeQuests[numActiveQuests] = newQuestID;
     player->activeQuests[numActiveQuests + 1] = NULL; // Null-terminate the array
+    printf("Active Quests: ");
+    for (int i = 0; i < numActiveQuests + 1; i++)
+    {
+        printf("%s ", player->activeQuests[i]);
+    }
+    printf("\n");
+}
+
+// Function to find quest level
+int getQuestLevel(Player *player, char *npc, char *questID)//This works checked (A)
+{
+    // Find NPC ID
+    int npcID = getNPCID(npc);
+
+    // Find quest level in NPCInfo array
+    int questLevel = -1; // Initialize to an invalid value
+    if (npcID >= 0)
+    {
+        // Check if questID exists for the NPC
+        char *npcQuestID = getQuestID(player, npc);
+        if (npcQuestID != NULL && strcmp(npcQuestID, questID) == 0)
+        {
+            // Get quest level from NPCInfo array
+            questLevel = player->NPCInfo[npcID][0];
+        }
+    }
+
+    return questLevel;
 }
 
 // Function to activate quest
-void activateQuest(Player *player, char *npc, char *NPCQuestID)
+void activateQuest(Player *player, char *npc, char *NPCQuestID)//This works checked (A)
 {
     // Assume NPCInfo is properly initialized and contains valid data
     // Find the NPC ID based on the given NPC name
@@ -945,17 +732,17 @@ void activateQuest(Player *player, char *npc, char *NPCQuestID)
     int npcIndex = npcID; // For simplicity, assuming the NPC ID corresponds to its index in NPCInfo
 
     // Find the Quest level based on the given NPCQuestID
-    int questLevel = getQuestLevel(NPCQuestID);
+    int questLevel = getQuestLevel(player, npc, NPCQuestID);
 
     // Update the quest status of the relevant NPC for the given quest level
-    player->NPCInfo[npcIndex][questLevel] = 1; // Set quest status to 1 (active)
+    player->NPCInfo[npcIndex][1] = 1; // Set quest status to 1 (active)
 
     // Add the activated quest to the activeQuests array
     addActiveQuest(player, NPCQuestID);
 }
 
 // Function to parse quests.json and get the quest location
-char *getQuestLocation(char *QuestID)
+char *getQuestLocation(char *NPCQuestID)//This works checked (A)
 {
     char *location = NULL;
 
@@ -984,7 +771,7 @@ char *getQuestLocation(char *QuestID)
                     cJSON_ArrayForEach(quest, quests)
                     {
                         cJSON *questIDJSON = cJSON_GetObjectItem(quest, "QuestID");
-                        if (questIDJSON != NULL && cJSON_IsString(questIDJSON) && strcmp(questIDJSON->valuestring, QuestID) == 0)
+                        if (questIDJSON != NULL && cJSON_IsString(questIDJSON) && strcmp(questIDJSON->valuestring, NPCQuestID) == 0)
                         {
                             // Quest found, get its location
                             cJSON *questLocation = cJSON_GetObjectItem(quest, "Location");
@@ -1007,7 +794,7 @@ char *getQuestLocation(char *QuestID)
 }
 
 // Function to parse quests.json and get the quest description
-char *getQuestDescription(const char *NPCQuestID)
+char *getQuestDescription(char *NPCQuestID)//This works checked (A)
 {
     char *description = NULL;
 
@@ -1058,8 +845,7 @@ char *getQuestDescription(const char *NPCQuestID)
     return description;
 }
 
-// Function to parse quests.json and get the quest reward
-void getQuestReward(Player *player, const char *questID)
+void giveQuestReward(Player *player, char *questID)//This works checked (A)
 {
     // Read the contents of the quests.json file
     FILE *file = fopen("quests.json", "r");
@@ -1145,9 +931,32 @@ void getQuestReward(Player *player, const char *questID)
     }
 }
 
-// Function to check if there is any quest to submit to the NPC
-bool anyQuesttoSubmit(Player *player, const char *npcName)
+// Function to check if there is any active quest for the NPC
+bool anyActiveQuest(Player *player, char *npc)//This works checked (A)
 {
+    char *questID = getQuestID(player, npc);
+    printf("in anyActiveQuest, questID = %s\n", questID);
+    // Check if the NPC has any active quests
+    for (int i = 0; player->activeQuests[i] != NULL; i++)
+    {
+        // printf("Active = %s, Here = %s", player->activeQuests[i], questID);
+        if (strcmp(player->activeQuests[i], questID) == 0)
+        {
+            // Active quest found
+            // printf("TRUE\n");
+            return true;
+        }
+    }
+
+    // No active quest for the NPC
+    // printf("FALSE\n");
+    return false;
+}
+
+// Function to check if there is any quest to submit to the NPC
+bool anyQuesttoSubmit(Player *player, char *npcName)//This works checked(A)
+{
+    // printf("Debug anyQuesttoSubmit1\n");
     int npcID = getNPCID(npcName);
     if (npcID == -1)
     {
@@ -1176,18 +985,76 @@ bool anyQuesttoSubmit(Player *player, const char *npcName)
     return false;
 }
 
-// Function to get the quest ID for a given NPC and player
-char *getQuestID(Player *player, char *npcName)
+// Function to parse characters.json and get the NPC ID
+int getNPCID(char *npcName)//This works checked (A)
 {
+    // printf("Getting NPC ID\n");
+    // Read the contents of the characters.json file
+    FILE *file = fopen("characters.json", "r");
+    if (file != NULL)
+    {
+        fseek(file, 0, SEEK_END);
+        long fileSize = ftell(file);
+        fseek(file, 0, SEEK_SET);
+
+        char *fileContent = (char *)malloc(fileSize + 1);
+        if (fileContent != NULL)
+        {
+            fread(fileContent, 1, fileSize, file);
+            fileContent[fileSize] = '\0';
+
+            // Parse the JSON content
+            cJSON *root = cJSON_Parse(fileContent);
+            if (root != NULL)
+            {
+                cJSON *characters = cJSON_GetObjectItem(root, "characters");
+                if (characters != NULL && cJSON_IsArray(characters))
+                {
+                    cJSON *character;
+                    cJSON_ArrayForEach(character, characters)
+                    {
+                        cJSON *name = cJSON_GetObjectItem(character, "name");
+                        if (name != NULL && cJSON_IsString(name) && strcmp(name->valuestring, npcName) == 0)
+                        {
+                            cJSON *id = cJSON_GetObjectItem(character, "ID");
+                            if (id != NULL && cJSON_IsNumber(id))
+                            {
+                                // NPC found, return its ID
+                                cJSON_Delete(root);
+                                fclose(file);
+                                free(fileContent);
+                                // printf("Got NPCID\n");
+                                return id->valueint;
+                            }
+                        }
+                    }
+                }
+                cJSON_Delete(root);
+            }
+            free(fileContent);
+        }
+        fclose(file);
+    }
+
+    // NPC not found or error reading file
+    return -1;
+}
+
+// Function to get the quest ID for a given NPC and player
+char *getQuestID(Player *player, char *npcName)//Test case 1 passed(A)
+{
+    // printf("Debug getQuestID1\n");
     int npcID = getNPCID(npcName);
     if (npcID == -1)
     {
         // NPC not found
         return NULL;
     }
+    // printf("Found NPC\n");
 
     // Get the quest level from the NPCInfo array
     int questLevel = player->NPCInfo[npcID][0];
+    // printf("|||Got quest level = %d|||\n", questLevel);
 
     // Construct and return the quest ID string
     char *questID = (char *)malloc(20 * sizeof(char)); // Adjust size as needed
@@ -1197,14 +1064,13 @@ char *getQuestID(Player *player, char *npcName)
     }
     return questID;
 }
-
-// Function to parse dialogues.json for dialogues corresponding to Quest
-char *questDialogues(char *questID)
+char *questDialogues(char *questID)//This works checked (A)
 {
-    printf("Debug 1\n");
+    // printf("Debug: Entering questDialogues\n");
+
     char *dialoguesString = NULL;
 
-    // Read the contents of the dialogues.json file
+    // Read the contents of the dialogue.json file
     FILE *file = fopen("dialogue.json", "r");
     if (file != NULL)
     {
@@ -1238,15 +1104,29 @@ char *questDialogues(char *questID)
                                 cJSON *tempString = cJSON_CreateString("");
                                 cJSON_ArrayForEach(text, textArray)
                                 {
-                                    cJSON *temp = cJSON_GetObjectItem(dialogue, "Text");
-                                    if (temp != NULL && cJSON_IsString(temp))
+                                    if (cJSON_IsString(text))
                                     {
-                                        cJSON *tempText = cJSON_CreateString(temp->valuestring);
-                                        cJSON_AddItemToArray(tempString, tempText);
+                                        char *tempText = strdup(text->valuestring); // Use strdup to duplicate the string
+                                        if (tempText != NULL)
+                                        {
+                                            // Append the duplicated string to the dialoguesString
+                                            if (dialoguesString != NULL)
+                                            {
+                                                // Reallocate memory to include the new string
+                                                dialoguesString = realloc(dialoguesString, strlen(dialoguesString) + strlen(tempText) + 2);
+                                                strcat(dialoguesString, " ");      // Add space between dialogue entries
+                                                strcat(dialoguesString, tempText); // Append the new string
+                                                free(tempText);                    // Free the duplicated string
+                                            }
+                                            else
+                                            {
+                                                // Allocate memory for the first dialogue entry
+                                                dialoguesString = strdup(tempText);
+                                                free(tempText); // Free the duplicated string
+                                            }
+                                        }
                                     }
                                 }
-                                dialoguesString = cJSON_Print(tempString);
-                                cJSON_Delete(tempString);
                             }
                             break; // No need to continue searching
                         }
@@ -1262,28 +1142,569 @@ char *questDialogues(char *questID)
     return dialoguesString;
 }
 
-// Function to find the last location node in the currentLocation array of Player
-void interactWithLocalNPCs(Player *player)
+// Function to interact with given NPC
+void interactWith(Player *player, char *npc) // Requires Quest Submission
 {
-    char *str=player->currentLocation;
-    char *locationNode=str; 
-    for(int i=0;str[i];i++)
+    printf("Debug 0 : %s\n", npc);
+
+    char *NPCQuestID = getQuestID(player,npc);
+
+    // // If any quest to submit:
+    if (anyQuesttoSubmit(player, npc))
     {
-        if(str[i]=='/')
-            locationNode=str+1;
+        //add ui statements
+        giveQuestReward(player, NPCQuestID);
+    }
+    // char *NPCQuestID = getQuestID(player, npc);
+
+    if (anyActiveQuest(player, npc) == true)
+    {
+        printf("You have an active quest related to this NPC. Please complete the quest first\n");
+    }
+    else
+    {
+        char *dialogues = questDialogues(NPCQuestID); // NPCQuestID instead of String
+        if (dialogues != NULL)
+        {
+            printf("%s\n", dialogues);//UI MODIFICATIONS REQ IF TIME
+            free(dialogues); // Free the allocated memory
+        }
+
+        // Quest description and reward
+        char *questDescription = getQuestDescription(NPCQuestID);
+        if (questDescription != NULL)
+        {
+            printf("%s\n", questDescription);
+            free(questDescription);
+        }
+        // PRINT THE QUEST REWARDS
+
+
+        // Quest Location
+        char *questLocation = getQuestLocation(NPCQuestID);
+        if (questLocation != NULL)
+        {
+            printf("You must go to %s to complete the Quest\n", questLocation);
+            free(questLocation);
+        }
+
+        // Get input to accept or reject
+        printf("Enter 1 to accept this quest now:\nEnter 0 to reject:\n");
+        int questinput;
+        scanf("%d", &questinput);
+
+        // If accepted, add to active quests
+        if (questinput == 1)
+            activateQuest(player, npc, NPCQuestID);
+    }
+}
+
+// Function to choose NPCs from available NPCs
+void chooseNPC(char **NPCsAvailable, Player *player,int *state)
+{
+    int i;
+    char input;
+
+    printf("Available NPCs:\n");
+    for(i=0;NPCsAvailable[i];i++)
+    {
+        printf("\n%d...to go to %s",i+1,NPCsAvailable[i]);
     }
 
+    printf("\nOr Enter n/N for Navigation Mode");
+    printf("\nOr Enter q/Q for Quest Mode");
+    printf("\nOr Enter e/E to Exit the Game");
+
+    printf("\nMake a Choise to continue : ");
+    getchar();
+    input=getc(stdin);
+    // flushInputBuffer();
+
+    for(i=1;NPCsAvailable[i-1];i++);
+    printf("c=%c,i=%d,",input,i);
+    while(input<'1' || input>i+'1')
+    {  
+        // printf("\nin loop");
+        if(input=='e'||input=='E')
+        {
+            *state =-1;
+            return;
+        }
+
+        if(input=='n'||input=='N')
+        {
+            *state = 0;
+            return;
+        }
+
+        if(input=='q' || input=='Q')
+        {
+            *state=2;
+            return;
+        }
+
+        printf("\nWell such a place doesn't exist. Enter a Valid Location!");
+        printf("\nChoose a Location to move to : ");
+        getchar();
+        input=getc(stdin);
+        // flushInputBuffer();
+
+    }
+
+    if(input=='e'||input=='E')
+    {
+        *state =-1;
+        return;
+    }
+
+    if(input=='i'||input=='I')
+    {
+        *state = 1;
+        return;
+    }
+
+    if(input=='q' || input=='Q')
+    {
+        *state=2;
+        return;
+    }
+
+    char *chooseNPC=NPCsAvailable[input - '1'];
+    interactWith(player,chooseNPC);
+
+}
+
+// Function to return array of NPCs available at the specified locationNode
+char **returnNPCsAvailable(char *locationNode)//This works checked
+{
+    char **NPCsAvailable = NULL;
+
+    // Read the contents of the locations.json file
+    FILE *file = fopen("locations.json", "r");
+    if (file != NULL)
+    {
+        fseek(file, 0, SEEK_END);
+        long fileSize = ftell(file);
+        fseek(file, 0, SEEK_SET);
+
+        char *fileContent = (char *)malloc(fileSize + 1);
+        if (fileContent != NULL)
+        {
+            fread(fileContent, 1, fileSize, file);
+            fileContent[fileSize] = '\0';
+
+            // Parse the JSON content
+            cJSON *root = cJSON_Parse(fileContent);
+            if (root != NULL)
+            {
+                cJSON *locations = cJSON_GetObjectItem(root, "locations");
+                if (locations != NULL && cJSON_IsArray(locations))
+                {
+                    cJSON *location;
+                    cJSON_ArrayForEach(location, locations)
+                    {
+                        cJSON *name = cJSON_GetObjectItem(location, "name");
+                        if (name != NULL && cJSON_IsString(name) && strcmp(name->valuestring, locationNode) == 0)
+                        {
+                            cJSON *npcs = cJSON_GetObjectItem(location, "NPCs");
+                            if (npcs != NULL && cJSON_IsArray(npcs))
+                            {
+                                int numNPCs = cJSON_GetArraySize(npcs);
+                                NPCsAvailable = (char **)malloc((numNPCs + 1) * sizeof(char *));
+                                if (NPCsAvailable != NULL)
+                                {
+                                    for (int i = 0; i < numNPCs; i++)
+                                    {
+                                        cJSON *npcObj = cJSON_GetArrayItem(npcs, i);
+                                        cJSON *npc = cJSON_GetObjectItem(npcObj, "npc");
+                                        if (npc != NULL && cJSON_IsString(npc))
+                                        {
+                                            NPCsAvailable[i] = strdup(npc->valuestring);
+                                        }
+                                    }
+                                    NPCsAvailable[numNPCs] = NULL; // Null-terminate the array
+                                }
+                            }
+                            break; // No need to continue searching
+                        }
+                    }
+                }
+                cJSON_Delete(root);
+            }
+            free(fileContent);
+        }
+        fclose(file);
+    }
+
+    return NPCsAvailable;
+}
+
+void equipItem(Player *player,int index)
+{
+    FILE *file=fopen("items.json","r");
+    if(file==NULL)
+    {
+        fprintf(stderr,"Failed to open file for reading\n");
+        return ;
+    }
+
+    fseek(file,0,SEEK_END);
+    long fileSize=ftell(file);
+    fseek(file,0,SEEK_SET);
+
+    char *fileContent=(char*)malloc(fileSize+1);
+    if (fileContent == NULL) {
+        fprintf(stderr, "Memory allocation failed for file content\n");
+        fclose(file);
+        return ;
+    }
+
+    size_t bytesRead = fread(fileContent, 1, fileSize, file);
+    // if (bytesRead != fileSize) {
+    //     printf("Error reading file.\n");
+    //     fclose(file);
+    //     free(fileContent);
+    //     return ;
+    // }
+    
+    fileContent[fileSize]=0;
+    fclose(file);
+
+    cJSON *root=cJSON_Parse(fileContent);
+    if (root == NULL) {
+        printf("Error parsing JSON data.\n");
+        free(fileContent);
+        return;
+    }
+
+    cJSON *itemsArray=cJSON_GetObjectItem(root,"items");
+
+    cJSON *item=NULL;
+    int i=0;
+    cJSON_ArrayForEach(item,itemsArray)
+    {   
+        if(strcmp(cJSON_GetObjectItem(item,"name")->valuestring,player->inventory->items[index])==0)
+        {
+            cJSON *buffs=cJSON_GetObjectItem(item,"buff");
+            player->stats->HP+=cJSON_GetObjectItem(buffs,"hp")->valueint;
+            player->stats->atk+=cJSON_GetObjectItem(buffs,"atk")->valueint;
+            player->stats->def+=cJSON_GetObjectItem(buffs,"def")->valueint;
+            player->stats->agi+=cJSON_GetObjectItem(buffs,"agi")->valueint;
+            player->stats->str+=cJSON_GetObjectItem(buffs,"str")->valueint;
+            player->stats->dex+=cJSON_GetObjectItem(buffs,"dex")->valueint;
+            player->stats->intel+=cJSON_GetObjectItem(buffs,"intel")->valueint;
+            player->stats->luck+=cJSON_GetObjectItem(buffs,"luck")->valueint;
+            break;
+        }
+    }
+
+    player->inventory->activeItems[index]=1;
+
+    printf("\nEquiped successfully");
+}
+
+void unequipItem(Player *player,int index)
+{
+    FILE *file=fopen("items.json","r");
+    if(file==NULL)
+    {
+        fprintf(stderr,"Failed to open file for reading\n");
+        return ;
+    }
+
+    fseek(file,0,SEEK_END);
+    long fileSize=ftell(file);
+    fseek(file,0,SEEK_SET);
+
+    char *fileContent=(char*)malloc(fileSize+1);
+    if (fileContent == NULL) {
+        fprintf(stderr, "Memory allocation failed for file content\n");
+        fclose(file);
+        return ;
+    }
+
+    size_t bytesRead = fread(fileContent, 1, fileSize, file);
+    // if (bytesRead != fileSize) {
+    //     printf("Error reading file.\n");
+    //     fclose(file);
+    //     free(fileContent);
+    //     return ;
+    // }
+    
+    fileContent[fileSize]=0;
+    fclose(file);
+
+    cJSON *root=cJSON_Parse(fileContent);
+    if (root == NULL) {
+        printf("Error parsing JSON data.\n");
+        free(fileContent);
+        return;
+    }
+
+    cJSON *itemsArray=cJSON_GetObjectItem(root,"items");
+
+    cJSON *item=NULL;
+    int i=0;
+    cJSON_ArrayForEach(item,itemsArray)
+    {   
+        if(strcmp(cJSON_GetObjectItem(item,"name")->valuestring,player->inventory->items[index])==0)
+        {
+            cJSON *buffs=cJSON_GetObjectItem(item,"buff");
+            player->stats->HP-=cJSON_GetObjectItem(buffs,"hp")->valueint;
+            player->stats->atk-=cJSON_GetObjectItem(buffs,"atk")->valueint;
+            player->stats->def-=cJSON_GetObjectItem(buffs,"def")->valueint;
+            player->stats->agi-=cJSON_GetObjectItem(buffs,"agi")->valueint;
+            player->stats->str-=cJSON_GetObjectItem(buffs,"str")->valueint;
+            player->stats->dex-=cJSON_GetObjectItem(buffs,"dex")->valueint;
+            player->stats->intel-=cJSON_GetObjectItem(buffs,"intel")->valueint;
+            player->stats->luck-=cJSON_GetObjectItem(buffs,"luck")->valueint;
+            break;
+        }
+    }
+
+    player->inventory->activeItems[index]=0;
+    printf("\nUnequiped successfully");
+}
+
+// Function to find the last location node in the currentLocation array of Player
+void interactionMode(Player *player,int *state)//This works checked (A)
+{
+    printf("In Interaction\n");
+    // Find and return the last string in currentLocation array
+    char *locationNode = player->currentLocation;
+    int i;
+    for(i=0;player->currentLocation[i];i++)
+        if(player->currentLocation[i]=='/')
+            locationNode=player->currentLocation+i+1;
+    
+    printf("Got Location node =%s\n",locationNode);
     // Now go to locations.json and find "locationNode", and return array of NPCs available
     char **NPCsAvailable = returnNPCsAvailable(locationNode);
 
-    chooseNPC(NPCsAvailable, player);
+    chooseNPC(NPCsAvailable, player,state);
 
     return;
 }
 
-void interactionMode(Player *player,int *state)
+void questMode(Player *player,int *state)
 {
-    interactWithLocalNPCs(player);
+    char input;
+    int i;
+
+    printf("\n");//Heading
+    for(i=0;player->inventory->items[i];i++)
+        printf("\n%d...to select Item - %s",i+1,player->inventory->items[i]);
+    
+    printf("\nOr Enter s/S to Skip");
+    printf("\nOr Enter i/I for Interaction Mode");
+    printf("\nOr Enter n/N for Navigation Mode");
+    printf("\nOr Enter e/E to Exit the Game");
+
+    printf("\nMake a Choise to continue : ");
+    getchar();
+    input=getc(stdin);
+    // flushInputBuffer();
+
+    if(input=='e'||input=='E')
+    {
+        *state =-1;
+        return;
+    }
+
+    if(input=='i'||input=='I')
+    {
+        *state = 1;
+        return;
+    }
+
+    if(input=='n' || input=='N')
+    {
+        *state=0;
+        return;
+    }
+
+    if(input>='1' && input<=i+'1')
+    {
+        if(player->inventory->activeItems[input-'1'])
+        {
+            char toUnequip;
+            printf("\nAlready Equiped!!");
+            printf("\nDo you want to Unequip it (Y/N) :");
+            getchar();
+            toUnequip=getc(stdin);
+
+            if(toUnequip=='y'||toUnequip=='Y')
+                unequipItem(player,input-'1');
+            
+        }
+        else
+        {
+            char toEquip;
+            printf("\nNOT Equiped!!");
+            printf("\nDo you want to Equip it (Y/N) :");
+            getchar();
+            toEquip=getc(stdin);
+
+            if(toEquip=='y'||toEquip=='Y')
+                equipItem(player,input-'1');
+
+        }
+    }
+
+    FILE *file=fopen("quests.json","r");
+    if (!file) {
+        fprintf(stderr, "Failed to open quests.json\n");
+        return;
+    }
+
+    fseek(file,0,SEEK_END);
+    long fileSize=ftell(file);
+    fseek(file,0,SEEK_SET);
+
+    char *fileContent = (char *)malloc(fileSize + 1);
+    if (!fileContent) {
+        fprintf(stderr, "Memory allocation failed for file content\n");
+        fclose(file);
+        return;
+    }
+
+    fread(fileContent,1,fileSize,file);
+    fclose(file);
+    fileContent[fileSize]=0;
+
+    cJSON *root=cJSON_Parse(fileContent);
+    if (!root) {
+        const char *error = cJSON_GetErrorPtr();
+        if (error != NULL) {
+            fprintf(stderr, "Error before: %s\n", error);
+        }
+        cJSON_Delete(root);
+        free(fileContent);
+        return;
+    }
+
+    cJSON *questsArray=cJSON_GetObjectItem(root,"quests");
+
+    char *cur_loc=player->currentLocation;
+    int j=0;
+    int choises[10];
+
+    for(i=0;cur_loc[i];i++)
+        if(cur_loc[i]=='/')j=i+1;
+
+    cur_loc=player->currentLocation+j;
+
+    int n;
+    for(n=0;player->activeQuests[n];n++);
+
+    for(i=0,j=0;i<n;i++)
+    {
+        cJSON *ptr=questsArray->child;
+        int k=0;
+        char *questId=strdup(player->activeQuests[i]);
+        while(ptr)
+        { 
+            printf("\nQid=%s,jQid=%s,cur_loc=%s,jloc=%s",questId,cJSON_GetObjectItem(ptr,"QuestID")->valuestring,cur_loc,cJSON_GetObjectItem(ptr,"Location")->valuestring);
+            if(strcmp(questId,cJSON_GetObjectItem(ptr,"QuestID")->valuestring)==0 && strcmp(cur_loc,cJSON_GetObjectItem(ptr,"Location")->valuestring)==0)
+                choises[j++]=k;
+            ptr=ptr->next;
+            k++;
+        }
+    }
+    choises[j]=-1;
+    
+    for(j=0;j<10 && choises[j]>=0;j++)
+    {
+        printf("\n%d",choises[j]);
+        cJSON *quest=cJSON_GetArrayItem(questsArray,choises[j]);
+        printf("\n%d...to start quest- %s",j+1,cJSON_GetObjectItem(quest,"name")->valuestring);
+    }
+
+    printf("\nOr Enter i/I for Interaction Mode");
+    printf("\nOr Enter n/N for Navigation Mode");
+    printf("\nOr Enter e/E to Exit the Game");
+
+    printf("\nMake a Choise to continue : ");
+    getchar();
+    input=getc(stdin);
+    // flushInputBuffer();
+
+    if(input=='e'||input=='E')
+    {
+        *state =-1;
+        return;
+    }
+
+    if(input=='i'||input=='I')
+    {
+        *state = 1;
+        return;
+    }
+
+    if(input=='n' || input=='N')
+    {
+        *state=0;
+        return;
+    }
+
+    while(input<='0' || input>i+'0')
+    {
+        if(input=='e'||input=='E')
+        {
+            *state =-1;
+            return;
+        }
+
+        if(input=='i'||input=='I')
+        {
+            *state = 1;
+            return;
+        }
+
+        if(input=='n' || input=='N')
+        {
+            *state=0;
+            return;
+        }
+
+        printf("\nWell such a quest doesn't exist. Enter a Valid Choise!");
+        printf("\nMake a Choise to continue : ");
+        getchar();
+        input=getc(stdin);
+        // flushInputBuffer();
+    }
+
+    cJSON *child=cJSON_GetArrayItem(questsArray,choises[input-'1']);
+    printf("game = %s",cJSON_GetObjectItem(child,"Minigame")->valuestring);
+    // int result=playMiniGame(player,cJSON_GetObjectItem(child,"Minigame")->valuestring);//in player.c
+    // if(result)
+    // {
+    //     char *questId=cJSON_GetObjectItem(child,"QuestID");
+    //     int npcId=questId[0]-'0';
+    //     player->NPCInfo[npcId][QUEST_STATUS]=2;
+    // }
+    // else
+    // {
+    //     printf("\n");//Print Game OVER STATEMENT and items lost and gold 0
+    //     player->currentLocation=strdup("WORLD/CITY");
+    //     player->gold=0;
+    //     player->xp=0;
+    //     player->inventory->items[1]=NULL;
+    //     player->inventory->activeItems[0]=0;
+    //     player->inventory->activeItems[1]=-1;
+    // }
 }
 
-//From story.h
+
+void processState(Player *player,int *state)
+{
+    if(*state==0)
+        navigationMode(player,state);
+    else
+    if(*state==1)
+        interactionMode(player,state);
+    else
+    if(*state==2)
+        questMode(player,state);
+
+}
