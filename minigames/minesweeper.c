@@ -327,15 +327,5 @@ int playMinesweeper(int size)
 int main()
 {
     int resMine = playMinesweeper(6);
-    return 0;
+    return resMine;
 }
-
-/* void sound_files(int choice)
-{
-  if(choice==1)
-   const char *soundFilePath = "./Sound Files/bomb_soun"; //Music
-  char command[300];
-  snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
-  signal(SIGINT, sigint_handler);
-  system(command);
-} */

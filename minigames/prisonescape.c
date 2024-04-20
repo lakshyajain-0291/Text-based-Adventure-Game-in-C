@@ -281,16 +281,21 @@ int playPrisonEscape(int size,int map)
     }
 }
 
-int main()
+int start_prison_escape()
 {
     sound(0);
     srand(time(0));
     for(int i=0;i<1000;i++)  //To properly randomise
      rand();
     int map=rand() %3;
-    playPrisonEscape(8,map);
+   int o= playPrisonEscape(8,map);
     system("killall afplay");
-    return 0;
+    return o;
+}
+
+int main()
+{
+    int x=start_prison_escape();
 }
 
 void print_prison(int size,int i,int j,int k)
