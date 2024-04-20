@@ -559,8 +559,9 @@ void play(char c,int *score,char arr[30][60],int *sp,struct body* h,int *m,int d
     else{
         printf(YELLOW "GAME OVER... \n" RESET);
         printf(YELLOW "Your Score is : %d\n" RESET,*score);
+
     } 
-    usleep(2500000);
+    usleep(250000);
 }
 void enter()
 {
@@ -646,17 +647,10 @@ void sound(int n)
   snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
   system(command);
 }
-void starting()
+int starting()
 {
     sound(0);
     int data[10][3]={{0}};
-    FILE *fptr;
-    fptr = fopen("snake_game.csv", "r");     //In order to store the high scores of the players
-    for(int i=0;i<10;i++)
-    {
-        fscanf(fptr,"%d%d%d",&data[i][0],&data[i][1],&data[i][2]);
-    }
-    fclose(fptr);
     int m=1, speed=2, i=0;
     char t='y';
     while(t=='y')        //The game runs while the condition is yes 
@@ -690,11 +684,11 @@ void starting()
         {
             print(arr,&score);
             play(c,&score,arr,&speed,tail,&m,data);
-            system("clear");
-        }
-        else
-        {
-            break;
+            system("killall afplay");
+            if(score >10)
+             return 0;
+            else 
+             return 1;
         }
         i++;
         system("clear");
@@ -708,13 +702,13 @@ void starting()
         }
         free(temp);
     }  
-    system("killall afplay");
+    return 0;
 }
 
 
 int main()
 {
-    starting();
+    int x=starting();
     
 }
 

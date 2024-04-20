@@ -96,12 +96,17 @@ int playCombat(int plWeapon, int plStamina, int oppWeapon, int oppStamina)
         }
     }
 }
-
-int main()
+int start_combat()
 {
-
     printf("Welcome to Combat Game\n\n");
     printf("Enter Player Move: H(head)/B(body)/L(leg) & H/B/L for Player Attack and Defense\t");
     int plWeapon = 15, plStamina = 100, oppWeapon = 10, oppStamina = 100;
     playCombat(plWeapon, plStamina, oppWeapon, oppStamina);
+    return 0;
+}
+
+int main()
+{
+    int x=start_combat();
+    return x;
 }
