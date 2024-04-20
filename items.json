@@ -6,15 +6,15 @@
       "durability": 100,
       "grade": "COMMON",
       "buff": {
-        "hp":	10,
-        "atk": 2,
-        "def":	0,
-        "agi":	0,
-        "str":	3,
-        "dex":	0,
-        "intel":	0,
-        "luck":	0
-        },
+        "HP": 20,
+        "atk": 0,
+        "def": 3,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+    },
       "type": "WEAPON"
     },
     {
@@ -23,16 +23,407 @@
       "durability": 100,
       "grade": "UNCOMMON",
       "buff": {
-        "hp":	10,
+        "HP": 20,
         "atk": 0,
-        "def":	4,
-        "agi":	0,
-        "str":	0,
-        "dex":	0,
-        "intel":	0,
-        "luck":	0
+        "def": 3,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+    },
+      "type": "ARMOR"
+    },
+    {
+      "name": "Potion of Healing",
+      "description": "A vial containing a potent healing elixir, capable of restoring lost health.",
+      "durability": 1,
+      "grade": "COMMON",
+      "buff": {
+        "HP": 50,
+        "atk": 0,
+        "def": 0,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "CONSUMABLE"
+    },
+    {
+      "name": "Lockpicking Kit",
+      "description": "A set of tools used for picking locks, allowing access to secured areas.",
+      "durability": 50,
+      "grade": "COMMON",
+      "buff": {
+        "HP": 0,
+        "atk": 0,
+        "def": 0,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "TOOL"
+    },
+    {
+      "name": "Ancient Scroll",
+      "description": "A mysterious scroll containing ancient wisdom and knowledge.",
+      "durability": 1,
+      "grade": "RARE",
+      "buff": {
+        "HP": 0,
+        "atk": 0,
+        "def": 0,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 10,
+        "luck": 0
+      },
+      "type": "MISC"
+    },
+    {
+      "name": "Shadow Cloak",
+      "description": "A cloak woven from the shadows of the night, granting its wearer enhanced stealth and agility.",
+      "durability": 100,
+      "grade": "EPIC",
+      "buff": {
+        "HP": 0,
+        "atk": 0,
+        "def": 2,
+        "agi": 5,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
       },
       "type": "ARMOR"
+    },
+    {
+      "name": "Phoenix Feather",
+      "description": "A rare feather from a mythical phoenix, said to possess the power of resurrection.",
+      "durability": 1,
+      "grade": "LEGENDARY",
+      "buff": {
+        "HP": 100,
+        "atk": 0,
+        "def": 0,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "CONSUMABLE"
+    },
+    {
+      "name": "Serpent's Fang",
+      "description": "A deadly poison extracted from the fang of a venomous serpent, capable of inflicting lethal damage.",
+      "durability": 1,
+      "grade": "RARE",
+      "buff": {
+        "HP": 0,
+        "atk": 50,
+        "def": 0,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "CONSUMABLE"
+    },
+    {
+      "name": "Crystal Shard",
+      "description": "A shimmering shard of crystal imbued with elemental magic, capable of casting powerful spells.",
+      "durability": 1,
+      "grade": "UNCOMMON",
+      "buff": {
+        "HP": 0,
+        "atk": 0,
+        "def": 0,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 20,
+        "luck": 0
+      },
+      "type": "MISC"
+    },
+    {
+      "name": "Thieves' Toolkit",
+      "description": "A set of specialized tools used by skilled thieves for stealthy infiltration and burglary.",
+      "durability": 50,
+      "grade": "RARE",
+      "buff": {
+        "HP": 0,
+        "atk": 0,
+        "def": 0,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "TOOL"
+    },
+    {
+      "name": "Enchanted Amulet",
+      "description": "An ancient amulet infused with magical energy, providing its wearer with protection from harm.",
+      "durability": 100,
+      "grade": "EPIC",
+      "buff": {
+        "HP": 30,
+        "atk": 0,
+        "def": 2,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "ACCESSORY"
+    },
+    {
+      "name": "Thunderstone",
+      "description": "A rare stone imbued with the power of thunder, capable of summoning lightning bolts to smite enemies.",
+      "durability": 1,
+      "grade": "RARE",
+      "buff": {
+        "HP": 0,
+        "atk": 70,
+        "def": 0,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "MISC"
+    },
+    {
+      "name": "Celestial Bow",
+      "description": "A bow crafted from rare celestial materials, capable of firing arrows imbued with divine power.",
+      "durability": 100,
+      "grade": "LEGENDARY",
+      "buff": {
+        "HP": 0,
+        "atk": 50,
+        "def": 0,
+        "agi": 0,
+        "str": 0,
+        "dex": 5,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "WEAPON"
+    },
+    {
+      "name": "Elixir of Invisibility",
+      "description": "A magical elixir that renders its drinker invisible to the naked eye, allowing for stealthy infiltration.",
+      "durability": 1,
+      "grade": "EPIC",
+      "buff": {
+        "HP": 0,
+        "atk": 0,
+        "def": 0,
+        "agi": 15,
+        "str": 0,
+        "dex": 15,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "CONSUMABLE"
+    },
+    {
+      "name": "Dragon Scale Armor",
+      "description": "Armor crafted from the scales of a mighty dragon, providing unparalleled protection against fire and heat.",
+      "durability": 100,
+      "grade": "LEGENDARY",
+      "buff": {
+        "HP": 50,
+        "atk": 0,
+        "def": 5,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "ARMOR"
+    },
+    {
+      "name": "Sword of the Fallen King",
+      "description": "Forged from the soul of a fallen king, this legendary sword radiates with ancient power and grants its wielder unrivaled strength and determination.",
+      "durability": 100,
+      "grade": "LEGENDARY",
+      "buff": {
+        "HP": 50,
+        "atk": 100,
+        "def": 10,
+        "agi": 0,
+        "str": 10,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "WEAPON"
+    },
+    {
+      "name": "Armor of the Titans",
+      "description": "Crafted from the remains of ancient titans, this legendary armor provides its wearer with unmatched resilience and endurance, capable of withstanding even the most devastating attacks.",
+      "durability": 100,
+      "grade": "LEGENDARY",
+      "buff": {
+        "HP": 100,
+        "atk": 0,
+        "def": 20,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "ARMOR"
+    },
+    {
+      "name": "Staff of the Arcane",
+      "description": "Carved from the heartwood of an ancient tree of knowledge, this mythical staff channels the raw power of the arcane, allowing its wielder to cast spells of unimaginable potency.",
+      "durability": 100,
+      "grade": "MYTHICAL",
+      "buff": {
+        "HP": 0,
+        "atk": 0,
+        "def": 0,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 50,
+        "luck": 0
+      },
+      "type": "WEAPON"
+    },
+    {
+      "name": "Amulet of Eternal Wisdom",
+      "description": "An ancient artifact imbued with the wisdom of the ages, this mythical amulet bestows its wearer with unparalleled insight and foresight, guiding them on the path to enlightenment.",
+      "durability": 100,
+      "grade": "MYTHICAL",
+      "buff": {
+        "HP": 0,
+        "atk": 0,
+        "def": 0,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 100,
+        "luck": 0
+      },
+      "type": "ACCESSORY"
+    },
+    {
+      "name": "Elixir of Immortality",
+      "description": "A legendary elixir said to grant eternal life to those who partake of its divine essence, bestowing immortality upon the drinker.",
+      "durability": 1,
+      "grade": "LEGENDARY",
+      "buff": {
+        "HP": 500,
+        "atk": 0,
+        "def": 0,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "CONSUMABLE"
+    },
+    {
+      "name": "Spear of the Celestial Dragon",
+      "description": "Forged in the fires of the heavens, this mythical spear is said to be wielded by the celestial dragon itself, granting its bearer the power to command the elements and smite their enemies with divine fury.",
+      "durability": 100,
+      "grade": "MYTHICAL",
+      "buff": {
+        "HP": 0,
+        "atk": 150,
+        "def": 5,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "WEAPON"
+    },
+    {
+      "name": "Crown of the Ancients",
+      "description": "Wrought from the molten gold of the sun and studded with the jewels of the stars, this legendary crown bestows its wearer with the authority and majesty of the ancient rulers of old.",
+      "durability": 100,
+      "grade": "LEGENDARY",
+      "buff": {
+        "HP": 0,
+        "atk": 0,
+        "def": 5,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 20,
+        "luck": 10
+      },
+      "type": "ACCESSORY"
+    },
+    {
+      "name": "Heart of the Phoenix",
+      "description": "A mythical artifact said to contain the essence of the legendary phoenix, granting its bearer the power of resurrection and rebirth.",
+      "durability": 1,
+      "grade": "MYTHICAL",
+      "buff": {
+        "HP": 1000,
+        "atk": 0,
+        "def": 0,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "CONSUMABLE"
+    },
+    {
+      "name": "Cloak of Shadows",
+      "description": "Woven from the darkness of the void, this mythical cloak shrouds its wearer in shadows, rendering them invisible to the naked eye and granting them the power to move unseen.",
+      "durability": 100,
+      "grade": "MYTHICAL",
+      "buff": {
+        "HP": 0,
+        "atk": 0,
+        "def": 2,
+        "agi": 10,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 0
+      },
+      "type": "ARMOR"
+    },
+    {
+      "name": "Eye of the Storm",
+      "description": "A legendary artifact said to be forged from the heart of a raging storm, this mythical gem grants its bearer control over the very elements themselves, unleashing the fury of the storm upon their enemies.",
+      "durability": 1,
+      "grade": "LEGENDARY",
+      "buff": {
+        "HP": 0,
+        "atk": 0,
+        "def": 0,
+        "agi": 0,
+        "str": 0,
+        "dex": 0,
+        "intel": 0,
+        "luck": 50
+      },
+      "type": "MISC"
     }
   ]
 }
