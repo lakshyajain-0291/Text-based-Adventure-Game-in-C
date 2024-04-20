@@ -3,17 +3,33 @@
 
 //FROM world.c
 
+
 void delay(int milliseconds) {
     clock_t start_time = clock();
     while (clock() < start_time + milliseconds * CLOCKS_PER_SEC / 1000);    
 }
 
-void type(const char *sentence) {
+void printStory(const char *sentence) {
+    int color,style;
+    
+    // Ask user for color input
+    printf("\nEnter color code: ");
+    scanf("%d", &color);
+    printf("\nEnter text style: ");
+    scanf("%d", &style);
+    
+    // Print color code
+    printf("\033[%d;%dm", style,color);
+    
+    // Print the sentence with typing effect
     for (int i = 0; i < strlen(sentence); i++) {
         printf("%c", sentence[i]);
         fflush(stdout); // Flush the output buffer to ensure immediate printing
         delay(50);     // Adjust delay as needed (50 milliseconds in this example)
     }
+    
+    // Reset color to default
+    printf("\033[0m");
 }
 
 Player* gameInitializer(char *PlayerID)
