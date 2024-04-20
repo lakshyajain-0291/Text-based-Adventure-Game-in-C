@@ -1,16 +1,3 @@
-/*
-
-Shoot birds.
-
-Bird spawns at x=0, y= Random (10 to 30)
-first flight: Up down (50%)
-next_flight = 50% prev_flight + 30% straight + 20% opp_prev;
-
-*/
-
-/*
-Progress: Bird Flies, Scope done, hit after 0.6 seconds
-*/
 #include <windows.h>
 #include <stdio.h>
 #include <conio.h>
@@ -100,7 +87,7 @@ void printFalcon(int x, int y)
     // Set the cursor position to (x, y) and print the message
     COORD pos = {x, y};
     SetConsoleCursorPosition(hConsole, pos);
-    printf("V");
+    printf("\x1b[34mV\x1b[0m");
 }
 
 void deleteFalcon(int x, int y)
@@ -207,6 +194,18 @@ void deleteScopeFalcon(int x, int y, int side)
 
 int playFalcon()
 {
+    printf("\e[1;1H\e[2J");
+    printf("\n        \x1b[33m");
+    char welcome[100]="WELCOME TO THE FALCONRY GAME";
+    for(int i=0;i<strlen(welcome);i++)
+    {
+        putchar(welcome[i]);
+        fflush(stdout);
+        delay(0.1);
+    }
+    printf("\x1b[0m");
+    printf("\n\n\n");
+    system("clear");
     int click_x = -1, click_y = -1, arrows = 4, shot = 0;
     int spawn_y;
     while (spawn_y < 10 || spawn_y > 30)
@@ -216,6 +215,7 @@ int playFalcon()
 
     int flight = rand() % 2; // Up=1. Down=0.
     printf("\e[1;1H\e[2J");
+    printf("\x1b[33mEnter the space bar to open the scope. Press inside the scope to shoot\x1b[0m");
     printFalcon(falcon_x, falcon_y);
     delay(0.3);
     deleteFalcon(falcon_x, falcon_y);
@@ -227,15 +227,20 @@ int playFalcon()
             if (click_x == falcon_x && click_y == falcon_y)
             {
                 printMessage(click_x, click_y, '0');
+                printf("\x1b[32mYou Win!!!!!\x1b[0m");
                 return 1;
             }
             else
                 printMessage(click_x, click_y, 'O');
         }
         if (falcon_x > 150)
-            return 0;
+        {    return 0;
+             printf("\x1b[31mYou Lose the game\x1b[0m");
+        }
         if (arrows == 0)
-            return 0;
+        {    return 0;
+             printf("\x1b[31mYou Lose the game\x1b[0m");
+        }
         printFalcon(falcon_x, falcon_y);
         shot = 0;
         click_x = 0, click_y = 0;
@@ -267,8 +272,5 @@ int playFalcon()
 int main()
 {
     int falconRes = playFalcon();
-    if (falconRes == 0)
-        printf("You Lose!\n");
-    else
-        printf("Congratulations! You Win\n");
+    return falconRes;
 }

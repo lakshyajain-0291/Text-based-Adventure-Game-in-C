@@ -19,9 +19,9 @@ void sigint_handler(int sig);
 void rope_sound();   
 void death_sound();    
 void bg_score();   
-void success_sounds(int n);                                                 
+void success_sounds(int n);      
 
-int main()
+int start_hangman()
 {
   bg_score();
   while(1){
@@ -507,6 +507,11 @@ void intro()
   printf("\033[0m\n");
 
   return;
+}                                           
+
+int main()
+{
+  int x=start_hangman();
 }
 
 void sigint_handler(int sig) {
