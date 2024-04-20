@@ -243,5 +243,5 @@ void interactionMode(Player* player,int *state);
 
 //From minigame
 
-int Falconry(Player *player){}
+int Falconry(Player *player);
 #endif

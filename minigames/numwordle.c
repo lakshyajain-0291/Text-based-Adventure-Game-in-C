@@ -90,8 +90,7 @@ int playWordle(int n, int attempts)
     printf("|       The number was %d\n", num);
     return 0;
 }
-
-int main()
+int start_wordle()
 {
     sound(0);
     int n = 5, attempts = 5, resWordle;
@@ -101,14 +100,24 @@ int main()
     { 
         sound(1);
         printf("|\x1b[32m       Good Game!!!\n\x1b[0m");
+        printf("|__________________________________________");
+        system("killall afplay");
         sleep(2);
+        return 0;
     }
     else if (resWordle == 0)
-        printf("|\x1b[31m       You Lose!!\n\x1b[0m");
-    
-    printf("|__________________________________________");
-    system("killall afplay");
+    {    printf("|\x1b[31m       You Lose!!\n\x1b[0m");
+         printf("|__________________________________________");
+         system("killall afplay");
+         return 1;
+    }
     return 0;
+}
+
+int main()
+{
+    int u=start_wordle();
+    return u;
 }
 void sound(int n)
 {

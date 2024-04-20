@@ -44,7 +44,38 @@ int getNpcNumber()//This works checked
     return cJSON_GetArraySize(charactersArray);
 }
 
+//FROM world.c
 
+
+void delay(int milliseconds) {
+    clock_t start_time = clock();
+    while (clock() < start_time + milliseconds * CLOCKS_PER_SEC / 1000);    
+}
+
+void printStory(const char *sentence) {
+    int color,style;
+    
+    // Ask user for color input
+    printf("\nEnter color code: ");
+    scanf("%d", &color);
+    printf("\nEnter text style: ");
+    scanf("%d", &style);
+    
+    // Print color code
+    printf("\033[%d;%dm", style,color);
+    
+    // Print the sentence with typing effect
+    for (int i = 0; i < strlen(sentence); i++) {
+        printf("%c", sentence[i]);
+        fflush(stdout); // Flush the output buffer to ensure immediate printing
+        delay(50);     // Adjust delay as needed (50 milliseconds in this example)
+    }
+    
+    // Reset color to default
+    printf("\033[0m");
+}
+
+int Falconry(Player *player){return 0;}
 // int playMiniGame(Player *player,char *gameName)
 // {
 
@@ -1604,7 +1635,7 @@ void questMode(Player *player,int *state)
         char *questId=strdup(player->activeQuests[i]);
         while(ptr)
         { 
-            printf("\nQid=%s,jQid=%s,cur_loc=%s,jloc=%s",questId,cJSON_GetObjectItem(ptr,"QuestID")->valuestring,cur_loc,cJSON_GetObjectItem(ptr,"Location")->valuestring);
+            // printf("\nQid=%s,jQid=%s,cur_loc=%s,jloc=%s",questId,cJSON_GetObjectItem(ptr,"QuestID")->valuestring,cur_loc,cJSON_GetObjectItem(ptr,"Location")->valuestring);
             if(strcmp(questId,cJSON_GetObjectItem(ptr,"QuestID")->valuestring)==0 && strcmp(cur_loc,cJSON_GetObjectItem(ptr,"Location")->valuestring)==0)
                 choises[j++]=k;
             ptr=ptr->next;
@@ -1615,7 +1646,7 @@ void questMode(Player *player,int *state)
     
     for(j=0;j<10 && choises[j]>=0;j++)
     {
-        printf("\n%d",choises[j]);
+        // printf("\n%d",choises[j]);
         cJSON *quest=cJSON_GetArrayItem(questsArray,choises[j]);
         printf("\n%d...to start quest- %s",j+1,cJSON_GetObjectItem(quest,"name")->valuestring);
     }
@@ -1647,7 +1678,7 @@ void questMode(Player *player,int *state)
         return;
     }
 
-    while(input<='0' || input>i+'0')
+    while(input<='0' || input>j+'0')
     {
         if(input=='e'||input=='E')
         {
