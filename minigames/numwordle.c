@@ -81,6 +81,7 @@ int playWordle(int n, int attempts)
 
             return 1;
         }
+        sound(2);
         wordlegame(n, num, guess);
         attempts--;
         printf("|                                          \n");
@@ -123,9 +124,11 @@ void sound(int n)
 {
     const char *soundFilePath;
   if(n==0)
-   soundFilePath = "./Sound Files/wordle_score.mp3"; //Music
+   soundFilePath = "./Sound Files/sons_of_mars_long.mp3"; //Music
   if(n==1)
    soundFilePath = "./Sound Files/yes_man.mp3"; 
+  if(n==2)
+   soundFilePath="./Sound Files/violin_fail.mp3";
   char command[300];
   snprintf(command, sizeof(command), "afplay \"%s\" &", soundFilePath);
   system(command);
