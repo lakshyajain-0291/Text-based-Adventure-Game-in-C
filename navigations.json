@@ -56,15 +56,15 @@
                                         "name": "PLAYER_HOUSE"
                                     },
                                     {
-                                        "name": "RandomNPC_HOUSE"
+                                        "name": "RANDOM_NPC_HOUSE"
                                     }
                                 ]
                             },
                             {
-                                "name": "GOVT_STREET",
+                                "name": "GOVERNMENT_STREET",
                                 "children": [
                                     {
-                                        "name": "GOVT_ALLEYWAYS"
+                                        "name": "GOVERNMENT_ALLEYWAYS"
                                     },
                                     {
                                         "name": "CITADEL"

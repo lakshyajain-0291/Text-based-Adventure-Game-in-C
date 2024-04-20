@@ -5,12 +5,14 @@
       "Quest_Name": "The Masterpiece",
       "NPC": "Metalsmith Gaius",
       "Text": [
+        "\n",
         "Marcus Agrippa: Greetings Gaius",
-        "Metalsmith Gaius: Ah, Marcus Agrippa! I've heard tales of your prowess in combat.",
-        "Marcus Agrippa: And I've heard of your skill with a hammer and anvil, Gaius.",
-        "Metalsmith Gaius: I have a proposition for you. There's a mission I need assistance with, and your strength would be invaluable.",
-        "Marcus Agrippa: What kind of mission?",
-        "Metalsmith Gaius: It involves venturing into the heart of hostile territory to retrieve a valuable weapon. The risks are great, but so are the rewards. Are you in Marcus?"
+        "Metalsmith Gaius: Ah, Marcus Agrippa! I've heard tales of your prowess in combat.\n",
+        "Marcus Agrippa: And I've heard of your skill with a hammer and anvil, Gaius.\n",
+        "Metalsmith Gaius: I have a proposition for you. There's a mission I need assistance with, and your strength would be invaluable.\n",
+        "Marcus Agrippa: What kind of mission?\n",
+        "Metalsmith Gaius: It involves venturing into the heart of hostile territory to retrieve a valuable weapon. The risks are great, but so are the rewards.\n",
+        "\tAre you in Marcus?"
       ]
     },
     {
@@ -18,12 +20,19 @@
       "Quest_Name": "The Rivalry",
       "NPC": "Metalsmith Gaius",
       "Text": [
-        "Marcus Agrippa: Greetings Gaius.",
-        "Metalsmith Gaius: Ah, Marcus Agrippa! It's good to see you again. I trust you're faring well?",
-        "Marcus Agrippa: As well as one can, considering the circumstances. I come bearing news of our previous endeavor. The legendary weapon we forged together has become quite the talk of the town.",
-        "Metalsmith Gaius: Excellent news, Marcus! Your assistance was invaluable in its creation. You have my deepest gratitude. Now, onto our next project. I've been pondering over a design for a new weapon—a blade that will be unmatched in both beauty and lethality. However, to bring this vision to life, I'll need your help once more, Marcus. We must gather rare materials and master intricate techniques to forge this masterpiece.",
-        "Marcus Agrippa: Your vision sounds ambitious, Gaius. I'm honored to be a part of it. What materials do you require, and where can we find them?",
-        "Metalsmith Gaius: We'll need a piece of meteoric iron, known for its exceptional strength, as well as a rare gemstone rumored to possess magical properties. The iron can be found deep within the Ironclad Mountains, and the gemstone is said to be guarded by a fearsome creature in the Forest of Shadows. It won't be an easy task, but I have faith in your abilities, Marcus."
+        "\n",
+        "Marcus Agrippa: Greetings Gaius.\n",
+        "Metalsmith Gaius: Ah, Marcus Agrippa! It's good to see you again. I trust you're faring well?\n",
+        "Marcus Agrippa: As well as one can, considering the circumstances. I come bearing news of our previous endeavor.\n ",
+        "\tThe legendary weapon we forged together has become quite the talk of the town.\n",
+        "Metalsmith Gaius: Excellent news, Marcus! Your assistance was invaluable in its creation. You have my deepest gratitude.\n",
+        "\tNow, onto our next project. I've been pondering over a design for a new weapon—a blade that will be unmatched in both beauty and lethality.\n",
+        "\tHowever, to bring this vision to life, I'll need your help once more, Marcus. We must gather rare materials and master intricate techniques to forge this masterpiece.\n",
+        "Marcus Agrippa: Your vision sounds ambitious, Gaius. I'm honored to be a part of it.\n",
+        "\tWhat materials do you require, and where can we find them?\n",
+        "Metalsmith Gaius: We'll need a piece of meteoric iron, known for its exceptional strength, as well as a rare gemstone rumored to possess magical properties.\n",
+        "\tThe iron can be found deep within the Ironclad Mountains, and the gemstone is said to be guarded by a fearsome creature in the Forest of Shadows.\n",
+        "\tIt won't be an easy task, but I have faith in your abilities, Marcus.\n"
       ]
     },
     {
@@ -31,17 +40,417 @@
       "Quest_Name": "The Lost Relic",
       "NPC": "Metalsmith Gaius",
       "Text": [
-        "Marcus Agrippa: Greetings, Gaius. I bring news of our victory in the prestigious blacksmithing contest.",
-        "Metalsmith Gaius: Marcus, my friend! Congratulations on your triumph. Your prowess in the competition has brought honor to us both.",
-        "Marcus Agrippa: It was a hard-fought battle, but in the end, our craftsmanship proved superior. Now, what new challenge do you have in store for us?",
-        "Metalsmith Gaius: Our next endeavor will be to recover a stolen artifact of great sentimental value to me. It's a hammer passed down through generations of my family, and I'll stop at nothing to see it returned to its rightful place.",
-        "Marcus Agrippa: I understand the importance of reclaiming what's yours, Gaius. Tell me more about this artifact and the circumstances of its theft.",
-        "Metalsmith Gaius: The hammer was taken from my workshop under the cover of night by a group of thieves who've been plaguing the city for some time. They're known to frequent the seedy taverns of the lower district, and I suspect they're holed up somewhere in the city's underworld.",
-        "Marcus Agrippa: Then it seems we'll need to venture into the heart of darkness to retrieve your hammer. You can count on me, Gaius.",
-        "Metalsmith Gaius: Your loyalty and bravery are unmatched, Marcus. Together, we'll track down those thieves and reclaim what is rightfully mine.",
-        "Marcus Agrippa: Let's not waste any time, then. Lead the way, Gaius. I'm ready to confront whatever dangers lie ahead."
+        "\n",
+        "Marcus Agrippa: Greetings, Gaius. I bring news of our victory in the prestigious blacksmithing contest.\n",
+        "Metalsmith Gaius: Marcus, my friend! Congratulations on your triumph. Your prowess in the competition has brought honor to us both.\n",
+        "Marcus Agrippa: It was a hard-fought battle, but in the end, our craftsmanship proved superior.\n ",
+        "tNow, what new challenge do you have in store for us?\n",
+        "Metalsmith Gaius: Our next endeavor will be to recover a stolen artifact of great sentimental value to me.\n",
+        "\tIt's a hammer passed down through generations of my family, and I'll stop at nothing to see it returned to its rightful place.\n",
+        "Marcus Agrippa: I understand the importance of reclaiming what's yours, Gaius.\n",
+        "\tTell me more about this artifact and the circumstances of its theft.\n",
+        "Metalsmith Gaius: The hammer was taken from my workshop under the cover of night by a group of thieves who've been plaguing the city for some time.\n",
+        "\tThey're known to frequent the seedy taverns of the lower district, and I suspect they're holed up somewhere in the city's underworld.\n",
+        "Marcus Agrippa: Then it seems we'll need to venture into the heart of darkness to retrieve your hammer.\n",
+        "\tYou can count on me, Gaius.\n",
+        "Metalsmith Gaius: Your loyalty and bravery are unmatched, Marcus.\n",
+        "\tTogether, we'll track down those thieves and reclaim what is rightfully mine.\n"
+     ]
+    },
+    {
+      "Quest_ID": "1_0",
+      "Quest_Name": "The Elixir of Truth",
+      "NPC": "Alchemist Aurelia",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Greetings, Aurelia.",
+        "Alchemist Aurelia: Ah, it's good to see you. I've been working on something that might interest you.\n",
+        "Marcus Agrippa: Oh? What is it?\n",
+        "Alchemist Aurelia: I've been researching ancient alchemical texts in hopes of creating a potion that reveals hidden truths when consumed.\n",
+        "\tIt's a risky endeavor, but I believe it could help me uncover the truth behind my family's murder.\n",
+        "Marcus Agrippa: That sounds intriguing, Aurelia. How can I assist you?\n",
+        "Alchemist Aurelia: I'll need your help gathering some rare ingredients for the potion. We'll need to venture into the depths of the Forbidden Forest to find them.\n",
+        "\tAre you up for the challenge?"
+      ]
+    },
+    {
+      "Quest_ID": "1_1",
+      "Quest_Name": "The Forbidden Formula",
+      "NPC": "Alchemist Aurelia",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Greetings, Aurelia. I've heard about your latest project.",
+        "Alchemist Aurelia: Ah, Player! Yes, I've been researching a forbidden alchemical formula that could be the key to unlocking immense power.\n",
+        "\tBut to obtain the ingredients needed to create the potion, we'll have to delve into dangerous territory.\n",
+        "Marcus Agrippa: What kind of ingredients are we talking about?\n",
+        "Alchemist Aurelia: We'll need the venom of a rare serpent that dwells in the depths of the Cursed Swamp, as well as a rare flower that only blooms under the light of a full moon.\n",
+        "\tIt won't be an easy task, but I believe the rewards will be worth the risk.\n",
+        "Marcus Agrippa: I'm ready to assist you, Aurelia. Let's uncover this forbidden knowledge together.\n",
+        "Alchemist Aurelia: Your courage is admirable, Marcus Agrippa. Together, we'll unlock the secrets of the ancients.\n"
+      ]
+    },
+    {
+      "Quest_ID": "1_2",
+      "Quest_Name": "The Alchemist's Conundrum",
+      "NPC": "Alchemist Aurelia",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Greetings, Aurelia. What's the next challenge you have for me?",
+        "Alchemist Aurelia: Player, I've been studying the writings of a long-dead sage, hoping to unlock the secrets of the universe.\n",
+        "\tBut his texts are filled with cryptic puzzles and riddles that have stumped even the most skilled alchemists.\n",
+        "Marcus Agrippa: What do you need me to do?\n",
+        "Alchemist Aurelia: I need your help solving these puzzles. If we can decipher the sage's messages, we could uncover knowledge that has been lost for centuries.\n",
+        "\tAre you ready to take on this challenge, Player?"
+      ]
+    },
+    {
+      "Quest_ID": "2_0",
+      "Quest_Name": "The Healing Garden",
+      "NPC": "Herbalist Flora",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Hello, Flora. How can I assist you today?",
+        "Herbalist Flora: Ah, Marcus Agrippa. I'm glad you're here. I've heard rumors of a hidden oasis filled with rare medicinal plants.\n",
+        "\tThese plants could hold the key to saving my life, but the journey to find them will be perilous.\n",
+        "Marcus Agrippa: I'm ready to help, Flora. What do we need to do?\n",
+        "Herbalist Flora: We'll need to venture deep into the wilderness, navigating treacherous terrain and facing dangerous creatures along the way.\n",
+        "\tBut if we succeed, we could uncover the herbs that will save me.\n",
+        "Marcus Agrippa: I'll do whatever it takes to help you, Flora. Let's find this healing garden.\n",
+        "Herbalist Flora: Your loyalty means the world to me, Marcus Agrippa. Together, we'll overcome any obstacle in our path.\n"
+      ]
+    },
+    {
+      "Quest_ID": "2_1",
+      "Quest_Name": "The Potion of Protection",
+      "NPC": "Herbalist Flora",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Hello again, Flora. What's our next task?",
+        "Herbalist Flora: Marcus Agrippa, I've been working on a new potion—one that grants temporary immunity to poison and disease.\n",
+        "\tIt could provide me with a vital defense against my enemies' schemes.\n",
+        "Marcus Agrippa: That sounds like a useful potion, Flora. What do you need me to do?\n",
+        "Herbalist Flora: We'll need to gather some rare ingredients for the potion. There's a cave in the mountains where a rare mushroom grows, and we'll need to obtain it.\n",
+        "\tBut be warned, the cave is guarded by fierce creatures that will not take kindly to intruders.\n",
+        "Marcus Agrippa: I'm ready to face whatever challenges lie ahead, Flora. Let's brew this potion.\n",
+        "Herbalist Flora: Your bravery is inspiring, Marcus Agrippa. Together, we'll create a potion that will keep us safe from harm.\n"
+      ]
+    },
+    {
+      "Quest_ID": "2_2",
+      "Quest_Name": "The Herbalist's Legacy",
+      "NPC": "Herbalist Flora",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Greetings, Flora. What's on your mind today?",
+        "Herbalist Flora: Marcus Agrippa, I've been thinking about the future of herbalism in our city. It's a dying art, and I fear that one day, all knowledge of it will be lost.\n",
+        "\tThat's why I've decided to take on an apprentice—a promising young student who shares my passion for plants and potions.\n",
+        "Marcus Agrippa: That's a noble endeavor, Flora. How can I help?\n",
+        "Herbalist Flora: I need your assistance in training my apprentice. We'll need to teach them the basics of herbalism and guide them in their studies.\n",
+        "\tWith your help, we can ensure that the art of herbalism will endure for generations to come.\n",
+        "Marcus Agrippa: I'd be honored to help, Flora. Let's pass down our knowledge and leave a lasting impact on the world.\n",
+        "Herbalist Flora: Your dedication to the craft fills my heart with joy, Marcus Agrippa. Together, we'll shape the future of herbalism.\n"
+      ]
+    },
+    {
+      "Quest_ID": "3_0",
+      "Quest_Name": "The Informant's Gambit",
+      "NPC": "Cassius the Spider",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Cassius, what's our next move?",
+        "Cassius the Spider: Marcus Agrippa, I have a delicate task that requires your expertise in subterfuge.\n",
+        "\tThere's a rival spy network operating in the city, and they possess valuable intelligence that could give us the upper hand.\n",
+        "Marcus Agrippa: What do you need me to do, Cassius?\n",
+        "Cassius the Spider: I need you to infiltrate their organization, posing as one of their own, and gather as much information as you can.\n",
+        "\tBut beware, Marcus. The world of espionage is a dangerous one, and trust is a rare commodity.\n",
+        "Marcus Agrippa: I understand the risks, Cassius. I'll do whatever it takes to complete the mission.\n",
+        "Cassius the Spider: Your courage and cunning never cease to impress, Marcus Agrippa. Together, we'll uncover the secrets that will secure our victory.\n"
+      ]
+    },
+    {
+      "Quest_ID": "3_1",
+      "Quest_Name": "The Political Maneuver",
+      "NPC": "Cassius the Spider",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Cassius, what's our next move?",
+        "Cassius the Spider: Marcus Agrippa, I've identified a key weakness in our enemies' defenses—a vulnerability that we can exploit to our advantage.\n",
+        "\tThere are certain individuals in the city's power structure whose allegiance is tenuous at best.\n",
+        "Marcus Agrippa: How do you propose we proceed, Cassius?\n",
+        "Cassius the Spider: We must use our charm and cunning to sow discord among our enemies, manipulating these key figures to advance our agenda.\n",
+        "\tBut we must tread carefully, Marcus. The political landscape is fraught with peril, and one misstep could spell disaster.\n",
+        "Marcus Agrippa: I'm ready to do whatever it takes to secure our victory, Cassius.\n",
+        "Cassius the Spider: Your loyalty and dedication are unmatched, Marcus Agrippa. Together, we'll outmaneuver our enemies and emerge victorious.\n"
+      ]
+    },
+    {
+      "Quest_ID": "3_2",
+      "Quest_Name": "The Shadow's Whisper",
+      "NPC": "Cassius the Spider",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Cassius, what's our next move?",
+        "Cassius the Spider: Marcus Agrippa, we have a traitor in our midst—a spy who has been feeding information to our enemies.\n",
+        "\tWe must uncover their identity and neutralize the threat before they can do any more damage.\n",
+        "Marcus Agrippa: How do you suggest we proceed, Cassius?\n",
+        "Cassius the Spider: We must conduct a thorough investigation, carefully scrutinizing the actions and behaviors of those closest to us.\n",
+        "\tBut time is of the essence, Marcus. The longer the traitor remains at large, the greater the risk to our cause.\n",
+        "Marcus Agrippa: I'll leave no stone unturned in my search for the traitor, Cassius.\n",
+        "Cassius the Spider: Your determination and vigilance are commendable, Marcus Agrippa. Together, we'll root out the traitor and ensure the security of our operation.\n"
+      ]
+    },
+    {
+      "Quest_ID": "4_0",
+      "Quest_Name": "The Rebel's Recruitment",
+      "NPC": "Octavius the Rebel",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Octavius, what's our next move?",
+        "Octavius the Rebel: Marcus Agrippa, the time has come to expand our ranks and bolster our cause.\n",
+        "\tWe must rally support for the rebellion, convincing disillusioned citizens to join our fight for freedom and justice.\n",
+        "Marcus Agrippa: How do you propose we recruit more members, Octavius?\n",
+        "Octavius the Rebel: We must spread hope in the face of oppression, inspiring others to rise up against tyranny and take a stand for what is right.\n",
+        "\tBut we must tread carefully, Marcus. The government's grip on power is strong, and dissenters are swiftly silenced.\n",
+        "Marcus Agrippa: I'll do whatever it takes to recruit more allies to our cause, Octavius.\n",
+        "Octavius the Rebel: Your dedication to our cause is commendable, Marcus Agrippa. Together, we'll ignite the flames of revolution and usher in a new era of freedom.\n"
+      ]
+    },
+    {
+      "Quest_ID": "4_1",
+      "Quest_Name": "The Saboteur's Gambit",
+      "NPC": "Octavius the Rebel",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Octavius, what's our next move?",
+        "Octavius the Rebel: Marcus Agrippa, we must strike at the heart of the government's strength—their weapons supply.\n",
+        "\tWe must infiltrate a government stronghold and sabotage their armaments, weakening their forces and tipping the scales in favor of the rebellion.\n",
+        "Marcus Agrippa: How do you propose we accomplish such a dangerous task, Octavius?\n",
+        "Octavius the Rebel: We must use stealth and cunning to evade detection, infiltrating the stronghold under the cover of darkness and striking swiftly before they can react.\n",
+        "\tBut we must remain vigilant, Marcus. The government's defenses are formidable, and one wrong move could mean the end of our cause.\n",
+        "Marcus Agrippa: I'm prepared to do whatever it takes to sabotage the government's weapons supply, Octavius.\n",
+        "Octavius the Rebel: Your courage and determination are unmatched, Marcus Agrippa. Together, we'll strike a decisive blow against our oppressors and pave the way for a brighter future.\n"
+      ]
+    },
+    {
+      "Quest_ID": "4_2",
+      "Quest_Name": "The Rebel's Stand",
+      "NPC": "Octavius the Rebel",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Octavius, what's our next move?",
+        "Octavius the Rebel: Marcus Agrippa, the time has come to confront our oppressors head-on and lead the rebellion in a decisive battle.\n",
+        "\tWe must inspire courage and resilience in our allies, showing them that together, we can overcome even the most overwhelming odds.\n",
+        "Marcus Agrippa: How do you propose we prepare for such a monumental undertaking, Octavius?\n",
+        "Octavius the Rebel: We must train relentlessly, honing our skills and strengthening our resolve for the challenges that lie ahead.\n",
+        "\tBut we must also rally support from our allies and fortify our defenses, ensuring that we are ready for whatever the government throws at us.\n",
+        "Marcus Agrippa: I'll stand with you in the battle against tyranny, Octavius.\n",
+        "Octavius the Rebel: Your commitment to our cause is unwavering, Marcus Agrippa. Together, we'll face our enemies with courage and determination, knowing that freedom and justice are worth fighting for.\n"
+      ]
+    },
+    {
+      "Quest_ID": "5_0",
+      "Quest_Name": "The Prophecy Unveiled",
+      "NPC": "Oracle Sibylla",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Oracle Sibylla, I seek guidance on my journey. What do the stars reveal?",
+        "Oracle Sibylla: Marcus Agrippa, the fates have woven a tapestry of destiny for you, and it is time to unveil its secrets.\n",
+        "\tA cryptic prophecy foretells of your true purpose, guiding you on the path to fulfilling your destiny.\n",
+        "Marcus Agrippa: How do I interpret this prophecy, Oracle Sibylla?\n",
+        "Oracle Sibylla: The stars speak in riddles, Marcus Agrippa, but fear not. I shall help you decipher their meaning and unravel the threads of fate that bind you.\n",
+        "\tBut be warned, the journey ahead will not be easy. The path to fulfilling your destiny is fraught with danger and uncertainty.\n",
+        "Marcus Agrippa: I am ready to face whatever challenges lie ahead, Oracle Sibylla.\n",
+        "Oracle Sibylla: Your courage and determination will serve you well on your journey, Marcus Agrippa. Embrace your destiny, for the stars have spoken, and your fate awaits.\n"
+      ]
+    },
+    {
+      "Quest_ID": "5_1",
+      "Quest_Name": "The Seer's Vision",
+      "NPC": "Oracle Sibylla",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Oracle Sibylla, I seek your guidance once more. What dangers lie ahead on my quest for vengeance?",
+        "Oracle Sibylla: Marcus Agrippa, the path before you is fraught with peril, but fear not. The stars have revealed a glimpse of the future, and I am here to guide you through the darkness.\n",
+        "\tPeer into the mists of time, and you shall uncover potential threats to your quest for vengeance, offering guidance on how to avoid danger and overcome obstacles.\n",
+        "Marcus Agrippa: How can I navigate these dangers and emerge victorious, Oracle Sibylla?\n",
+        "Oracle Sibylla: Trust in your instincts, Marcus Agrippa, and heed the warnings of the stars. They shall light your way and lead you safely through the trials that lie ahead.\n",
+        "\tBut remember, the future is not set in stone. Your actions will shape your destiny, and only through courage and determination can you hope to triumph over adversity.\n",
+        "Marcus Agrippa: I will not falter in the face of adversity, Oracle Sibylla. With your guidance, I shall overcome any obstacle that stands in my way.\n",
+        "Oracle Sibylla: Your strength of spirit will carry you far, Marcus Agrippa. Trust in yourself, and the stars shall guide you to victory.\n"
+      ]
+    },
+    {
+      "Quest_ID": "5_2",
+      "Quest_Name": "The Mystic's Trials",
+      "NPC": "Oracle Sibylla",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Oracle Sibylla, I seek your wisdom. How can I prepare for the trials that lie ahead?",
+        "Oracle Sibylla: Marcus Agrippa, the path to greatness is paved with trials and tribulations, but fear not. The stars have deemed you worthy, and I shall prepare you for the challenges that await.\n",
+        "\tTest your resolve with a series of mystical trials designed to challenge your mind, body, and spirit, preparing you for the trials ahead.\n",
+        "Marcus Agrippa: What kind of trials must I face, Oracle Sibylla?\n",
+        "Oracle Sibylla: The trials will test your courage, your wisdom, and your strength of will. They will push you to your limits and beyond, but know that you are not alone.\n",
+        "\tI shall be with you every step of the way, guiding you through the darkness and into the light.\n",
+        "Marcus Agrippa: I am ready to face whatever challenges lie ahead, Oracle Sibylla.\n",
+        "Oracle Sibylla: Your bravery will be your greatest weapon, Marcus Agrippa. Embrace the trials that await, for they shall forge you into the hero you were always meant to be.\n"
+      ]
+    },
+    {
+      "Quest_ID": "6_0",
+      "Quest_Name": "The City's Guardian",
+      "NPC": "General Lucius",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: General Lucius, I stand ready to serve the city.",
+        "General Lucius: Marcus Agrippa, it is good to see you. The city is in need of vigilant guardians like yourself.\n",
+        "\tWe must maintain law and order to ensure the safety of its citizens. Criminals roam the streets unchecked, preying on the innocent.\n",
+        "Marcus Agrippa: I am ready to assist in any way I can, General Lucius.\n",
+        "General Lucius: Good. We shall patrol the city streets together, apprehending criminals and restoring peace to our streets.\n",
+        "\tAre you prepared for this task, Marcus Agrippa?"
+      ]
+    },
+    {
+      "Quest_ID": "6_1",
+      "Quest_Name": "The Military Strategist",
+      "NPC": "General Lucius",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: General Lucius, I am at your service.",
+        "General Lucius: Marcus Agrippa, I have a strategic task that requires your expertise. Our city faces external threats, and we must defend it at all costs.\n",
+        "\tWe shall plan and execute a series of strategic maneuvers to maintain our city's sovereignty and protect its people.\n",
+        "Marcus Agrippa: I am honored to aid in the city's defense, General Lucius.\n",
+        "General Lucius: Together, we shall ensure that our enemies do not breach our defenses. Are you prepared for this challenge, Marcus Agrippa?"
+      ]
+    },
+    {
+      "Quest_ID": "6_2",
+      "Quest_Name": "The Loyalty Test",
+      "NPC": "General Lucius",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: General Lucius, how may I serve the city?",
+        "General Lucius: Marcus Agrippa, there are whispers of corruption within the city guard. I cannot trust my troops until I know the truth.\n",
+        "\tI need you to investigate these rumors, uncovering traitors and restoring my faith in my troops.\n",
+        "Marcus Agrippa: I will not rest until the city guard's loyalty is unquestionable, General Lucius.\n",
+        "General Lucius: Your dedication to duty is commendable, Marcus Agrippa. We shall root out the traitors together. Are you ready for this task?"
+      ]
+    },
+    {
+      "Quest_ID": "7_0",
+      "Quest_Name": "The Archeologist's Dilemma",
+      "NPC": "Sophia the Scholar",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Sophia, I am ready to assist you in your excavation.",
+        "Sophia the Scholar: Marcus Agrippa, it's good to see you. Together, we have an opportunity to uncover secrets hidden beneath the earth.\n",
+        "\tThe artifact we seek may hold the key to unlocking the truth behind your family's murder.\n",
+        "Marcus Agrippa: I am eager to delve into the past and uncover the truth, Sophia.\n",
+        "Sophia the Scholar: Then let us not waste any time. The excavation site awaits. Are you prepared for this journey, Marcus Agrippa?"
+      ]
+    },
+    {
+      "Quest_ID": "7_1",
+      "Quest_Name": "The Library's Riddle",
+      "NPC": "Sophia the Scholar",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Sophia, I am ready to solve the riddle of the library.",
+        "Sophia the Scholar: Marcus Agrippa, welcome back. The library holds many secrets, and we must unlock them to continue our quest.\n",
+        "\tHidden within its shelves is a puzzle that may lead us closer to the truth behind your family's murder.\n",
+        "Marcus Agrippa: I am prepared to unravel the mysteries of the library, Sophia.\n",
+        "Sophia the Scholar: Then let us delve into its depths and uncover the knowledge hidden within. Are you ready for this challenge, Marcus Agrippa?"
+      ]
+    },
+    {
+      "Quest_ID": "7_2",
+      "Quest_Name": "The Scholar's Discovery",
+      "NPC": "Sophia the Scholar",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Sophia, I am ready to explore the hidden chambers of Argenstone.",
+        "Sophia the Scholar: Marcus Agrippa, it's time to reveal the secrets hidden within Argenstone's walls.\n",
+        "\tThe ancient texts we uncover may hold the key to unlocking the lost history of our city.\n",
+        "Marcus Agrippa: I am prepared to decipher the ancient texts, Sophia.\n",
+        "Sophia the Scholar: Then let us venture into the depths of Argenstone and uncover the knowledge that lies within. Are you ready for this journey, Marcus Agrippa?"
+      ]
+    },
+    {
+      "Quest_ID": "8_0",
+      "Quest_Name": "The Call of the Sea",
+      "NPC": "Siren Melaina",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Melaina, I am ready to heed the call of the sea.",
+        "Siren Melaina: Marcus Agrippa, it's time to embark on a journey into the depths of the ocean.\n",
+        "\tGuided by my song, we will uncover treasures long lost beneath the waves.\n",
+        "Marcus Agrippa: I am eager to explore the mysteries of the sea with you, Melaina.\n",
+        "Siren Melaina: Then let us set sail and discover the wonders that lie beneath the waves. Are you ready for this adventure, Marcus Agrippa?"
+      ]
+    },
+    {
+      "Quest_ID": "8_1",
+      "Quest_Name": "The Song of Protection",
+      "NPC": "Siren Melaina",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Melaina, I am ready to learn the ancient melodies of the sea.",
+        "Siren Melaina: Marcus Agrippa, it's time to unlock the power of the sea's enchanting music.\n",
+        "\tWith my guidance, you will master the melodies that protect against danger and navigate treacherous waters.\n",
+        "Marcus Agrippa: I am prepared to embrace the songs of protection, Melaina.\n",
+        "Siren Melaina: Then let us begin our training and harness the magic of the sea. Are you ready to learn, Marcus Agrippa?"
+      ]
+    },
+    {
+      "Quest_ID": "8_2",
+      "Quest_Name": "The Siren's Secret",
+      "NPC": "Siren Melaina",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Melaina, I am ready to uncover the truth behind your mysterious origins.",
+        "Siren Melaina: Marcus Agrippa, it's time to delve into the myths and legends of the ocean.\n",
+        "\tTogether, we will uncover the secrets of my past and discover the truth hidden beneath the waves.\n",
+        "Marcus Agrippa: I am determined to uncover the mysteries of your origins, Melaina.\n",
+        "Siren Melaina: Then let us journey into the depths of the ocean and reveal the secrets that lie within. Are you ready for this revelation, Marcus Agrippa?"
+      ]
+    },
+    {
+      "Quest_ID": "9_0",
+      "Quest_Name": "The Black Market Deal",
+      "NPC": "Mortimer the Whisperer",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Mortimer, I am ready to strike a bargain in the black market.",
+        "Mortimer the Whisperer: Marcus Agrippa, it's time to delve into the underworld of the city.\n",
+        "\tWith my guidance, you will obtain rare and exotic goods to aid you in your quest.\n",
+        "Marcus Agrippa: I am prepared to navigate the shadows and acquire what I need, Mortimer.\n",
+        "Mortimer the Whisperer: Then let us venture into the darkness and strike a deal that will aid you on your journey. Are you ready for this, Marcus Agrippa?"
+      ]
+    },
+    {
+      "Quest_ID": "9_1",
+      "Quest_Name": "The Informant's Tip",
+      "NPC": "Mortimer the Whisperer",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Mortimer, I am ready to receive valuable information from your network of spies.",
+        "Mortimer the Whisperer: Marcus Agrippa, it's time to gain an edge over your enemies.\n",
+        "\tWith the information I provide, you will be one step closer to achieving your goals.\n",
+        "Marcus Agrippa: I am eager to leverage your network to my advantage, Mortimer.\n",
+        "Mortimer the Whisperer: Then let me share with you the knowledge that will tip the scales in your favor. Are you ready to receive it, Marcus Agrippa?"
+      ]
+    },
+    {
+      "Quest_ID": "9_2",
+      "Quest_Name": "The Whisperer's Favor",
+      "NPC": "Mortimer the Whisperer",
+      "Text": [
+        "\n",
+        "Marcus Agrippa: Mortimer, I am ready to call in a favor and eliminate a troublesome adversary.",
+        "Mortimer the Whisperer: Marcus Agrippa, it's time to leverage my influence to remove obstacles in your path.\n",
+        "\tWith my favor, your journey to vengeance will become much smoother.\n",
+        "Marcus Agrippa: I am prepared to utilize your influence to achieve my goals, Mortimer.\n",
+        "Mortimer the Whisperer: Then let us eliminate the troublesome adversary and pave the way for your vengeance. Are you ready to proceed, Marcus Agrippa?"
       ]
     }
-
   ]
 }

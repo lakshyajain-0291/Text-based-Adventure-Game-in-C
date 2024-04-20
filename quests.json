@@ -1,20 +1,20 @@
 {
     "quests": [
         {
-            "QuestID":"0_0",
+            "QuestID": "0_0", 
             "Name": "The Masterpiece",
-            "Description" : "Assist Gaius in creating a legendary weapon, gathering rare materials and mastering intricate techniques to forge a masterpiece.",
-            "Location": "FOREST",
+            "Description": "Assist Gaius in creating a legendary weapon, gathering rare materials and mastering intricate techniques to forge a masterpiece.",
+            "Location": "METALSMITH_SHOP",
             "Reward": {
                 "gold": 50,
                 "xp": 50,
                 "item": null,
-                "relationship":50 
+                "relationship": 50
             },
             "Minigame": "Combat"
         },
         {
-            "QuestID":"0_1",
+            "QuestID": "0_1", 
             "Name": "The Rivalry",
             "Description": "Compete against a rival metalsmith in a prestigious contest, showcasing Gaius's skills and proving his superiority in the art of blacksmithing.",
             "Location": "DOCKS",
@@ -22,9 +22,373 @@
                 "gold": 50,
                 "xp": 50,
                 "item": null,
-                "relationship":50 
+                "relationship": 50
             },
-            "Minigame":"Falconry"
+            "Minigame": "Falconry"
+        },
+        {
+            "QuestID": "0_2",
+            "Name": "The Lost Relic",
+            "Description": "Embark on a quest to recover a stolen artifact of great sentimental value to Gaius, delving into the city's underworld to track down the thieves and reclaim what is rightfully his.",
+            "Location": "OTHER_ALLEYWAYS",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "PrisonEscape"
+        },
+        {
+            "QuestID": "1_0", 
+            "Name": "The Elixir of Truth",
+            "Description": "Brew a potion that reveals hidden secrets when consumed, aiding Aurelia in uncovering the truth behind her family's murder.",
+            "Location": "ALCHEMIST_SHOP",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Lockpicking"
+        },
+        {
+            "QuestID": "1_1",
+            "Name": "The Forbidden Formula",
+            "Description": "Delve into forbidden alchemical texts to uncover a recipe for a potent potion, risking life and limb to obtain the elusive ingredients needed for its creation.",
+            "Location": "ALCHEMIST_SHOP",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "PrisonEscape"
+        },
+        {
+            "QuestID": "1_2",
+            "Name": "The Alchemist's Conundrum",
+            "Description": "Solve a series of alchemical puzzles left behind by a long-dead sage, unlocking hidden knowledge that could change the course of history, driven by Aurelia's thirst for discovery.",
+            "Location": "ALCHEMIST_SHOP",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Memory"
+        },
+        { 
+            "QuestID": "2_0", 
+            "Name": "The Healing Garden",
+            "Description": "Explore a hidden oasis rumored to contain rare medicinal plants, gathering herbs that hold the key to saving Flora's own life.",
+            "Location": "FOREST",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Hangtheman"
+        },
+        {
+            "QuestID": "2_1",
+            "Name": "The Potion of Protection",
+            "Description": "Brew a potion that grants temporary immunity to poison and disease, providing Flora with a vital defense against her enemies' schemes.",
+            "Location": "HERBALIST_SHOP",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Memory"
+        },
+        {
+            "QuestID": "2_2",
+            "Name": "The Herbalist's Legacy",
+            "Description": "Pass down your knowledge to a promising apprentice, ensuring that the art of herbalism will endure for generations to come, fueled by Flora's desire to leave a lasting impact on the world.",
+            "Location": "HERBALIST_SHOP",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "PrisonEscape"
+        },
+        {
+            "QuestID": "3_0", 
+            "Name": "The Informant's Gambit",
+            "Description": "Infiltrate a rival spy network to gather valuable intelligence for Cassius, navigating through deception and danger to bring back crucial information.",
+            "Location": "GOVERNMENT_ALLEYWAYS",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "PrisonEscape"
+        },
+        {
+            "QuestID": "3_1",
+            "Name": "The Political Maneuver",
+            "Description": "Manipulate key figures in the city's power structure to advance Cassius's agenda, using charm and cunning to sow discord among his enemies.",
+            "Location": "GOVERNMENT_STREET",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Wordle"
+        },
+        {
+            "QuestID": "3_2",
+            "Name": "The Shadow's Whisper",
+            "Description": "Uncover a traitor within Cassius's ranks, ferreting out the spy and neutralizing the threat before they can do any more damage.",
+            "Location": "GOVERNMENT_ALLEYWAYS",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Hangtheman"
+        },
+        {
+            "QuestID": "4_0", 
+            "Name": "The Rebel's Recruitment",
+            "Description": "Rally support for the rebellion by convincing disillusioned citizens to join their cause, spreading hope in the face of oppression.",
+            "Location": "OTHER_STREET",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Wordle"
+        },
+        {
+            "QuestID": "4_1",
+            "Name": "The Saboteur's Gambit",
+            "Description": "Infiltrate a government stronghold to sabotage their weapons supply, weakening their forces and tipping the scales in favor of the rebellion.",
+            "Location": "GOVERNMENT_STREET",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "PrisonEscape"
+        },
+        {
+            "QuestID": "4_2",
+            "Name": "The Rebel's Stand",
+            "Description": "Lead the rebellion in a decisive battle against the government forces, inspiring courage and resilience in the face of overwhelming odds, driven by Octavius's unwavering commitment to freedom and justice.",
+            "Location": "CITY_IN",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Combat"
+        },
+        {
+            "QuestID": "5_0", 
+            "Name": "The Prophecy Unveiled",
+            "Description": "Interpret a cryptic prophecy foretelling the protagonist's destiny, guiding them on the path to fulfilling their true purpose.",
+            "Location": "CITADEL",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Lockpicking"
+        },
+        {
+            "QuestID": "5_1",
+            "Name": "The Seer's Vision",
+            "Description": "Peer into the future to uncover potential threats to the protagonist's quest for vengeance, offering guidance on how to avoid danger and overcome obstacles.",
+            "Location": "CATHADREL",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Memory"
+        },
+        {
+            "QuestID": "5_2",
+            "Name": "The Mystic's Trials",
+            "Description": "Test the protagonist's resolve with a series of mystical trials designed to challenge their mind, body, and spirit, preparing them for the trials ahead.",
+            "Location": "ACADEMY",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Hangtheman"
+        },
+        {
+            "QuestID": "6_0", 
+            "Name": "The City's Guardian",
+            "Description": "Assist General Lucius in patrolling the city streets, apprehending criminals and maintaining law and order to ensure the safety of its citizens.",
+            "Location": "RESIDENTIAL_STREET",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Combat"
+        },
+        {
+            "QuestID": "6_1",
+            "Name": "The Military Strategist",
+            "Description": "Aid General Lucius in planning and executing a series of strategic maneuvers to defend the city against external threats and maintain its sovereignty.",
+            "Location": "BARRACKS",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Snakegame"
+        },
+        {
+            "QuestID": "6_2",
+            "Name": "The Loyalty Test",
+            "Description": "Investigate rumors of corruption within the city guard, uncovering traitors and restoring General Lucius's faith in his troops.",
+            "Location": "GOVERNEMENT_STREET",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Lockpicking"
+        },
+        {
+            "QuestID": "7_0", 
+            "Name": "The Archeologist's Dilemma",
+            "Description": "Join Sophia in excavating a buried artifact, using your expertise to uncover clues about your family's murder hidden within its ancient engravings.",
+            "Location": "ARGENSTONE",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Minesweeper"
+        },
+        {
+            "QuestID": "7_1",
+            "Name": "The Library's Riddle",
+            "Description": "Solve a complex puzzle hidden within the city's grand library, unraveling a cryptic message that leads to a crucial revelation for your quest.",
+            "Location": "ACADEMY",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Wordle"
+        },
+        {
+            "QuestID": "7_2",
+            "Name": "The Scholar's Discovery",
+            "Description": "Explore the hidden chambers of Argenstone alongside Sophia, deciphering ancient texts to uncover its lost history.",
+            "Location": "ARGENSTONE",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Hangtheman"
+        },
+        {
+            "QuestID": "8_0", 
+            "Name": "The Call of the Sea",
+            "Description": "Venture into the depths of the ocean to uncover hidden treasures and lost artifacts, guided by Melaina's mystical song.",
+            "Location": "SEA",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Falconry"
+        },
+        {
+            "QuestID": "8_1",
+            "Name": "The Song of Protection",
+            "Description": "Learn the ancient melodies of the sea, using Melaina's enchanting music to ward off danger and navigate treacherous waters.",
+            "Location": "SEA",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Memory"
+        },
+        {
+            "QuestID": "8_2",
+            "Name": "The Siren's Secret",
+            "Description": "Discover the truth behind Melaina's mysterious origins, delving into the myths and legends of the ocean to uncover the secrets of her past.",
+            "Location": "ACADEMY",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Hangtheman"
+        },
+        {
+            "QuestID": "9_0", 
+            "Name": "The Black Market Deal",
+            "Description": "Strike a bargain with Mortimer to obtain rare and exotic goods, delving into the underworld of the city to acquire what you need.",
+            "Location": "STRANGE_SHOP",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Snakegame"
+        },
+        {
+            "QuestID": "9_1",
+            "Name": "The Informant's Tip",
+            "Description": "Receive valuable information from Mortimer's network of spies and informants, using their knowledge to gain an edge over your enemies.",
+            "Location": "TAVERN",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Memory"
+        },
+        {
+            "QuestID": "9_2",
+            "Name": "The Whisperer's Favor",
+            "Description": "Call in a favor from Mortimer to eliminate a troublesome adversary, leveraging his influence to remove obstacles in your path to vengeance.",
+            "Location": "OTHER_ALLEYWAYS",
+            "Reward": {
+                "gold": 50,
+                "xp": 50,
+                "item": null,
+                "relationship": 50
+            },
+            "Minigame": "Hangtheman"
         }
-    ] 
+    ]
 }

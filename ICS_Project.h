@@ -6,34 +6,49 @@
 #include<string.h>
 #include<stdbool.h>
 #include"cJSON.h"
-#include"cJSON.c"
+// #include"cJSON.c"
 #include<time.h>
 
-
+#define MAX_PLAYER_ID_LENGTH 100
 
 
 //Structures
 
 // Define the Inventory structure
-typedef struct {
-    int size; // Size of the inventory
+typedef struct
+{
+    int size;     // Size of the inventory
     char **items; // Array of items in the inventory
+    int *activeItems;
 } Inventory;
+
+// Define Stats structure
+typedef struct
+{
+    int HP;
+    int atk;
+    int def;
+    int agi;
+    int str;
+    int dex;
+    int intel;
+    int luck;
+} Stats;
 
 // Define the Player structure
 typedef struct
-{   
+{
     char *id;
     char *name;            // Player's name
     int level;             // Player's level
-    Stats stats;           // Player's stats (e.g., HP, attack, defense)
-    Inventory *inventory;   // Player's inventory
     int wtdLevel;          // Wantedted level
     int xp;                // Player's experience points
     int gold;              // Player's gold
     char *currentLocation; // Player's current location [Change this]
-    char **activeQuests;   // Player's active quests
+    Stats *stats;          // Player's stats (e.g., HP, attack, defense)
+    Inventory *inventory;  // Player's inventory
     int **NPCInfo;         // Player's interactions with NPCs (and status of Quest-line)
+    char **activeQuests;   // Player's active quests
 } Player;
 
 // Define a typedef for function pointer
@@ -54,19 +69,6 @@ typedef enum
     CITIZEN,
     ///Add more as needed
 }TypeOfNpc;
-
-// Define Stats structure
-typedef struct 
-{
-    int HP;
-    int atk;
-    int def;
-    int agi;
-    int str;
-    int dex;
-    int intel;
-    int luck;
-}Stats;
 
 typedef enum
 {
@@ -153,7 +155,7 @@ typedef struct
 
 void delay(int milliseconds);
 
-void type(const char *sentence);
+void printStory(const char *sentence);
 
 Player* gameInitializer(char *PlayerID);
 
@@ -183,8 +185,7 @@ int playMinigame(Player *player,char *gameName);
 int getNpcNumber();
 int getNPCID(char *npcName);
 void interactWith(Player *player, char *npc); // Requires Quest Submission
-void chooseNPC(char **NPCsAvailable, Player *player);
-
+void chooseNPC(char **NPCsAvailable, Player *player,int *state);
 
 
 
@@ -210,7 +211,7 @@ void chooseNPC(char **NPCsAvailable, Player *player);
 //From locations.h
 
 void navigationMode(Player *player,int *state);
-char *getQuestLocation(char *QuestID);
+char *getQuestLocation(char *NPCQuestID);
 char **returnNPCsAvailable(char *locationNode);
 
 
@@ -221,12 +222,11 @@ char **returnNPCsAvailable(char *locationNode);
 void questMode(Player *player,int *state);
 void addActiveQuest(Player *player, char *questID);
 void activateQuest(Player *player, char *npc, char *NPCQuestID);
-char *getQuestDescription(const char *NPCQuestID);
-void getQuestReward(Player *player, const char *questID);
-bool anyQuesttoSubmit(Player *player, const char *npcName);
+char *getQuestDescription(char *NPCQuestID);
+void giveQuestReward(Player *player, char *questID);
+bool anyQuesttoSubmit(Player *player, char *npcName);
 char *getQuestID(Player *player, char *npcName);
 char *questDialogues(char *questID);
-void interactWithLocalNPCs(Player *player);
 void interactionMode(Player* player,int *state);
 
 
