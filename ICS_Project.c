@@ -23,7 +23,7 @@ int getNpcNumber()//This works checked
 
     size_t bytesRead = fread(fileContent, 1, fileSize, file);
     // if (bytesRead != fileSize) {
-    //     printf("Error reading file.\n");
+    //     printf("Error reading file.\n",31,0);
     //     fclose(file);
     //     free(fileContent);
     //     return NULL;
@@ -34,7 +34,7 @@ int getNpcNumber()//This works checked
 
     cJSON *root=cJSON_Parse(fileContent);
     if (root == NULL) {
-        printf("Error parsing JSON data.\n");
+        printf("Error parsing JSON data.\n",31,0);
         free(fileContent);
         return -1;
     }
@@ -67,6 +67,41 @@ void printStory(const char *sentence,int color,int style) {
     printf("\033[0m");
 }
 
+// void delay(int milliseconds) {
+//     usleep(milliseconds * 1000); // usleep takes microseconds
+// }
+
+// void printStory(const char *format, int color, int style, ...) {
+//     // Print color code
+//     printf("\033[%d;%dm", style, color);
+
+//     // Variable argument handling
+//     va_list args;
+//     va_start(args, style);
+
+//     // Print formatted output with delay between characters
+//     char *ptr = (char *)format;
+//     while (*ptr != '\0') {
+//         if (*ptr == '%' && *(ptr + 1) != '\0' && (*(ptr + 1) == 'd' || *(ptr + 1) == 's')) {
+//             vprintf("%c", args);
+//             fflush(stdout); // Flush the output buffer to ensure immediate printing
+//             delay(50);     // Delay between characters (adjust as needed)
+//             ptr += 2;      // Move past the placeholder
+//         } else {
+//             printf("%c", *ptr);
+//             fflush(stdout); // Flush the output buffer to ensure immediate printing
+//             delay(50);     // Delay between characters (adjust as needed)
+//             ptr++;
+//         }
+//     }
+
+//     // End variable argument handling
+//     va_end(args);
+
+//     // Reset color to default
+//     printf("\033[0m");
+// }
+
 int Falconry(Player *player){return 0;}
 // int playMiniGame(Player *player,char *gameName)
 // {
@@ -88,7 +123,7 @@ int Falconry(Player *player){return 0;}
             
 //         }
 //     }
-//     printf("No function found for input: %s\n", gameName);
+//     printStory("No function found for input: %s\n", gameName);
 
 // }
 
@@ -155,7 +190,7 @@ Player *createNewPlayer(char *playerID)//This works checked
         exit(EXIT_FAILURE);
     }
 
-    int numOfNpcs=getNpcNumber();//reading chharcters.json for no of npcs
+    int numOfNpcs=getNpcNumber();//reading characters.json for no of npcs
 
     newPlayer->NPCInfo=(int**)malloc(sizeof(int*)*numOfNpcs);
     if (newPlayer->NPCInfo == NULL)
@@ -183,7 +218,7 @@ Player *createNewPlayer(char *playerID)//This works checked
     newPlayer->stats->luck = 7;
 
     newPlayer->inventory->size = 10;
-    strcpy(newPlayer->inventory->items[0],"Gladiator's Sword");
+    newPlayer->inventory->items[0]=strdup("Gladiator's Sword");
     newPlayer->inventory->items[1]=NULL;
     newPlayer->inventory->activeItems[0]=0;//not equiped
     newPlayer->inventory->activeItems[1]=-1;//NULL
@@ -244,6 +279,7 @@ void savePlayerData(Player *player)//This works checked
     {
         cJSON *item=cJSON_CreateObject();
         cJSON_AddItemToArray(itemsArray,item);
+        // printf("mi%s",player->inventory->items[i]);
         cJSON_AddStringToObject(item,"item",player->inventory->items[i]);
         cJSON_AddNumberToObject(item,"isEquiped",player->inventory->activeItems[i]);
     }
@@ -289,10 +325,10 @@ void savePlayerData(Player *player)//This works checked
 Player *loadPlayerData(char *playerID)//This works checked
 {
     int i;
-    char *fileName;
-    strcpy(fileName,playerID);
+    char *fileName = (char *)malloc(strlen(playerID) + 6); // 6 for ".json\0"
+    fileName=strdup(playerID);
     strcat(fileName,".json");
-
+    // printStory("filaName:|%s|",fileName,31,0);
     FILE *file=fopen(fileName,"r");
     if(file==NULL)
     {
@@ -301,19 +337,27 @@ Player *loadPlayerData(char *playerID)//This works checked
     }
 
     fseek(file,0,SEEK_END);
-    long fileSize = ftell(file);
+    long fileSize=ftell(file);
     fseek(file,0,SEEK_SET);
 
-    char *fileContent = (char*)malloc(fileSize + 1);
+    char *fileContent=(char*)malloc(fileSize+1);
     if (fileContent == NULL) {
         fprintf(stderr, "Memory allocation failed for file content\n");
         fclose(file);
         return NULL;
     }
 
-    fread(fileContent,1,fileSize,file);
-    fclose(file);
+    size_t bytesRead = fread(fileContent, 1, fileSize, file);
+    // if (bytesRead != fileSize) {
+    //     printf("Error reading file.\n");
+    //     fclose(file);
+    //     free(fileContent);
+    //     return NULL;
+    // }
+    
     fileContent[fileSize]=0;
+    fclose(file);
+
 
     cJSON *root=cJSON_Parse(fileContent);
     cJSON *playerObject=cJSON_GetObjectItem(root,"player");
@@ -397,9 +441,8 @@ Player* gameInitializer(char *PlayerID)//This works checked
     int input;
     Player *player;
 
-    printf("\nEnter (1) to Start a New Game");
-    printf("\nEnter (2) Load an Old Game");
-    printf("\nEnter a Choice : ");
+    printStory("\nEnter (1) to Start a New Game",31,0);
+    printStory("\nEnter a Choice : ",31,0);
     scanf("%d",&input);
 
     if (input == 1)
@@ -415,18 +458,18 @@ Player* gameInitializer(char *PlayerID)//This works checked
         player = loadPlayerData(PlayerID);
         if (player == NULL)
         {
-            printf("No saved game found. Starting a new game...\n");
+            printStory("No saved game found. Starting a new game...\n",31,0);
             player = createNewPlayer(PlayerID);
             savePlayerData(player);
         }
         else
         {
-            printf("Old game loaded successfully\n");
+            printStory("Old game loaded successfully\n",31,0);
         }
     }
     else
     {
-        printf("Invalid choice. Starting a new game...\n");
+        printStory("Invalid choice. Starting a new game...\n",31,0);
         player = createNewPlayer(PlayerID);
         savePlayerData(player);
     }
@@ -436,10 +479,10 @@ Player* gameInitializer(char *PlayerID)//This works checked
 
 void selectState(int *state)//This works checked
 {
-    printf("\nEnter (0) to Choose  Navigation Mode");
-    printf("\nEnter (1) to Choose Interaction Mode");
-    printf("\nEnter (2) to Choose       Quest Mode");
-    printf("\nChoose a Mode to continue your Journey : ");
+    printStory("\nEnter (0) to Choose  Navigation Mode",31,0);
+    printStory("\nEnter (1) to Choose Interaction Mode",31,0);
+    printStory("\nEnter (2) to Choose       Quest Mode",31,0);
+    printStory("\nChoose a Mode to continue your Journey : ",31,0);
 
     scanf("%d",state);
 
@@ -479,7 +522,7 @@ void navigationMode(Player *player,int *state)//This works checked BUT ADD SOME 
 
     cJSON *root=cJSON_Parse(fileContent);
     if (root == NULL) {
-        printf("Error parsing JSON data.\n");
+        printStory("Error parsing JSON data.\n",31,0);
         free(fileContent);
         return;
     }
@@ -523,14 +566,16 @@ void navigationMode(Player *player,int *state)//This works checked BUT ADD SOME 
         for(int i=0;i<cJSON_GetArraySize(children);i++)
         {
             cJSON *child=cJSON_GetArrayItem(children,i);
-            printf("\n Enter (%d) to go to %s",i+1,cJSON_GetObjectItem(child,"name")->valuestring);
+            char toPrint[100];
+            sprintf(toPrint,"\n Enter (%d) to go to %s",i+1,cJSON_GetObjectItem(child,"name")->valuestring);
+            printStory(toPrint,31,0);
         }
 
-        printf("\nOr Enter (i/I) for Interaction Mode");
-        printf("\nEnter (q/Q) for Quest Mode");
-        printf("\nEnter (e/E) to Exit the Game");
+        printStory("\nOr Enter (i/I) for Interaction Mode",31,0);
+        printStory("\nEnter (q/Q) for Quest Mode",31,0);
+        printStory("\nEnter (e/E) to Exit the Game",31,0);
 
-        printf("\nEnter your choice : ");
+        printStory("\nEnter your choice : ",31,0);
         getchar();
         input=getc(stdin);
         // flushInputBuffer();
@@ -559,8 +604,8 @@ void navigationMode(Player *player,int *state)//This works checked BUT ADD SOME 
                 return;
             }
 
-            printf("\nSuch a place doesn't exist. Enter a Valid Location!");
-            printf("\nChoose a Location to move to : ");
+            printStory("\nSuch a place doesn't exist. Enter a Valid Location!",31,0);
+            printStory("\nChoose a Location to move to : ",31,0);
             getchar();
             input=getc(stdin);
             // flushInputBuffer();
@@ -588,20 +633,25 @@ void navigationMode(Player *player,int *state)//This works checked BUT ADD SOME 
     else
     {
         // printf("\nin else");
-        printf("\nEnter (0) to go out of %s",token_prev);
+        char toPrint[100];
+        sprintf(toPrint,"\nEnter (0) to go out of %s",token_prev);
+        printStory(toPrint,31,0);
         for(int i=0;i<cJSON_GetArraySize(children);i++)
         {
             cJSON *child=cJSON_GetArrayItem(children,i);
-            printf("\nEnter (%d) to go to %s",(i+1),cJSON_GetObjectItem(child,"name")->valuestring);
+            char toPrint[100];
+            sprintf(toPrint,"\nEnter (%d) to go to %s",(i+1),cJSON_GetObjectItem(child,"name")->valuestring);
+            printStory(toPrint,31,0);
+
         }
 
-        printf("\n");
-        printf("\nOr Enter (i/I) for Interaction Mode");
-        printf("\nEnter (q/Q) for Quest Mode");
-        printf("\nEnter (e/E) to Exit the Game");
+        printStory("\n",31,0);
+        printStory("\nOr Enter (i/I) for Interaction Mode",31,0);
+        printStory("\nEnter (q/Q) for Quest Mode",31,0);
+        printStory("\nEnter (e/E) to Exit the Game",31,0);
 
-        printf("\n");
-        printf("\nEnter your choice : ");
+        printStory("\n",31,0);
+        printStory("\nEnter your choice : ",31,0);
         getchar();
         input=getc(stdin);
         // flushInputBuffer();
@@ -628,8 +678,8 @@ void navigationMode(Player *player,int *state)//This works checked BUT ADD SOME 
                 return;
             }
 
-            printf("\nSuch a place doesn't exist. Enter a Valid Location!");
-            printf("\nChoose a Location to move to : ");
+            printStory("\nSuch a place doesn't exist. Enter a Valid Location!",31,0);
+            printStory("\nChoose a Location to move to : ",31,0);
             getchar();
             input=getc(stdin);
             // flushInputBuffer();
@@ -697,7 +747,7 @@ void addActiveQuest(Player *player, char *questID)//This works checked (A)
     if (newQuestID == NULL)
     {
         // Handle memory allocation error
-        printf("Error: Memory allocation failed\n");
+        printStory("Error: Memory allocation failed\n",31,0);
         return;
     }
 
@@ -706,7 +756,7 @@ void addActiveQuest(Player *player, char *questID)//This works checked (A)
     if (player->activeQuests == NULL)
     {
         // Handle memory reallocation error
-        printf("Error: Memory reallocation failed\n");
+        printStory("Error: Memory reallocation failed\n",31,0);
         free(newQuestID); // Free the allocated memory for the new quest ID
         return;
     }
@@ -719,7 +769,7 @@ void addActiveQuest(Player *player, char *questID)//This works checked (A)
     // {
     //     printf("%s ", player->activeQuests[i]);
     // }
-    printf("\n");
+    printStory("\n",31,0);
 }
 
 // Function to find quest level
@@ -1182,38 +1232,52 @@ void interactWith(Player *player, char *npc) // Requires Quest Submission
 
     if (anyActiveQuest(player, npc) == true)
     {
-        printf("\nYou have an active quest related to this NPC. Please complete the quest first\n");
+        printStory("\nYou have an active quest related to this NPC. Please complete the quest first\n",31,0);
     }
     else
     {
         char *dialogues = questDialogues(NPCQuestID); // NPCQuestID instead of String
         if (dialogues != NULL)
         {
-            printf("\n%s\n", dialogues);//UI MODIFICATIONS REQ IF TIME
+            char toPrint[1000];
+            sprintf(toPrint,"\n%s\n",dialogues);//UI MODIFICATIONS REQ IF TIME
+            printStory(toPrint,31,0);
+
             free(dialogues); // Free the allocated memory
         }
 
+        char toPrint[10];
+        sprintf(toPrint,"\n%s\n","Description :");
+        printStory(toPrint,31,0);
         // Quest description and reward
         char *questDescription = getQuestDescription(NPCQuestID);
         if (questDescription != NULL)
         {
-            printf("\n%s\n", questDescription);
+            char toPrint[100];
+            sprintf(toPrint,"\n%s\n",questDescription);
+            printStory(toPrint,31,0);
+
             free(questDescription);
 
             // PRINT THE QUEST REWARDS
 
 
-            // Quest Location
+            toPrint[10];
+            sprintf(toPrint,"\n%s\n","Hint : ");
+            printStory(toPrint,31,0);
             char *questLocation = getQuestLocation(NPCQuestID);
+            // Quest Location
             if (questLocation != NULL)
             {
-                printf("\nYou must go to %s to complete this Quest\n", questLocation);
+                char toPrint[20];
+                sprintf(toPrint,"\nYou must go to %s to complete this Quest\n",questLocation);
+                printStory(toPrint,31,0);
                 free(questLocation);
             }
 
             // Get input to accept or reject
-            printf("\nEnter (1) to accept this quest right now\nEnter (0) to reject this quest for now");
-            printf("\nEnter your choice :");
+            printStory("\nEnter (1) to accept this quest right now\nEnter (0) to reject this quest for now",31,0);
+            printStory("\nEnter your choice :",31,0);
             int questinput;
             scanf("%d", &questinput);
 
@@ -1221,12 +1285,15 @@ void interactWith(Player *player, char *npc) // Requires Quest Submission
             if (questinput == 1)
             {
                 activateQuest(player, npc, NPCQuestID);
-                printf("\nAccepted Quest!\n");
+                printStory("\nAccepted Quest!\n",31,0);
             }
         }
         else 
         {
-            printf("\nYou have been ignored by %s\n", npc);
+            char toPrint[25];
+            sprintf(toPrint,"\nYou have been ignored by %s\n", npc);
+            printStory(toPrint,31,0);
+
         }
         
     }
@@ -1239,16 +1306,35 @@ void chooseNPC(char **NPCsAvailable, Player *player,int *state)
     char input;
 
     // printf("Available NPCs:\n");
-    for(i=0;NPCsAvailable[i];i++)
-    {
-        printf("\nEnter (%d) to interact with %s",i+1,NPCsAvailable[i]);
+    for (int i = 0; NPCsAvailable[i]; i++) {
+        // Determine the required size for the formatted string
+        int size = snprintf(NULL, 0, "\nEnter (%d) to interact with %s", i + 1, NPCsAvailable[i]);
+        if (size < 0) {
+            printf("Error in formatting.\n");
+            break;
+        }
+
+        // Allocate memory dynamically to hold the formatted string
+        char *toPrint = (char *)malloc(size + 1); // Add 1 for the null terminator
+
+        // Populate the dynamically allocated string with formatted data
+        if (toPrint != NULL) {
+            sprintf(toPrint, "\nEnter (%d) to interact with %s", i + 1, NPCsAvailable[i]);
+            printStory(toPrint, 31, 0);
+
+            // Free the dynamically allocated memory
+            free(toPrint);
+        } else {
+            printf("Memory allocation failed.\n");
+            break;
+        }
     }
 
-    printf("\nOr Enter (n/N) for Navigation Mode");
-    printf("\nEnter (q/Q) for Quest Mode");
-    printf("\nEnter (e/E) to Exit the Game\n");
+    printStory("\nOr Enter (n/N) for Navigation Mode",31,0);
+    printStory("\nEnter (q/Q) for Quest Mode",31,0);
+    printStory("\nEnter (e/E) to Exit the Game\n",31,0);
 
-    printf("\nEnter Your choice : ");
+    printStory("\nEnter Your choice : ",31,0);
     getchar();
     input=getc(stdin);
     // flushInputBuffer();
@@ -1276,8 +1362,8 @@ void chooseNPC(char **NPCsAvailable, Player *player,int *state)
             return;
         }
 
-        printf("\nSuch an NPC doesn't exist. Enter a Valid NPC!");
-        printf("\nChoose a NPC to interact with : ");
+        printStory("\nSuch an NPC doesn't exist. Enter a Valid NPC!",31,0);
+        printStory("\nChoose a NPC to interact with : ",31,0);
         getchar();
         input=getc(stdin);
         // flushInputBuffer();
@@ -1405,7 +1491,7 @@ void equipItem(Player *player,int index)
 
     cJSON *root=cJSON_Parse(fileContent);
     if (root == NULL) {
-        printf("Error parsing JSON data.\n");
+        printStory("Error parsing JSON data.\n",31,0    );
         free(fileContent);
         return;
     }
@@ -1433,7 +1519,7 @@ void equipItem(Player *player,int index)
 
     player->inventory->activeItems[index]=1;
 
-    printf("\nEquiped Item successfully!");
+    printStory("\nEquiped Item successfully!",31,0);
 }
 
 void unequipItem(Player *player,int index)
@@ -1469,7 +1555,7 @@ void unequipItem(Player *player,int index)
 
     cJSON *root=cJSON_Parse(fileContent);
     if (root == NULL) {
-        printf("Error parsing JSON data.\n");
+        printStory("Error parsing JSON data.\n",31,0);
         free(fileContent);
         return;
     }
@@ -1496,7 +1582,7 @@ void unequipItem(Player *player,int index)
     }
 
     player->inventory->activeItems[index]=0;
-    printf("\nUnequiped Item successfully!");
+    printStory("\nUnequiped Item successfully!",31,0);
 }
 
 // Function to find the last location node in the currentLocation array of Player
@@ -1526,14 +1612,18 @@ void questMode(Player *player,int *state)
 
     printf("\n");//Heading
     for(i=0;player->inventory->items[i];i++)
-    printf("\nEnter (%d) to select Item => %s",i+1,player->inventory->items[i]);
-    
-    printf("\nOr Enter (s/S) to Skip");
-    printf("\nEnter (i/I) for Interaction Mode");
-    printf("\nEnter (n/N) for Navigation Mode");
-    printf("\nEnter (e/E) to Exit the Game");
+    {
+        char toPrint[100];
+        sprintf(toPrint,"\nEnter (%d) to select Item => %s",i+1,player->inventory->items[i]);
+        printStory(toPrint,31,0);
 
-    printf("\nEnter your choice : ");
+    }
+    printStory("\nOr Enter (s/S) to Skip",31,0);
+    printStory("\nEnter (i/I) for Interaction Mode",31,0);
+    printStory("\nEnter (n/N) for Navigation Mode",31,0);
+    printStory("\nEnter (e/E) to Exit the Game",31,0);
+
+    printStory("\nEnter your choice : ",31,0);
     getchar();
     input=getc(stdin);
     // flushInputBuffer();
@@ -1561,8 +1651,8 @@ void questMode(Player *player,int *state)
         if(player->inventory->activeItems[input-'1'])
         {
             char toUnequip;
-            printf("\nItem Already Equiped.");
-            printf("\nDo you want to Unequip it (Y/N) :");
+            printStory("\nItem Already Equiped.",31,0);
+            printStory("\nDo you want to Unequip it (Y/N) :",31,0);
             getchar();
             toUnequip=getc(stdin);
 
@@ -1573,8 +1663,8 @@ void questMode(Player *player,int *state)
         else
         {
             char toEquip;
-            printf("\nItem not currently Equiped.");
-            printf("\nDo you want to Equip it (Y/N) :");
+            printStory("\nItem not currently Equiped.",31,0);
+            printStory("\nDo you want to Equip it (Y/N) :",31,0);
             getchar();
             toEquip=getc(stdin);
 
@@ -1650,17 +1740,20 @@ void questMode(Player *player,int *state)
     {
         // printf("\n%d",choises[j]);
         cJSON *quest=cJSON_GetArrayItem(questsArray,choises[j]);
-        printf("\nEnter (%d) to start quest=> %s",j+1,cJSON_GetObjectItem(quest,"name")->valuestring);
+        char toPrint[100];
+        sprintf(toPrint,"\nEnter (%d) to start quest=> %s",j+1,cJSON_GetObjectItem(quest,"name")->valuestring);
+        printStory(toPrint,31,0);
+
     }
 
     if(choises[0]==-1)
-        printf("\nNo Active quest at this location\nExplore More!");
+        printStory("\nNo Active quest at this location\nExplore More!",31,0);
 
-    printf("\nOr Enter (i/I) for Interaction Mode");
-    printf("\nEnter (n/N) for Navigation Mode");
-    printf("\nEnter (e/E) to Exit the Game");
+    printStory("\nOr Enter (i/I) for Interaction Mode",31,0);
+    printStory("\nEnter (n/N) for Navigation Mode",31,0);
+    printStory("\nEnter (e/E) to Exit the Game",31,0);
 
-    printf("\nEnter your choice : ");
+    printStory("\nEnter your choice : ",31,0);
     getchar();
     input=getc(stdin);
     // flushInputBuffer();
@@ -1703,15 +1796,18 @@ void questMode(Player *player,int *state)
             return;
         }
 
-        printf("\nSuch a quest doesn't exist. Enter a Valid Choice!");
-        printf("\nEnter your choice : ");
+        printStory("\nSuch a quest doesn't exist. Enter a Valid Choice!",31,0);
+        printStory("\nEnter your choice : ",31,0);
         getchar();
         input=getc(stdin);
         // flushInputBuffer();
     }
 
     cJSON *child=cJSON_GetArrayItem(questsArray,choises[input-'1']);
-    printf("game = %s",cJSON_GetObjectItem(child,"Minigame")->valuestring);
+    char toPrint[1000];
+    sprintf(toPrint,"game = %s",cJSON_GetObjectItem(child,"Minigame")->valuestring);
+    printStory(toPrint,31,0);
+
     // int result=playMiniGame(player,cJSON_GetObjectItem(child,"Minigame")->valuestring);//in player.c
     // if(result)
     // {

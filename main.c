@@ -6,7 +6,7 @@ int state;
 
 int main()
 {
-    printf("\e[1;1H\e[2J");
+    printStory("\e[1;1H\e[2J",31,0);
 
     char *playerID = (char *)malloc(sizeof(char) * MAX_PLAYER_ID_LENGTH);
     if (playerID == NULL)
@@ -19,7 +19,7 @@ int main()
 
     // printRules();
 
-    printf("\nEnter Login ID : ");
+    printStory("\nEnter Login ID : ",31,0);
     if (scanf("%s", playerID) != 1)
     {
         fprintf(stderr, "Error reading player ID\n");
@@ -34,7 +34,7 @@ int main()
         free(playerID);
         return EXIT_FAILURE;
     }
-    printf("\nid-%s",player->id);
+    // printStory("\nid-%s",player->id,31,0);
     // printf("\nname-%s",player->name);
     // printf("\nlevel-%d",player->level);
     // printf("\nstats,hp-%d",player->stats->HP);
@@ -50,7 +50,7 @@ int main()
     while (state >= 0)
         processState(player, &state); // function that processes the state
 
-    printf("Thank you for playing The Vindication"); /// EXIT STATEMENT
+    printStory("Thank you for playing The Vindication",31,0); /// EXIT STATEMENT
 
     savePlayerData(player);
 //     // Cleanup
