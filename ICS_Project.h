@@ -8,6 +8,8 @@
 #include"cJSON.h"
 // #include"cJSON.c"
 #include<time.h>
+#include <stdarg.h>
+
 
 #define MAX_PLAYER_ID_LENGTH 100
 
