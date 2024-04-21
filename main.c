@@ -52,7 +52,7 @@ int main()
 
     printf("Thank you for playing The Vindication"); /// EXIT STATEMENT
 
-//     savePlayerData(player);
+    savePlayerData(player);
 //     // Cleanup
 //     freePlayer(playerID);
 //     return EXIT_SUCCESS;

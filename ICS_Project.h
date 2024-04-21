@@ -155,7 +155,7 @@ typedef struct
 
 void delay(int milliseconds);
 
-void printStory(const char *sentence);
+void printStory(const char *sentence,int color,int style);
 
 Player* gameInitializer(char *PlayerID);
 

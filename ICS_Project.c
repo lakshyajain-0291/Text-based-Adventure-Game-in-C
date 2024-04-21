@@ -52,15 +52,7 @@ void delay(int milliseconds) {
     while (clock() < start_time + milliseconds * CLOCKS_PER_SEC / 1000);    
 }
 
-void printStory(const char *sentence) {
-    int color,style;
-    
-    // Ask user for color input
-    printf("\nEnter color code: ");
-    scanf("%d", &color);
-    printf("\nEnter text style: ");
-    scanf("%d", &style);
-    
+void printStory(const char *sentence,int color,int style) {    
     // Print color code
     printf("\033[%d;%dm", style,color);
     
