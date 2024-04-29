@@ -24,7 +24,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Falconry"
+            "Minigame": "falconry"
         },
         {
             "QuestID": "0_2",
@@ -297,7 +297,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Wordle"
+            "Minigame": "Hangtheman"
         },
         {
             "QuestID": "7_2",
@@ -323,7 +323,7 @@
                 "item": null,
                 "relationship": 50
             },
-            "Minigame": "Falconry"
+            "Minigame": "falconry"
         },
         {
             "QuestID": "8_1",

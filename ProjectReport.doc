@@ -1,0 +1,287 @@
+ICS Spring 24 Major Project Report : Customizable Open-Ended Text Based Adventure Game World in C
+
+Description 
+
+A Modifiable Historical Fiction Open-Ended Adventure Game world, “The Vindication”, developed with many minigames, non-playable character interactions, dialogue-based quests, Terminal ASCII graphics, in-Game audio in C using structures and parsing, modifying and creating JSON files in C.
+
+
+Introduction
+
+The Purpose of the project is to develop a C program capable of integrating various features of a computer game. The project presents a captivating Text-Based Adventure Open World game developed in C language, enriched with user interaction features such as mouse control and sound effects. Utilizing the cJSON library for JSON parsing, this project offers players a dynamic and immersive gaming experience within a terminal environment. This Project Report discusses Features, Implementation Steps, Opportunities and Future Scopes of the Project. 
+
+Features
+
+Open-World Design: The game world is open-ended, allowing players to explore various locations and interact with non-playable characters (NPCs).
+
+Modifiable Quests: There are currently 27 quests, each of which can be modified or expanded upon easily due to their JSON format storage.
+
+Minigames: Several mini-games are integrated into the gameplay, including Minesweeper,  Prison Escape Game, Hangman, a Snake game, with terminal ASCII graphics, in-game music, and if possible Terminal Mouse Control..
+
+JSON Data Structure: All game content, including NPC interactions, quest details, and mini-game parameters, are stored and parsed using the JSON format, enabling easy modification and expansion of the game's content.
+
+Unique Game ID and Save Functionality: The game is initiated with a unique ID, and players have the option to load a saved game. A unique JSON file is created for each game session, allowing for seamless continuation of gameplay. The Load functionality is currently non-integrated with the Program.
+
+Three-State Game Loop: The game loop consists of three states:
+Navigation State: Players can move through the game world based on navigation data stored in navigations.json.
+Interaction State: Players can interact with NPCs, initiate quests, and progress through dialogues. Active quests are tracked and managed within this state.
+Mini-game State: If there's an active quest related to the location, players can engage in mini-games. Winning these games progresses quest status.
+
+Item System: The game includes an item system where players can equip items to receive buffs, enhancing their gameplay experience.
+
+Expandability: The project is highly expandable, allowing for the addition of new quests, NPCs, mini-games, and items with minimal effort due to its modular and data-driven design.
+
+Sound Integration: The project uses system commands (like “afplay”) to play .mp3 files over terminal (available for MacOS devices).
+Code Logic and Game Mechanics
+
+Game Authorization and Logging In: A file is created whenever a unique player ID is entered. Upon exit, the existing file is modified to the current game status and saved.
+. 
+	The Game is divided into 3 “States”: Navigation, NPC Interaction and Quests. 
+
+STATE 1 (NAVIGATION): A navigation file of a map is made connecting each location node to its multiple children. Each Child location node has a unique parent. Navigation is allowed only to Parent or Child location nodes. To enter a “Sibling” node, one must go to the parent and then to the other child. User is prompted amongst allowed nodes to navigate through the game world, or to change his state to interact or perform quest-tasks.   
+STATE 2 (INTERACTION): This state offers choices to interact with non-playable characters of the game story at each location node. The file related to characters’ location is read, to find available NPCs at that location node. The user is prompted to choose a relevant NPC, or to change his state to navigate or perform quest-tasks available at that location. When chosen a relevant NPC, the user is prompted to submit (if any) previous quests. If submitted, the reward is given by modifying the player data accordingly. Then dialogues and other relevant information related to the next quest (if any) are displayed by parsing the dialogue or other relevant files. Then the user is prompted to accept or reject the displayed quest. If accepted, the player’s data is modified accordingly. These data changes can be checked once the game has ended by viewing the corresponding <player_id>.json file to the Player ID
+STATE 3 (QUESTS): This state integrates minigames to the Game World. When at a location node with an active quest (parsed from the quest file, and the player data structure), the user is prompted to utilize an Item, which provides special Buffs to the protagonist, ultimately changing the player data structure. Then he is asked to do one of the active quests with help of a minigame. If the game is won, the quest is removed from the activeQuests array, and its status is changed to “toSubmit”. The minigames’ mechanics are as follows:
+Minesweeper
+Game Setup: Minesweeper begins by generating a grid of cells, where each cell can either contain a mine or be empty. The size of the grid and the number of mines are typically specified at the beginning. Mines are randomly placed within the grid, ensuring that each cell has a certain probability of containing a mine.
+Gameplay Mechanics: The player interacts with the grid by clicking on cells. If a cell contains a mine, the game ends. If the clicked cell is empty, it reveals itself along with the number of neighboring cells containing mines. If the revealed cell has no neighboring mines, adjacent cells are automatically revealed recursively until cells with mines nearby are encountered.
+Flagging Mines: To help identify mines, players can flag cells they suspect contain mines. Flagging prevents accidental clicks on those cells. Players have a limited number of flags they can use, typically equal to the number of mines on the grid.
+Winning and Losing: The game is won when all non-mine cells are revealed, and all mines are flagged. Conversely, the game is lost if the player clicks on a cell containing a mine. After winning or losing, the player can choose to start a new game with the same or different parameters.
+Memory Card Game
+Game Setup: A 4x4 matrix is randomly generated with integers 1 to 8, each occurring twice. This creates a total of 16 cards with 8 pairs. These cards are initially hidden from the player.
+Gameplay Mechanics: The player clicks on two cards to reveal them. If both cards correspond to the same number, they remain revealed, and the player's progress increases by one. Otherwise, if the cards do not match, the player's attempts decrease by one. The player's goal is to reveal all the numbers within the given number of attempts to win the game.
+Card Matching: The game checks if the two clicked cards have the same number. If they do, the corresponding numbers are added to a progress array, and the player's progress increases. If not, the attempts decrease, and the cards remain hidden again.
+Winning and Losing: The game continues until the player runs out of attempts or reveals all the numbers. If the player exhausts all attempts without revealing all numbers, they lose the game. Conversely, if the player successfully reveals all numbers within the given attempts, they win.
+Prison Escape Game
+Game Mechanics:
+Player Movement: The player can move in four directions: up (W), left (A), down (S), and right (D). The player can only move to adjacent empty cells (represented by zeros) in the grid.
+Guard Movement: The guard moves towards the player's position based on a simple chasing algorithm. If the guard detects the player's presence in its line of sight, it moves towards the player. Otherwise, it may continue patrolling or follow a predetermined path.
+Turn-based Gameplay: The player and the guard take turns moving on the grid. First, the player makes a move, followed by the guard.
+Win/Loss Conditions:
+Win Condition: The player wins the game if they successfully reach the exit point without being caught by the guard. Upon reaching the exit, a congratulatory message is displayed, and the game ends.
+Loss Condition: The player loses the game if the guard catches them before they reach the exit. When the guard catches the player, a failure message is displayed, and the game ends.
+Boundary Condition Checks:
+Player Movement Boundary: Before moving the player, the game checks if the intended move would keep the player within the boundaries of the grid. If the move would cause the player to go out of bounds, it is not allowed.
+Guard Movement Boundary: Similarly, when calculating the guard's movement, the game ensures that the guard remains within the bounds of the grid.
+Obstacle Collision Check: The game checks if the player's intended movement path intersects with any obstacles (represented by non-zero cells) in the grid. If there's an obstacle in the way, the player cannot move to that cell.
+Lock Picking (Number Code Breaker)
+Initialization:
+The game generates a random number with n digits, where n is the length of the number to guess. This number is hidden from the player.
+The player is given a limited number of attempts to guess the correct number.
+Guessing Process:
+The player is prompted to enter a guess for the hidden number.
+After each guess, the game provides feedback to the player in the form of clues.
+Clue Generation:
+For each digit in the player's guess:
+If the digit in the guess matches the digit in the same position in the hidden number, the clue is "2" (indicating a correct digit in the correct position).
+If the digit in the guess matches a digit in the hidden number but is in a different position, the clue is "1" (indicating a correct digit but in the wrong position).
+If the digit in the guess does not match any digit in the hidden number, the clue is "0" (indicating a wrong digit).
+Win/Loss Conditions:
+If the player correctly guesses the entire number within the allotted attempts, they win the game.
+If the player exhausts all attempts without guessing the correct number, they lose the game.
+Combat Game (incompletely implemented): 
+Initialization:
+The game initializes the player and opponent with certain attributes like stamina and weapon strength.
+Player Input:
+The player is prompted to input their attack and defense moves.
+The player selects their attack and defense moves by entering two characters, representing attack and defense respectively. The choices are:
+'H' for head attack/defense
+'B' for body attack/defense
+'L' for leg attack/defense
+Opponent Behavior:
+The opponent's attack and defense moves are determined randomly.
+The opponent randomly selects attack and defense moves based on a predetermined probability distribution.
+Combat Resolution:
+Based on the player's and opponent's attack and defense moves, the game calculates the damage inflicted on each other's stamina.
+The damage calculation depends on the weapon strength and attack moves.
+If the opponent's stamina or the player's stamina reaches zero or below, the game ends.
+Win/Loss Conditions:
+If the opponent's stamina reaches zero or below, the player wins the game.
+If the player's stamina reaches zero or below, the player loses the game.
+Feedback:
+After each round of combat, the game prints the status of player and opponent stamina.
+It also displays the attack and defense moves chosen by both the player and the opponent
+Falconry Game
+Initialization:
+The game initializes the spawn position of the falcon randomly within a specific range on the y-axis. The falcon starts flying from the left side of the screen (x=0).
+Falcon Flight:
+The falcon moves horizontally towards the right side of the screen (x-axis) with each iteration of the game loop.
+The falcon's vertical movement (y-axis) is determined based on its previous flight behavior.
+Initially, the falcon's flight direction (up or down) is randomly determined.
+Player Input:
+The player has a limited number of arrows to shoot down the falcon.
+The player can press the spacebar to shoot an arrow.
+Upon shooting, the player's mouse click coordinates are recorded, and the arrow trajectory is displayed on the screen.
+Shooting Mechanism:
+When the player shoots an arrow, the game checks if the falcon's current position matches the player's mouse click coordinates.
+If the falcon is hit by the arrow, the game ends with the player's victory.
+If the player runs out of arrows or if the falcon reaches the right side of the screen without being hit, the game ends with the player's defeat.
+Feedback:
+After each shot, the game displays the trajectory of the arrow and updates the falcon's position.
+If the player successfully hits the falcon, a victory message is displayed.
+If the player fails to hit the falcon within the allotted arrows, a defeat message is displayed.
+
+.
+
+
+Code Implementation
+
+Extensive Use of Structures: The project makes extensive use of structures to organize and manage various game components, such as NPCs, quests, items, and game states. Structures provide a modular and organized approach to data management, enhancing code readability and maintainability.
+
+Use of Pointers: The project uses concept of complex pointers
+
+Dynamic Memory Allocation and Memory Management: DMA has been extensively used throughout the project to manage memory efficiently. Every allocated memory is freed wherever possible, ensuring optimal memory usage and preventing memory leaks.
+
+File Handling: The project extensively makes use of concepts of File Handling, especially to handle .json type files.
+JSON File Creation: Implemented to create a new game corresponding to the unique player ID provided
+JSON File Modification: Implemented to save game upon exit for that particular player ID.
+JSON File Parsing: Extensively implemented throughout runtime from parsing Player Data (in structure format) from player.json to data related to NPCs, Quests and Minigames. . 
+
+Terminal Mouse Control: The minigames in the project (particularly: Minesweeper and Memory Game) utilize windows.h library in C to locate position of mouse click at terminal in a coordinate system.
+
+Escape Sequences: Being based over text, this project utilizes several escape sequences for better user interface and experience, for example for differing colors and styles of text being displayed over terminal.
+
+Timed and Random Functions: The program utilizes time.h and srand(), rand() functions for delays, probabilistic conditions throughout runtime (especially in minigames).
+
+
+
+Learning Outcomes
+
+Proficiency in C Programming: Through the development of the Text-Based Adventure Open World game, proficiency in the C programming language was gained. This includes understanding language syntax, data structures, memory management, and file handling.
+
+Memory Management Skills: Extensive use of Dynamic Memory Allocation (DMA) and meticulous memory management practices were employed throughout the project. This experience enhanced understanding and proficiency in managing memory efficiently, preventing memory leaks, and optimizing resource usage.
+
+File Handling and JSON Management: The integration of the cJSON library for JSON parsing, modification and creation enabled storage, retrieval and manipulation of game content in JSON Format. This experience deepened understanding of JSON Data Structures and techniques. 
+
+Data Structure Implementation: The project's reliance on structures for organizing and managing game components, such as NPCs, quests, items, and game states, provided practical experience implementing and utilizing data structures effectively.
+
+Problem-Solving and Troubleshooting: Encountering challenges such as OS compatibility issues, integration difficulties, and limitations in graphical interface. development required problem-solving skills and the ability to troubleshoot and debug code effectively.
+
+Modular Design and Expandability: The project's modular and data-driven design facilitated easy modification and expansion of game content, including quests, NPCs, mini-games, and items. This experience underscored the importance of modular design principles for scalability and maintainability.
+
+Project Management and Planning: Planning and managing the project's development lifecycle, including requirements analysis, design, implementation, testing, and iteration, honed project management skills and fostered an understanding of iterative software development methodologies.
+
+Teamwork and Collaboration: If developed in a team setting, collaboration with team members on various aspects of the project, such as code integration, testing, and documentation, fostered teamwork skills and the ability to work effectively within a group dynamic.
+
+
+
+Development Techniques Utilized
+
+Version Control: We utilized Git and GitHub extensively throughout the project. Git allowed all contributors to collaborate seamlessly, manage code changes efficiently, and track project history. GitHub served as a centralized repository for our codebase, enabling version control, issue tracking, and collaborative code reviews.
+
+Modularity and Encapsulation: We adopted a modular approach to code design, breaking down the game logic into three Game States and various minigames. This allowed us to encapsulate related functionality within cohesive units, promoting code organization and facilitating easier maintenance and future expansion of the game.
+
+Macro Instructions and Enumeration: We leveraged macro instructions and enumeration to define constants and improve code readability. Macros provided symbolic names for values, colors and boundary checks, making the code more self-explanatory and easier to maintain and read. Enumerations were used in certain functionalities like Quest Management.
+ 
+Commenting and Documentation: We prioritized thorough commenting and documentation throughout the codebase. Inline comments were used to explain algorithms and logics. Additionally, we have prepared comprehensive documentation outlining the game's logic, design, and usage guidelines, facilitating future development and maintenance.
+
+Entity Identification and Referencing: Many elements of the game world, including NPCs and quests were assigned unique identifiers (IDs). These IDs were utilized to reference and manipulate corresponding data within the game engine. This approach facilitated efficient data management, enhanced modifiability, and enabled seamless integration of new game elements through JSON files or other data storage formats.
+
+
+Challenges encountered and Opportunities
+
+OS Compatibility Issues: Developing the game across different operating systems posed challenges due to variations in library support and system dependencies. This required careful consideration and adaptation of the codebase to ensure cross-platform compatibility. Major issue is that Terminal Mouse Control works on Windows OS, but not on MacOS while Sound Integration on terminal works on MacOS, but not on Windows OS. To solve this issue, we must find or develop features compatible with all Operating Systems. 
+
+Lack of Graphic Interface without External Libraries: The absence of a graphical interface without the use of external libraries limited the visual appeal of the game within the terminal environment. Overcoming this challenge involved leveraging ASCII art and terminal graphics to provide a visually engaging experience while adhering to the constraints of a text-based interface. To solve this issue, we must learn and utilize User Interface libraries compatible with C, like GTK or SDL
+
+Input Buffer Management: Handling user input effectively, especially in scenarios of unexpected or invalid input presented a significant challenge. This was solved by checking each input and providing a loop mechanism to allow the user to input again. A problem remains unsolved while taking mouse input during various minigames that hindered with the user input afterwards. 
+
+Mismanaged Work Organization: Lack of organization and foresight in task management lead to inefficiencies and confusion during the development process. This was mostly solved by adaptation of Git as a version control system. 
+
+
+Future Prospects
+
+Expansion of Content: Continuously enrich the gaming experience by introducing new quests, NPCs, locations, and mini-games.
+
+Variations with JSON: Facilitate rapid customization and expansion of the game by leveraging JSON files, allowing for the creation of diverse game scenarios, by adding new quests, non-Playable Characters, Location Nodes etc.
+
+Mod Tools: Develop user-friendly tools to simplify the modification process, empowering players and developers to customize the game effortlessly.
+
+AI Integration: Enhance replayability and immersion through the integration of AI algorithms to dynamically generate stories and quests tailored to each player's experience.
+
+Multiplayer: Foster a sense of community and collaboration by implementing multiplayer functionality, enabling players to explore and interact with each other within the game world, ultimately trying to make a MMORPG. 
+
+Random Events: Infuse unpredictability and excitement into gameplay with the introduction of random events, ensuring each playthrough offers unique challenges and opportunities.
+
+Repeatable/Daily Quests: Foster long-term engagement and enjoyment by incorporating repeatable or daily quests, providing players with an infinite game loop and ongoing incentives for exploration and participation.
+
+
+
+Contribution
+
+Aradhya Mahajan (B23CH1008)
+Development of minigames
+Minesweeper
+Memory Card Game
+Combat Game
+Prison Escape
+Falconry Game
+Lock picking (Number code break) game
+Development of State 1 i.e. Interaction State of game
+Writing Game World plot line including NPCs, Quests, Navigation Map, Dialogues and Items
+Writing JSON files according to the Game World Plot Line.
+Debugging and Error Handling’
+Minigame Integration
+Documentation
+Ideation and Brainstorming
+Danie George John (B23CI1012)
+Development of minigame: Hang the Man
+Development Terminal User Interface of all minigames
+Sound Integration in MacOS
+Ideation and Brainstorming
+Harsh Nandan Shukla
+Ideation and Brainstorming
+Aided in JSON processing
+Text processing via escape sequences
+Lakshya Jain (B23CS1039)
+
+
+Game Logic Development
+Development of state 0 i.e. Navigation State of game
+Development of state 2 i.e. Quest Task State of game
+Integration of Overall Game
+Integration of Text Processing
+Player.json Creation by JSON Creation through cJSON
+All JSON File parsing to get Game World Information about NPCs, Quests, Dialogues and Mini-Games to play.  
+Debugging and Error Handling
+Ideation and Brainstorming
+
+Special Credits
+
+Dave Gamble for providing cJSON library to parse, modify and create JSON files through C.
+Sambhav Jha for helping in Game Story development.
+Anadi Sharma for resolving confusions in Game Logic.
+Open AI and ChatGPT for writing Dialogues and Descriptions.
+Geek for Geeks for concepts necessary for JSON parsing and creation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

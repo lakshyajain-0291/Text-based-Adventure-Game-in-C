@@ -6,7 +6,7 @@
       "NPC": "Metalsmith Gaius",
       "Text": [
         "\n",
-        "Marcus Agrippa: Greetings Gaius",
+        "Marcus Agrippa: Greetings Gaius\n",
         "Metalsmith Gaius: Ah, Marcus Agrippa! I've heard tales of your prowess in combat.\n",
         "Marcus Agrippa: And I've heard of your skill with a hammer and anvil, Gaius.\n",
         "Metalsmith Gaius: I have a proposition for you. There's a mission I need assistance with, and your strength would be invaluable.\n",
@@ -63,7 +63,7 @@
       "NPC": "Alchemist Aurelia",
       "Text": [
         "\n",
-        "Marcus Agrippa: Greetings, Aurelia.",
+        "Marcus Agrippa: Greetings, Aurelia.\n",
         "Alchemist Aurelia: Ah, it's good to see you. I've been working on something that might interest you.\n",
         "Marcus Agrippa: Oh? What is it?\n",
         "Alchemist Aurelia: I've been researching ancient alchemical texts in hopes of creating a potion that reveals hidden truths when consumed.\n",
@@ -79,7 +79,7 @@
       "NPC": "Alchemist Aurelia",
       "Text": [
         "\n",
-        "Marcus Agrippa: Greetings, Aurelia. I've heard about your latest project.",
+        "Marcus Agrippa: Greetings, Aurelia. I've heard about your latest project.\n",
         "Alchemist Aurelia: Ah, Player! Yes, I've been researching a forbidden alchemical formula that could be the key to unlocking immense power.\n",
         "\tBut to obtain the ingredients needed to create the potion, we'll have to delve into dangerous territory.\n",
         "Marcus Agrippa: What kind of ingredients are we talking about?\n",
@@ -95,7 +95,7 @@
       "NPC": "Alchemist Aurelia",
       "Text": [
         "\n",
-        "Marcus Agrippa: Greetings, Aurelia. What's the next challenge you have for me?",
+        "Marcus Agrippa: Greetings, Aurelia. What's the next challenge you have for me?\n",
         "Alchemist Aurelia: Player, I've been studying the writings of a long-dead sage, hoping to unlock the secrets of the universe.\n",
         "\tBut his texts are filled with cryptic puzzles and riddles that have stumped even the most skilled alchemists.\n",
         "Marcus Agrippa: What do you need me to do?\n",
@@ -109,7 +109,7 @@
       "NPC": "Herbalist Flora",
       "Text": [
         "\n",
-        "Marcus Agrippa: Hello, Flora. How can I assist you today?",
+        "Marcus Agrippa: Hello, Flora. How can I assist you today?\n",
         "Herbalist Flora: Ah, Marcus Agrippa. I'm glad you're here. I've heard rumors of a hidden oasis filled with rare medicinal plants.\n",
         "\tThese plants could hold the key to saving my life, but the journey to find them will be perilous.\n",
         "Marcus Agrippa: I'm ready to help, Flora. What do we need to do?\n",
@@ -125,7 +125,7 @@
       "NPC": "Herbalist Flora",
       "Text": [
         "\n",
-        "Marcus Agrippa: Hello again, Flora. What's our next task?",
+        "Marcus Agrippa: Hello again, Flora. What's our next task?\n",
         "Herbalist Flora: Marcus Agrippa, I've been working on a new potion—one that grants temporary immunity to poison and disease.\n",
         "\tIt could provide me with a vital defense against my enemies' schemes.\n",
         "Marcus Agrippa: That sounds like a useful potion, Flora. What do you need me to do?\n",
@@ -141,7 +141,7 @@
       "NPC": "Herbalist Flora",
       "Text": [
         "\n",
-        "Marcus Agrippa: Greetings, Flora. What's on your mind today?",
+        "Marcus Agrippa: Greetings, Flora. What's on your mind today?\n",
         "Herbalist Flora: Marcus Agrippa, I've been thinking about the future of herbalism in our city. It's a dying art, and I fear that one day, all knowledge of it will be lost.\n",
         "\tThat's why I've decided to take on an apprentice—a promising young student who shares my passion for plants and potions.\n",
         "Marcus Agrippa: That's a noble endeavor, Flora. How can I help?\n",
@@ -157,7 +157,7 @@
       "NPC": "Cassius the Spider",
       "Text": [
         "\n",
-        "Marcus Agrippa: Cassius, what's our next move?",
+        "Marcus Agrippa: Cassius, what's our next move?\n",
         "Cassius the Spider: Marcus Agrippa, I have a delicate task that requires your expertise in subterfuge.\n",
         "\tThere's a rival spy network operating in the city, and they possess valuable intelligence that could give us the upper hand.\n",
         "Marcus Agrippa: What do you need me to do, Cassius?\n",
@@ -173,8 +173,8 @@
       "NPC": "Cassius the Spider",
       "Text": [
         "\n",
-        "Marcus Agrippa: Cassius, what's our next move?",
-        "Cassius the Spider: Marcus Agrippa, I've identified a key weakness in our enemies' defenses—a vulnerability that we can exploit to our advantage.\n",
+        "Marcus Agrippa: Cassius, what's our next move?\n",
+        "Cassius the Spider: Marcus Agrippa, I've identified a key weakness in our enemies' defenses— a vulnerability that we can exploit to our advantage.\n",
         "\tThere are certain individuals in the city's power structure whose allegiance is tenuous at best.\n",
         "Marcus Agrippa: How do you propose we proceed, Cassius?\n",
         "Cassius the Spider: We must use our charm and cunning to sow discord among our enemies, manipulating these key figures to advance our agenda.\n",
@@ -189,7 +189,7 @@
       "NPC": "Cassius the Spider",
       "Text": [
         "\n",
-        "Marcus Agrippa: Cassius, what's our next move?",
+        "Marcus Agrippa: Cassius, what's our next move?\n",
         "Cassius the Spider: Marcus Agrippa, we have a traitor in our midst—a spy who has been feeding information to our enemies.\n",
         "\tWe must uncover their identity and neutralize the threat before they can do any more damage.\n",
         "Marcus Agrippa: How do you suggest we proceed, Cassius?\n",
@@ -205,7 +205,7 @@
       "NPC": "Octavius the Rebel",
       "Text": [
         "\n",
-        "Marcus Agrippa: Octavius, what's our next move?",
+        "Marcus Agrippa: Octavius, what's our next move?\n",
         "Octavius the Rebel: Marcus Agrippa, the time has come to expand our ranks and bolster our cause.\n",
         "\tWe must rally support for the rebellion, convincing disillusioned citizens to join our fight for freedom and justice.\n",
         "Marcus Agrippa: How do you propose we recruit more members, Octavius?\n",
@@ -221,7 +221,7 @@
       "NPC": "Octavius the Rebel",
       "Text": [
         "\n",
-        "Marcus Agrippa: Octavius, what's our next move?",
+        "Marcus Agrippa: Octavius, what's our next move?\n",
         "Octavius the Rebel: Marcus Agrippa, we must strike at the heart of the government's strength—their weapons supply.\n",
         "\tWe must infiltrate a government stronghold and sabotage their armaments, weakening their forces and tipping the scales in favor of the rebellion.\n",
         "Marcus Agrippa: How do you propose we accomplish such a dangerous task, Octavius?\n",
@@ -237,7 +237,7 @@
       "NPC": "Octavius the Rebel",
       "Text": [
         "\n",
-        "Marcus Agrippa: Octavius, what's our next move?",
+        "Marcus Agrippa: Octavius, what's our next move?\n",
         "Octavius the Rebel: Marcus Agrippa, the time has come to confront our oppressors head-on and lead the rebellion in a decisive battle.\n",
         "\tWe must inspire courage and resilience in our allies, showing them that together, we can overcome even the most overwhelming odds.\n",
         "Marcus Agrippa: How do you propose we prepare for such a monumental undertaking, Octavius?\n",
@@ -253,7 +253,7 @@
       "NPC": "Oracle Sibylla",
       "Text": [
         "\n",
-        "Marcus Agrippa: Oracle Sibylla, I seek guidance on my journey. What do the stars reveal?",
+        "Marcus Agrippa: Oracle Sibylla, I seek guidance on my journey. What do the stars reveal?\n",
         "Oracle Sibylla: Marcus Agrippa, the fates have woven a tapestry of destiny for you, and it is time to unveil its secrets.\n",
         "\tA cryptic prophecy foretells of your true purpose, guiding you on the path to fulfilling your destiny.\n",
         "Marcus Agrippa: How do I interpret this prophecy, Oracle Sibylla?\n",
@@ -269,7 +269,7 @@
       "NPC": "Oracle Sibylla",
       "Text": [
         "\n",
-        "Marcus Agrippa: Oracle Sibylla, I seek your guidance once more. What dangers lie ahead on my quest for vengeance?",
+        "Marcus Agrippa: Oracle Sibylla, I seek your guidance once more. What dangers lie ahead on my quest for vengeance?\n",
         "Oracle Sibylla: Marcus Agrippa, the path before you is fraught with peril, but fear not. The stars have revealed a glimpse of the future, and I am here to guide you through the darkness.\n",
         "\tPeer into the mists of time, and you shall uncover potential threats to your quest for vengeance, offering guidance on how to avoid danger and overcome obstacles.\n",
         "Marcus Agrippa: How can I navigate these dangers and emerge victorious, Oracle Sibylla?\n",
@@ -285,7 +285,7 @@
       "NPC": "Oracle Sibylla",
       "Text": [
         "\n",
-        "Marcus Agrippa: Oracle Sibylla, I seek your wisdom. How can I prepare for the trials that lie ahead?",
+        "Marcus Agrippa: Oracle Sibylla, I seek your wisdom. How can I prepare for the trials that lie ahead?\n",
         "Oracle Sibylla: Marcus Agrippa, the path to greatness is paved with trials and tribulations, but fear not. The stars have deemed you worthy, and I shall prepare you for the challenges that await.\n",
         "\tTest your resolve with a series of mystical trials designed to challenge your mind, body, and spirit, preparing you for the trials ahead.\n",
         "Marcus Agrippa: What kind of trials must I face, Oracle Sibylla?\n",
@@ -301,7 +301,7 @@
       "NPC": "General Lucius",
       "Text": [
         "\n",
-        "Marcus Agrippa: General Lucius, I stand ready to serve the city.",
+        "Marcus Agrippa: General Lucius, I stand ready to serve the city.\n",
         "General Lucius: Marcus Agrippa, it is good to see you. The city is in need of vigilant guardians like yourself.\n",
         "\tWe must maintain law and order to ensure the safety of its citizens. Criminals roam the streets unchecked, preying on the innocent.\n",
         "Marcus Agrippa: I am ready to assist in any way I can, General Lucius.\n",
@@ -315,7 +315,7 @@
       "NPC": "General Lucius",
       "Text": [
         "\n",
-        "Marcus Agrippa: General Lucius, I am at your service.",
+        "Marcus Agrippa: General Lucius, I am at your service.\n",
         "General Lucius: Marcus Agrippa, I have a strategic task that requires your expertise. Our city faces external threats, and we must defend it at all costs.\n",
         "\tWe shall plan and execute a series of strategic maneuvers to maintain our city's sovereignty and protect its people.\n",
         "Marcus Agrippa: I am honored to aid in the city's defense, General Lucius.\n",
@@ -328,7 +328,7 @@
       "NPC": "General Lucius",
       "Text": [
         "\n",
-        "Marcus Agrippa: General Lucius, how may I serve the city?",
+        "Marcus Agrippa: General Lucius, how may I serve the city?\n",
         "General Lucius: Marcus Agrippa, there are whispers of corruption within the city guard. I cannot trust my troops until I know the truth.\n",
         "\tI need you to investigate these rumors, uncovering traitors and restoring my faith in my troops.\n",
         "Marcus Agrippa: I will not rest until the city guard's loyalty is unquestionable, General Lucius.\n",
@@ -341,7 +341,7 @@
       "NPC": "Sophia the Scholar",
       "Text": [
         "\n",
-        "Marcus Agrippa: Sophia, I am ready to assist you in your excavation.",
+        "Marcus Agrippa: Sophia, I am ready to assist you in your excavation.\n",
         "Sophia the Scholar: Marcus Agrippa, it's good to see you. Together, we have an opportunity to uncover secrets hidden beneath the earth.\n",
         "\tThe artifact we seek may hold the key to unlocking the truth behind your family's murder.\n",
         "Marcus Agrippa: I am eager to delve into the past and uncover the truth, Sophia.\n",
@@ -354,7 +354,7 @@
       "NPC": "Sophia the Scholar",
       "Text": [
         "\n",
-        "Marcus Agrippa: Sophia, I am ready to solve the riddle of the library.",
+        "Marcus Agrippa: Sophia, I am ready to solve the riddle of the library.\n",
         "Sophia the Scholar: Marcus Agrippa, welcome back. The library holds many secrets, and we must unlock them to continue our quest.\n",
         "\tHidden within its shelves is a puzzle that may lead us closer to the truth behind your family's murder.\n",
         "Marcus Agrippa: I am prepared to unravel the mysteries of the library, Sophia.\n",
@@ -367,7 +367,7 @@
       "NPC": "Sophia the Scholar",
       "Text": [
         "\n",
-        "Marcus Agrippa: Sophia, I am ready to explore the hidden chambers of Argenstone.",
+        "Marcus Agrippa: Sophia, I am ready to explore the hidden chambers of Argenstone.\n",
         "Sophia the Scholar: Marcus Agrippa, it's time to reveal the secrets hidden within Argenstone's walls.\n",
         "\tThe ancient texts we uncover may hold the key to unlocking the lost history of our city.\n",
         "Marcus Agrippa: I am prepared to decipher the ancient texts, Sophia.\n",
@@ -380,7 +380,7 @@
       "NPC": "Siren Melaina",
       "Text": [
         "\n",
-        "Marcus Agrippa: Melaina, I am ready to heed the call of the sea.",
+        "Marcus Agrippa: Melaina, I am ready to heed the call of the sea.\n",
         "Siren Melaina: Marcus Agrippa, it's time to embark on a journey into the depths of the ocean.\n",
         "\tGuided by my song, we will uncover treasures long lost beneath the waves.\n",
         "Marcus Agrippa: I am eager to explore the mysteries of the sea with you, Melaina.\n",
@@ -393,7 +393,7 @@
       "NPC": "Siren Melaina",
       "Text": [
         "\n",
-        "Marcus Agrippa: Melaina, I am ready to learn the ancient melodies of the sea.",
+        "Marcus Agrippa: Melaina, I am ready to learn the ancient melodies of the sea.\n",
         "Siren Melaina: Marcus Agrippa, it's time to unlock the power of the sea's enchanting music.\n",
         "\tWith my guidance, you will master the melodies that protect against danger and navigate treacherous waters.\n",
         "Marcus Agrippa: I am prepared to embrace the songs of protection, Melaina.\n",
@@ -406,7 +406,7 @@
       "NPC": "Siren Melaina",
       "Text": [
         "\n",
-        "Marcus Agrippa: Melaina, I am ready to uncover the truth behind your mysterious origins.",
+        "Marcus Agrippa: Melaina, I am ready to uncover the truth behind your mysterious origins.\n",
         "Siren Melaina: Marcus Agrippa, it's time to delve into the myths and legends of the ocean.\n",
         "\tTogether, we will uncover the secrets of my past and discover the truth hidden beneath the waves.\n",
         "Marcus Agrippa: I am determined to uncover the mysteries of your origins, Melaina.\n",
@@ -419,7 +419,7 @@
       "NPC": "Mortimer the Whisperer",
       "Text": [
         "\n",
-        "Marcus Agrippa: Mortimer, I am ready to strike a bargain in the black market.",
+        "Marcus Agrippa: Mortimer, I am ready to strike a bargain in the black market.\n",
         "Mortimer the Whisperer: Marcus Agrippa, it's time to delve into the underworld of the city.\n",
         "\tWith my guidance, you will obtain rare and exotic goods to aid you in your quest.\n",
         "Marcus Agrippa: I am prepared to navigate the shadows and acquire what I need, Mortimer.\n",
@@ -432,7 +432,7 @@
       "NPC": "Mortimer the Whisperer",
       "Text": [
         "\n",
-        "Marcus Agrippa: Mortimer, I am ready to receive valuable information from your network of spies.",
+        "Marcus Agrippa: Mortimer, I am ready to receive valuable information from your network of spies.\n",
         "Mortimer the Whisperer: Marcus Agrippa, it's time to gain an edge over your enemies.\n",
         "\tWith the information I provide, you will be one step closer to achieving your goals.\n",
         "Marcus Agrippa: I am eager to leverage your network to my advantage, Mortimer.\n",
@@ -445,7 +445,7 @@
       "NPC": "Mortimer the Whisperer",
       "Text": [
         "\n",
-        "Marcus Agrippa: Mortimer, I am ready to call in a favor and eliminate a troublesome adversary.",
+        "Marcus Agrippa: Mortimer, I am ready to call in a favor and eliminate a troublesome adversary.\n",
         "Mortimer the Whisperer: Marcus Agrippa, it's time to leverage my influence to remove obstacles in your path.\n",
         "\tWith my favor, your journey to vengeance will become much smoother.\n",
         "Marcus Agrippa: I am prepared to utilize your influence to achieve my goals, Mortimer.\n",

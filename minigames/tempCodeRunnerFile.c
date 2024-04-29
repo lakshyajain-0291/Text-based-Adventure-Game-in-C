@@ -1,1 +1,0 @@
-putchar(welcome[i]);

@@ -1,1 +1,0 @@
-gcc windows_testing.c -o windows_testing -lwinmm
